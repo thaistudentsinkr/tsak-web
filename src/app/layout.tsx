@@ -5,8 +5,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./navbar.css"
 import Link from "next/link";
-import { ChevronDown } from "lucide-react";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import InformationDropdown from "./components/InformationDropDown";
+import AboutDropdown from "./components/AboutDropDown";
+import CommunityDropdown from "./components/CommunityDropDown";
 
 
 const geistSans = Geist({
@@ -53,25 +55,16 @@ export default function RootLayout({
             <img src="/TSAK_word.png" alt="TSAK_word.png" className="w-[135px] h-[41px]" />
           </Link>
           <ul className="flex text-[#FFFCDD] space-x-7 ml-auto mr-1 items-center">
-            <ul className="font-onest text-base font-normal flex space-x-10">
+            <ul className="font-onest text-base font-normal flex space-x-7">
               <li>
-                <button className="flex space-x-2"> 
-                  <span>Information</span>
-                  <ChevronDown className="w-4 h-4 mt-1" />
-                </button>
+                <InformationDropdown/>
               </li>
               <li>
-                <button className="flex space-x-2">
-                  <span>About TSAK</span>
-                  <ChevronDown className="w-4 h-4 mt-1" />
-                </button>
+                <AboutDropdown/>
               </li>
               <li>
-                <button className="flex space-x-2">
-                  <span>Community</span>
-                  <ChevronDown className="w-4 h-4 mt-1" />
-                </button>
-              </li>
+                <CommunityDropdown/>
+              </li>  
             </ul>
             <li>
               <LanguageSwitcher locales={['en', 'th']}/>
