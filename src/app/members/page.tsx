@@ -5,7 +5,6 @@ import MemberCard from "../../components/ui/memberCard";
 
 const departments = [
   "สมาชิกกิตติมศักด์",
-  "สมาชิกปัจจุบัน",
   "ฝ่ายบริหาร",
   "ฝ่ายประสานงาน",
   "ฝ่ายประชาสัมพันธ์",
@@ -90,6 +89,17 @@ export default function Home() {
       lastname: "Lastname",
       university: "Seoul National University",
       major: "Computer Science",
+      position: "IT Support",
+      department: "IT Support",
+      working: true,
+    },
+
+    {
+      picture: "tsak.png",
+      firstname: "Firstname",
+      lastname: "Lastname",
+      university: "Seoul National University",
+      major: "Computer Science",
       position: "ที่ปรึกษา",
       department: "สมาชิกกิตติมศักด์",
       working: true,
@@ -119,9 +129,7 @@ export default function Home() {
   ];
 
   const filteredMembers = memberData.filter((m) => {
-    if (selectedDept === "สมาชิกปัจจุบัน") {
-      return m.working === true;
-    } else if (selectedDept === "อดีตสมาชิก") {
+    if (selectedDept === "อดีตสมาชิก") {
       return m.working === false;
     } else {
       return m.department === selectedDept;
@@ -133,31 +141,27 @@ export default function Home() {
 
   return (
     <div className="font-sans min-h-screen p-8 sm:p-20">
-      <h2 className="text-2xl font-bold text-black mb-8 text-center pt-5">
+      <h2 className="text-2xl font-bold text-black mb-8 pt-5 text-center sm:translate-x-[150px]">
         {selectedDept}
       </h2>
 
       <div className="flex flex-col sm:flex-row gap-10">
         <aside className="w-full sm:w-[250px] flex flex-col gap-3">
           {departments.map((dept, index) => {
-            const isFirst = index === 0;
-            const isLast = index === departments.length - 1;
 
             return (
               <button
                 key={dept}
                 onClick={() => setSelectedDept(dept)}
-                className={`w-full text-lg font-medium px-4 py-3 border border-black text-black text-center
+                className={`w-full text-lg font-medium px-4 py-3 border border-black text-center
         transition-all rounded-r-full
         ${selectedDept === dept
-                    ? "bg-[#9d2b2b] text-white"
-                    : "bg-white hover:bg-gray-100"
+                    ? "bg-[#A51D2C] text-[#FFFCDD] border border-[#A51D2C]"
+                    : "bg-[#2C3985] text-[#FFFCDD] border border-[#2C3985] hover:bg-[#1F2A6B]"
                   }`}
                 style={{
                   borderTopLeftRadius: "0.25rem",
                   borderBottomLeftRadius: "0.25rem",
-                  borderTopRightRadius: isFirst ? "0" : undefined,
-                  borderBottomRightRadius: isLast ? "0" : undefined,
                 }}
               >
                 {dept}
@@ -167,39 +171,61 @@ export default function Home() {
 
         </aside>
 
-        <main className="flex-1 flex flex-col gap-8 items-center w-full">
+        <main className="flex-1 flex flex-col gap-8 items-center w-full relative">
           {selectedDept === "ฝ่ายบริหาร" ? (
-            <div className="flex flex-col gap-4 w-full max-w-7xl">
-              <div className="flex justify-center">
-                {filteredMembers
-                  .filter((m) => m.position === "ประธานสมาคม")
-                  .map((member, idx) => (
-                    <MemberCard key={idx} member={member} />
-                  ))}
+            <div className="relative flex flex-col gap-12 w-full max-w-7xl items-center justify-center py-12">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="border-4 border-[#A51D2C]/20 rounded-[50%] w-[320px] h-[100px] rotate-[9.47deg] flex items-center justify-center p-4">
+
+                  <p className="text-[#A51D2C]/20 font-bold text-lg sm:text-xl leading-snug text-center whitespace-pre-line">
+                    Thai Students Association{'\n'}in the Republic of Korea
+                  </p>
+                </div>
               </div>
 
-              <div className="flex justify-center gap-4">
-                {filteredMembers
-                  .filter(
-                    (m) =>
-                      m.position === "รองประธานสมาคม" || m.position === "เลขานุการ"
-                  )
-                  .map((member, idx) => (
-                    <MemberCard key={idx} member={member} />
-                  ))}
+              <div className="flex flex-col gap-15 relative z-10 w-full">
+                <div className="flex justify-center mb-8">
+                  {filteredMembers
+                    .filter((m) => m.position === "ประธานสมาคม")
+                    .map((member, idx) => (
+                      <MemberCard key={idx} member={member} />
+                    ))}
+                </div>
+
+                <div className="flex justify-center gap-30">
+                  {filteredMembers
+                    .filter(
+                      (m) =>
+                        m.position === "รองประธานสมาคม" ||
+                        m.position === "เลขานุการ"
+                    )
+                    .map((member, idx) => (
+                      <MemberCard key={idx} member={member} />
+                    ))}
+                </div>
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center w-full max-w-7xl">
-              {filteredMembers.length > 0 ? (
-                filteredMembers.map((member, index) => (
-                  <MemberCard key={index} member={member} />
-                ))
-              ) : (
-                <p className="text-gray-600 mt-10 text-lg">
-                  ไม่มีสมาชิกในหมวดนี้
-                </p>
-              )}
+            <div className="w-full max-w-7xl">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                {filteredMembers.length > 0 ? (
+                  filteredMembers.map((member, index) => (
+                    <MemberCard key={index} member={member} />
+                  ))
+                ) : (
+                  <p className="text-gray-600 mt-10 text-lg">
+                    ไม่มีสมาชิกในฝ่ายนี้
+                  </p>
+                )}
+              </div>
+
+              <div className="absolute bottom-4 right-4 w-[320px] h-[100px] flex items-center justify-center">
+                <div className="border-4 border-[#A51D2C]/20 rounded-[50%] rotate-[-17.11deg] w-full h-full flex items-center justify-center p-4">
+                  <p className="text-[#A51D2C]/20 font-bold text-lg sm:text-xl leading-snug text-center whitespace-pre-line">
+                    Thai Students Association{'\n'}in the Republic of Korea
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </main>
