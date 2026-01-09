@@ -35,6 +35,8 @@ export default function MemberCard({ member }: { member: Member }) {
                 ? "#FFD700"
                 : null;
 
+    const imageSrc = picture?.startsWith("/") ? picture : picture ? `/${picture}` : undefined;
+
     return (
         <div
             className="w-full max-w-xs border shadow-md overflow-hidden aspect-[354.67/224.59] flex flex-col"
@@ -60,7 +62,7 @@ export default function MemberCard({ member }: { member: Member }) {
                 <div className="flex-shrink-0 w-1/3 bg-gray-300 rounded-md overflow-hidden">
                     {picture && (
                         <img
-                            src={picture}
+                            src={imageSrc}
                             alt={`${firstname} ${lastname}`}
                             className="w-full h-full object-cover"
                         />
