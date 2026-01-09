@@ -1,0 +1,34 @@
+{
+  "sponsors": {
+    "title": "Sponsorship & Partners"
+  },
+
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Feel free and don't hesitate to contact us!"
+  },
+
+  "departments": {
+    "honorary": "Honorary Members",
+    "executive": "Executive Department",
+    "liaison": "Liaison",
+    "pr": "Public Relations",
+    "events": "Events",
+    "accounting": "Accounting",
+    "documents": "Documentation",
+    "it": "IT Support",
+    "alumni": "Former Members"
+  },
+  
+  "positions": {
+  "president": "President",
+  "vice_president": "Vice President",
+  "secretary": "Secretary",
+  "advisor": "Advisor",
+  "head_prefix": "Head of"
+},
+
+  "members": {
+    "empty": "No members in this department"
+  }
+}

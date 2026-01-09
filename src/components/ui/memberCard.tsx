@@ -6,32 +6,33 @@ type Member = {
     lastname: string;
     university: string;
     major: string;
-    position: string;
+    position: "president" | "vice_president" | "secretary" | "head" | "member" | "advisor";
+    positionLabel?: string;
     department: string;
     working: boolean;
 };
 
 export default function MemberCard({ member }: { member: Member }) {
-    const { picture, firstname, lastname, university, major, position } = member;
+    const { picture, firstname, lastname, university, major, position, positionLabel } = member;
 
     const cardBg =
-        position === "ประธานสมาคม"
+        position === "president"
             ? "#85C5FF"
-            : position === "รองประธานสมาคม" || position === "เลขานุการ"
+            : position === "vice_president" || position === "secretary"
                 ? "#FFFCDD"
                 : "#FFFFFF";
 
     const headerBg =
-        position.includes("Head") || position === "ประธานสมาคม"
+        position === "head" || position === "president"
             ? "#A51D2C"
             : "#2e367c";
 
     const starColor =
-        position === "ประธานสมาคม"
+        position === "president"
             ? "#FFFFFF"
-            : position.includes("Head") ||
-                position === "รองประธานสมาคม" ||
-                position === "เลขานุการ"
+            : position === "head" ||
+                position === "vice_president" ||
+                position === "secretary"
                 ? "#FFD700"
                 : null;
 
@@ -79,7 +80,7 @@ export default function MemberCard({ member }: { member: Member }) {
 
                     <div className="text-center mt-3 sm:mt-4 pb-4">
                         <span className="bg-[#9d2b2b] text-[#f7f5dc] text-xs sm:text-sm font-medium py-1 px-3 rounded-full inline-block">
-                            {position}
+                            {positionLabel || position}
                         </span>
                     </div>
                 </div>

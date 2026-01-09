@@ -1,7 +1,15 @@
 import Image from "next/image";
-import Link from "next/link"
+import Link from "next/link";
+import { getDictionary } from "@/lib/i18n";
 
-export default function Home() {
+type PageProps = {
+  params: {
+    locale: string;
+  };
+};
+
+export default function Home({ params }: PageProps) {
+  const dict = getDictionary(params.locale);
   const contact = [
     {
       text: "thaistudentsinkorea@gmail.com",
@@ -38,8 +46,8 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <center>
-          <h1 className="text-3xl font-bold">Contact Us</h1>
-          <p className="text-lg text-gray-600 mb-6">Feel free and don't hesitate to contact us!</p>
+          <h1 className="text-3xl font-bold">{dict.contact.title}</h1>
+          <p className="text-lg text-gray-600 mb-6">{dict.contact.subtitle}</p>
           <div className="flex flex-col item-center justify-center gap-4">
             {contact.map((item, index) => (
               <Link

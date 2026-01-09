@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getDictionary } from "@/lib/i18n";
 
 //function to fetch data from sponsors api
 // async function getSponsors() {
@@ -7,7 +8,14 @@ import Image from "next/image";
 //   return res.json();
 // }
 
-export default function Home() {
+type PageProps = {
+  params: {
+    locale: string;
+  };
+};
+
+export default function Home({ params }: PageProps) {
+  const dict = getDictionary(params.locale);
   //use fake data for now; use const sponsors = await getSponsors(); after have backend
   const sponsors = [
     {
@@ -23,7 +31,7 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[20px_1fr_20px] justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-8 row-start-2 w-full max-w-3xl">
         <h1 className="text-3xl font-bold text-center text-black dark:text-white">
-          Sponsorship & Partners
+          {dict.sponsors.title}
         </h1>
         <div className="flex flex-col gap-4 w-full">
           {sponsors.map((item, index) => (

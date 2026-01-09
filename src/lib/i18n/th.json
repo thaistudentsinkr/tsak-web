@@ -1,0 +1,32 @@
+{
+  "sponsors": {
+    "title": "ผู้สนับสนุนและพันธมิตร"
+  },
+  "contact": {
+    "title": "ติดต่อเรา",
+    "subtitle": "สามารถติดต่อเราได้ผ่านช่องทาง"
+  },
+  "departments": {
+    "honorary": "สมาชิกกิตติมศักดิ์",
+    "executive": "ฝ่ายบริหาร",
+    "liaison": "ฝ่ายประสานงาน",
+    "pr": "ฝ่ายประชาสัมพันธ์และสื่อ",
+    "events": "ฝ่ายกิจกรรม",
+    "accounting": "ฝ่ายบัญชี",
+    "documents": "ฝ่ายเอกสาร",
+    "it": "IT Support",
+    "alumni": "อดีตสมาชิก"
+  },
+
+  "positions": {
+    "president": "ประธานสมาคม",
+    "vice_president": "รองประธานสมาคม",
+    "secretary": "เลขานุการ",
+    "advisor": "ที่ปรึกษา",
+    "head_prefix": "หัวหน้าฝ่าย"
+  },
+  
+  "members": {
+    "empty": "ไม่มีสมาชิกในฝ่ายนี้"
+  }
+}
