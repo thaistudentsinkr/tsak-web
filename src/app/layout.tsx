@@ -6,7 +6,7 @@ import "./globals.css";
 import "./navbar.css"
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import { FaGlobe } from "react-icons/fa";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 
 const geistSans = Geist({
@@ -48,7 +48,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <nav className="navbar">
-          <Link href="/" className="flex items-center">
+          <Link href="/th" className="flex items-center">
             <img src="/tsak.png" alt="tsak.png" className="home_icon" />
             <img src="/TSAK_word.png" alt="TSAK_word.png" className="w-[135px] h-[41px]" />
           </Link>
@@ -74,11 +74,7 @@ export default function RootLayout({
               </li>
             </ul>
             <li>
-              <button className="langCh_button">
-                <FaGlobe className="w-5 h-5 text-[#FFFCDD] bg-[#A51D2C] rounded-full p-[1px]"/>
-                <span className="font-inter font-medium text-base ml-1">English</span>
-                <ChevronDown className="w-4 h-4"/>
-              </button>
+              <LanguageSwitcher locales={['en', 'th']}/>
             </li>
           </ul>
         </nav>
