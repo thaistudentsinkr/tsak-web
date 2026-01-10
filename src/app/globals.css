@@ -24,15 +24,58 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --background: #202020;
     --foreground: #fffdfa;
   }
-}
+} */
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Responsive zoom handling */
+@media (max-width: 480px) {
+  html {
+    font-size: 14px; /* Smaller base font for mobile */
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  html {
+    font-size: 15px; /* Medium base font for tablets */
+  }
+}
+
+@media (min-width: 769px) {
+  html {
+    font-size: 16px; /* Standard base font for desktop */
+  }
+}
+
+/* Handle very small screens */
+@media (max-width: 320px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+/* Handle large screens */
+@media (min-width: 1440px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+/* Ensure smooth scaling */
+* {
+  box-sizing: border-box;
+}
+
+/* Prevent horizontal overflow on small screens */
+body {
+  overflow-x: hidden;
 }

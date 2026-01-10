@@ -1,0 +1,185 @@
+.eventCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 372.704px;
+  gap: 0.5625rem;
+  position: relative;
+}
+
+.whiteRectangle {
+  border-radius: 1.25rem 0 0 1.25rem;
+  border: 1px solid #000;
+  background: #FFF;
+  overflow: visible;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease-in-out;
+  width: 372.704px;
+  height: 443.593px;
+  flex: none;
+  position: relative;
+}
+
+.whiteRectangle::before {
+  content: '';
+  position: absolute;
+  top: -3.05rem; /* -48.87px equivalent */
+  right: -3.05rem; /* -48.87px equivalent */
+  width: 6.11rem; /* 97.74px equivalent */
+  height: 6.11rem; /* 97.74px equivalent */
+  background: #FFF;
+  border-radius: 100%;
+  border: 1px solid #000;
+  z-index: 1;
+}
+
+.whiteRectangle::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3.07rem; /* 48.87px equivalent */
+    height: 3.05rem; /* 48.87px equivalent */
+    background: #ffffff; /* same as background color */
+    z-index: 2;
+}
+
+.whiteRectangle:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.eventImage {
+  position: relative;
+  background-color: #f3f4f6;
+  cursor: pointer;
+  width: 325px;
+  height: 405px;
+  margin: 19.3px auto;
+  margin-left: 24px;
+  margin-right: 24px;
+  z-index: 4;
+}
+
+.organizationLogo {
+  position: absolute;
+  background-color: transparent;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem; /* 80px equivalent */
+  height: 5rem; /* 80px equivalent */
+  top: -2.5rem; /* -40px equivalent */
+  right: -2.5rem; /* -40px equivalent */
+  z-index: 3;
+}
+
+.organizationLogo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: 0.625rem; /* 10px equivalent */
+}
+
+.eventContent {
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  padding: 0 1.2rem 1.2rem 1.2rem; /* 19.3px equivalent */
+}
+
+.eventContent:hover {
+  background-color: #f9fafb;
+}
+
+.eventDetailBox {
+  background-color: #2C3985;
+  width: 372.704px;
+  min-height: 84px;
+  flex-shrink: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1.25rem 0 0 1.25rem;
+  border: 1px solid #000;
+}
+
+.eventTitle {
+  color: #FFFCDD;
+  font-family: 'Onest', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(1.5rem, 4vw, 2.25rem); /* 24px to 36px responsive */
+  line-height: 1.1;
+  margin: 0;
+}
+
+.eventDate {
+    color: #FFFCDD;
+    font-family: Poppins;
+    font-size: clamp(0.875rem, 2vw, 0.9375rem); /* 14px to 15px responsive */
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.eventStatus {
+  width: 6.4375rem; /* 103px equivalent */
+  height: 1.9375rem; /* 31px equivalent */
+  border-radius: 1.25rem; /* 20px equivalent */
+  font-size: clamp(0.875rem, 2vw, 1rem); /* 14px to 16px responsive */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  border: 1px solid #000;
+  flex-shrink: 0;
+}
+
+/* Keep mobile/tablet responsiveness */
+@media (max-width: 480px) {
+  .eventCard {
+    max-width: 20rem;
+  }
+  .whiteRectangle, .eventDetailBox {
+    width: 100%;
+    min-width: unset;
+    max-width: 100%;
+    height: auto;
+  }
+  .eventImage {
+    width: 92vw;
+    height: 54vw;
+    min-width: unset;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  .eventCard {
+    max-width: 22rem;
+  }
+  .whiteRectangle, .eventDetailBox {
+    width: 100%;
+    min-width: unset;
+    max-width: 100%;
+    height: auto;
+  }
+  .eventImage {
+    width: 80vw;
+    height: 48vw;
+    min-width: unset;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Handle zoom levels better */
+@media (min-resolution: 2dppx) {
+  .eventCard {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
