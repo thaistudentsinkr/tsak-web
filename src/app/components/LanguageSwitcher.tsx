@@ -45,7 +45,7 @@ export default function LanguageSwitcher({ locales }: LanguageSwitcherProps) {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setOpen(!open)}
-        className="langCh_button flex items-center space-x-1"
+        className="flex rounded-[60px] w-[140px] h-[36px] bg-[#FFFCDD] text-[#A51D2C] items-center justify-center gap-1.5"
       >
         <FaGlobe className="w-5 h-5 text-[#FFFCDD] bg-[#A51D2C] rounded-full p-[1px]"/>
         <span className="font-inter font-medium text-base ml-1">{currentLanguage}</span>
