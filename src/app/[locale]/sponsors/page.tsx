@@ -17,7 +17,6 @@ type PageProps = {
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   const dict = getDictionary(locale);
-
   //use fake data for now; use const sponsors = await getSponsors(); after have backend
   const sponsors = [
     {

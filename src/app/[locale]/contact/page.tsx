@@ -11,7 +11,6 @@ type PageProps = {
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   const dict = getDictionary(locale);
-
   const contact = [
     {
       text: "thaistudentsinkorea@gmail.com",
