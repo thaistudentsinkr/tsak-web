@@ -42,7 +42,8 @@ export default async function Home({ params }: PageProps) {
       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS97sukkNEXGlXOQojQ8FaDlRDhk2S1E2Re6w&s",
       link: "https://kcampus.kr/profile/thaistudentassociation(tsak)-25487"
     },
-  ]
+  ];
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -70,7 +71,6 @@ export default async function Home({ params }: PageProps) {
           </div>
         </center>
       </main>
-
     </div>
   );
 }

@@ -59,7 +59,6 @@ export default async function Home({ params }: PageProps) {
           ))}
         </div>
       </main>
-
     </div>
   );
 }
