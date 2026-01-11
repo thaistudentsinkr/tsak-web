@@ -28,7 +28,7 @@
 .calendarButton {
   position: absolute;
   top: 0;
-  right: clamp(1rem, 10vw, 5rem);
+  left: calc(50% + clamp(12rem, 35vw, 25rem));
   display: flex;
   align-items: center;
   gap: 0.75rem;

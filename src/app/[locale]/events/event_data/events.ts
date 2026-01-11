@@ -1,7 +1,13 @@
+export interface Sponsor {
+  name: string;
+  logoUrl: string;
+}
+
 export interface EventData {
   id: string;
   title: string;
   titleEn?: string;
+  subtitle?: string;
   imageUrl: string;
   date: string;
   dateRange?: string;
@@ -10,6 +16,8 @@ export interface EventData {
   description?: string;
   location?: string;
   organizer?: string;
+  sponsors?: Sponsor[];
+  imageDir?: string[];
 }
 
 export const events: EventData[] = [
