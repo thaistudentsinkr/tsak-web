@@ -17,20 +17,20 @@ const languageNames: Record<string, string> = {
 export default function LanguageSwitcher({ locales }: LanguageSwitcherProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false); // Track if component is mounted
-  const [currentLocale, setCurrentLocale] = useState("th"); // default
+  const [currentLocale, setCurrentLocale] = useState("en"); // default
   const router = useRouter();
   const pathname = usePathname();
 
   // Only run on client after mount
   useEffect(() => {
     setMounted(true);
-    const localeFromPath = pathname.split("/")[1] || "th";
+    const localeFromPath = pathname.split("/")[1] || "en";
     setCurrentLocale(localeFromPath);
   }, [pathname]);
 
   if (!mounted) return null; // prevent rendering on server
 
-  const currentLanguage = languageNames[currentLocale] || "ไทย";
+  const currentLanguage = languageNames[currentLocale] || "English";
 
 
   const switchLanguage = (locale: string) => {

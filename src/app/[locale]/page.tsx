@@ -1,5 +1,5 @@
-export default function Home({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
-  const currentLocale = params.locale;
+export default async function Home({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const { locale: currentLocale } = await params;
 
   const Homepage: Record<string, string> = {
     en: "Homepage",
