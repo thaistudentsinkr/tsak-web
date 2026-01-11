@@ -45,7 +45,7 @@ export default function LanguageSwitcher({ locales }: LanguageSwitcherProps) {
     <div className="relative inline-block text-left">
       <button
         onClick={() => setOpen(!open)}
-        className="langCh_button flex items-center space-x-1"
+        className="flex rounded-[60px] w-[140px] h-[36px] bg-[#FFFCDD] text-[#A51D2C] items-center justify-center gap-1.5"
       >
         <FaGlobe className="w-5 h-5 text-[#FFFCDD] bg-[#A51D2C] rounded-full p-[1px]"/>
         <span className="font-inter font-medium text-base ml-1">{currentLanguage}</span>
@@ -53,14 +53,16 @@ export default function LanguageSwitcher({ locales }: LanguageSwitcherProps) {
       </button>
 
       {open && (
-        <div className="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-          <div className="py-1">
+        <div className="absolute left-1/2 -translate-x-1/2 mt-4 w-25 flex justify-center bg-[#FFFCDD] rounded-2xl shadow-md overflow-hidden">
+          <div className="py-1 space-y-1">
             {locales.map((locale) => (
               <button
                 key={locale}
                 onClick={() => switchLanguage(locale)}
-                className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                  locale === currentLocale ? 'bg-gray-100 text-gray-900' : 'text-gray-700'
+                className={`block w-full text-center px-4 py-2 text-sm ${
+                  locale === currentLocale 
+                  ? 'rounded-full border border-[#A51D2C] bg-[#A51D2C] text-[#FFFCDD]' 
+                  : 'text-gray-700 border border-transparent hover:bg-[#A51D2C]/10 hover:text-[#A51D2C] hover:border hover:border-[#A51D2C]/50 hover:rounded-full'
                 }`}
               >
                 {languageNames[locale]}

@@ -2,7 +2,7 @@ import data from "@/locales/info/visa.json";
 
 type Locale = 'en' | 'th';
 
-export default async function AboutPage({ params }: { params: { locale: Locale } }) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
   const content = data[locale] || data.en;
 

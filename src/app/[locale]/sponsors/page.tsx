@@ -9,13 +9,14 @@ import { getDictionary } from "@/lib/i18n";
 // }
 
 type PageProps = {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
-export default function Home({ params }: PageProps) {
-  const dict = getDictionary(params.locale);
+export default async function Home({ params }: PageProps) {
+  const { locale } = await params;
+  const dict = getDictionary(locale);
   //use fake data for now; use const sponsors = await getSponsors(); after have backend
   const sponsors = [
     {

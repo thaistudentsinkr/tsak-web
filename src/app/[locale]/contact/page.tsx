@@ -3,13 +3,14 @@ import Link from "next/link";
 import { getDictionary } from "@/lib/i18n";
 
 type PageProps = {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 };
 
-export default function Home({ params }: PageProps) {
-  const dict = getDictionary(params.locale);
+export default async function Home({ params }: PageProps) {
+  const { locale } = await params;
+  const dict = getDictionary(locale);
   const contact = [
     {
       text: "thaistudentsinkorea@gmail.com",
