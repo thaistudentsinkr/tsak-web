@@ -1,5 +1,6 @@
 import { events } from "../event_data/events";
 import EventsHeader from "../components/EventsHeader";
+import Image from "next/image";
 
 export default async function EventPage({
   params,
@@ -16,9 +17,6 @@ export default async function EventPage({
           <h1 className="text-4xl sm:text-5xl font-bold text-center sm:text-left">
             Event Not Found
           </h1>
-          <p className="text-lg text-center sm:text-left max-w-2xl">
-            The event with ID {eventId} could not be found.
-          </p>
         </main>
       </div>
     );
@@ -30,8 +28,92 @@ export default async function EventPage({
         {/* Event Header */}
         <EventsHeader />
 
-        {/* Event Detail Content */}
+        {/* Event Subtitle */}
+        <h2 className="text-2xl sm:text-3xl font-medium text-center">
+          {event.subtitle || event.title}
+        </h2>
+
+        {/* Event Image */}
         <div className="w-full max-w-4xl">
+          {event.imageUrl ? (
+            <div className="relative w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg overflow-hidden">
+              <Image
+                src={event.imageUrl}
+                alt={event.title}
+                fill
+                className="object-cover"
+              />
+            </div>
+          ) : (
+            <div className="w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg" />
+          )}
+          
+          {/* Registration Button - Only show if event is open */}
+          {event.status === 'open' && (
+            <div className="flex justify-center mt-6">
+              <button className="py-4 px-8 bg-[#2C3985] text-[#FFFCDD] rounded-full text-lg font-medium hover:bg-[#1e2a6b] transition-colors">
+                ลงทะเบียนเข้าร่วมงาน
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Sponsors Section */}
+        <div className="w-full max-w-4xl">
+          <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
+            ผู้สนับสนุน
+          </h2>
+          {event.sponsors && event.sponsors.length > 0 && (
+            <div className="flex flex-wrap gap-6 items-center">
+              {event.sponsors.map((sponsor, index) => (
+                <div key={index} className="relative w-32 h-32 sm:w-40 sm:h-40">
+                  <Image
+                    src={sponsor.logoUrl}
+                    alt={sponsor.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Event Details Section */}
+        <div className="w-full max-w-4xl">
+          <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
+            รายละเอียดกิจกรรม
+          </h2>
+          {event.description && (
+            <p className="text-lg text-left whitespace-pre-line">
+              {event.description}
+            </p>
+          )}
+        </div>
+
+        {/* Event Photos Section */}
+        <div className="w-full max-w-4xl">
+          <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
+            ภาพกิจกรรม
+          </h2>
+          {event.imageDir && event.imageDir.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {event.imageDir.map((imageUrl, index) => (
+                <div key={index} className="relative w-full aspect-square bg-[#f3f4f6] rounded-lg overflow-hidden">
+                  <Image
+                    src={imageUrl}
+                    alt={`${event.title} - Image ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Event Detail Content */}
+        {/* <div className="w-full max-w-4xl">
           <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
             {event.title}
           </h2>
@@ -46,7 +128,7 @@ export default async function EventPage({
             <p><strong>Status:</strong> {event.statusText}</p>
             {event.description && <p><strong>Description:</strong> {event.description}</p>}
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   );

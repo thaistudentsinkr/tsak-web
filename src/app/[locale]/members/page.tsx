@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MemberCard from "../../../components/ui/memberCard";
 import { getDictionary } from "@/lib/i18n";
 import { useParams } from "next/navigation";
@@ -19,118 +19,87 @@ const DEPARTMENTS = [
 
 type Department = (typeof DEPARTMENTS)[number];
 
+type Position = "president" | "vice_president" | "secretary" | "head" | "member" | "advisor";
+
+type MemberData = {
+  id: number;
+  picture: string | null;
+  firstname: string;
+  lastname: string;
+  university: string;
+  major: string;
+  position: Position;
+  department: Department;
+  working: boolean;
+};
+
 export default function Home() {
   const params = useParams<{ locale: string }>();
   const locale = params?.locale || 'en';
   
   const dict = getDictionary(locale);
   const [selectedDept, setSelectedDept] = useState<Department>("honorary");
+  const [memberData, setMemberData] = useState<MemberData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
+  // Helper function to get position label
   const getPositionLabel = (position: string, department: string) => {
     if (position === "head") {
+      // For heads, combine "Head of" with department name
       const headPrefix = dict?.positions?.head_prefix || "Head of";
       const deptName = dict?.departments?.[department as Department] || department;
       return `${headPrefix} ${deptName}`;
     } else if (position === "member" && department !== "executive") {
+      // For members of specific departments, you might want to show department name
       return dict?.departments?.[department as Department] || department;
     } else {
+      // For other positions, use direct translation
       return dict?.positions?.[position as keyof typeof dict.positions] || position;
     }
   };
 
-  type Position = "president" | "vice_president" | "secretary" | "head" | "member" | "advisor";
-  
-  type MemberData = {
-    picture: string;
-    firstname: string;
-    lastname: string;
-    university: string;
-    major: string;
-    position: Position;
-    department: Department;
-    working: boolean;
-  };
+  // Fetch members from Django API
+  useEffect(() => {
+    async function fetchMembers() {
+      try {
+        const res = await fetch("http://localhost:8000/api/members/");
+        if (!res.ok) throw new Error("Failed to fetch members");
+        const data = await res.json();
+        setMemberData(data);
+      } catch (err) {
+        console.error(err);
+        setError("Failed to load members");
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  //use fake data for now
-  const memberData: MemberData[] = [
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "president",
-      department: "executive",
-      working: true,
-    },
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "head",
-      department: "it",
-      working: true,
-    },
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "member",
-      department: "it",
-      working: true,
-    },
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "member",
-      department: "it",
-      working: false,
-    },
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "advisor",
-      department: "honorary",
-      working: true,
-    },
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "vice_president",
-      department: "executive",
-      working: true,
-    },
-    {
-      picture: "tsak.png",
-      firstname: "Firstname",
-      lastname: "Lastname",
-      university: "Seoul National University",
-      major: "Computer Science",
-      position: "secretary",
-      department: "executive",
-      working: true,
-    },
-  ];
+    fetchMembers();
+  }, []);
 
   const filteredMembers = memberData.filter((m) => {
     if (selectedDept === "alumni") {
       return m.working === false;
     }
-    return m.department === selectedDept;
+    return m.department === selectedDept && m.working === true;
   });
+
+  if (loading) {
+    return (
+      <div className="font-sans min-h-screen p-8 sm:p-20 flex items-center justify-center">
+        <p className="text-xl">Loading members...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="font-sans min-h-screen p-8 sm:p-20 flex items-center justify-center">
+        <p className="text-xl text-red-600">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="font-sans min-h-screen p-8 sm:p-20">
@@ -177,9 +146,9 @@ export default function Home() {
                 <div className="flex justify-center mb-8">
                   {filteredMembers
                     .filter((m) => m.position === "president")
-                    .map((member, idx) => (
+                    .map((member) => (
                       <MemberCard 
-                        key={idx} 
+                        key={member.id} 
                         member={{
                           ...member,
                           positionLabel: getPositionLabel(member.position, member.department),
@@ -195,9 +164,9 @@ export default function Home() {
                         m.position === "vice_president" ||
                         m.position === "secretary"
                     )
-                    .map((member, idx) => (
+                    .map((member) => (
                       <MemberCard
-                        key={idx}
+                        key={member.id}
                         member={{
                           ...member,
                           positionLabel: getPositionLabel(member.position, member.department),
@@ -211,9 +180,9 @@ export default function Home() {
             <div className="w-full max-w-7xl">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {filteredMembers.length > 0 ? (
-                  filteredMembers.map((member, idx) => (
+                  filteredMembers.map((member) => (
                     <MemberCard
-                      key={idx}
+                      key={member.id}
                       member={{
                         ...member,
                         positionLabel: getPositionLabel(member.position, member.department),

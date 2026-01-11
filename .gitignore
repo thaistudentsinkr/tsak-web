@@ -52,3 +52,16 @@ __pycache__/
 # Migration files
 **/migrations/
 !**/migrations/__init__.py
+
+# Django
+*.log
+*.pot
+db.sqlite3
+db.sqlite3-journal
+
+# Media files (user uploaded content)
+media/
+
+# Static files
+staticfiles/
+static_collected/

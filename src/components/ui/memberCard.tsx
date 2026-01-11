@@ -1,7 +1,7 @@
 "use client";
 
 type Member = {
-    picture?: string;
+    picture?: string | null;
     firstname: string;
     lastname: string;
     university: string;
@@ -36,7 +36,11 @@ export default function MemberCard({ member }: { member: Member }) {
                 ? "#FFD700"
                 : null;
 
-    const imageSrc = picture?.startsWith("/") ? picture : picture ? `/${picture}` : undefined;
+    // If picture is a full URL from Django (starts with http), use it directly
+    // Otherwise, treat it as a filename in /public folder
+    const imageSrc = picture 
+        ? (picture.startsWith('http') ? picture : `/${picture}`)
+        : undefined;
 
     return (
         <div

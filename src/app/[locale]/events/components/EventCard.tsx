@@ -11,6 +11,8 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, locale }: EventCardProps) {
+  const eventDetailUrl = `/${locale}/events/${event.id}`;
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'ended':
@@ -28,18 +30,17 @@ export default function EventCard({ event, locale }: EventCardProps) {
     <div className={styles.eventCard}>
       {/* White Rectangle - Contains Image */}
       <div className={styles.whiteRectangle}>
-        {/* Event Image - Clickable to open in new tab */}
-        <div 
-          className={styles.eventImage}
-          onClick={() => window.open(event.imageUrl, '_blank')}
-        >
-          <Image
-            src={event.imageUrl}
-            alt={event.title}
-            fill
-            className="object-cover"
-          />
-        </div>
+        {/* Event Image - Clickable to navigate to event detail */}
+        <Link href={eventDetailUrl} className="block">
+          <div className={styles.eventImage}>
+            <Image
+              src={event.imageUrl}
+              alt={event.title}
+              fill
+              className="object-cover"
+            />
+          </div>
+        </Link>
         
         {/* Organization logo in circular cutout */}
         <div className={styles.organizationLogo}>
@@ -54,7 +55,7 @@ export default function EventCard({ event, locale }: EventCardProps) {
       </div>
 
       {/* Light Blue Rectangle - Event Details */}
-      <Link href={`/${locale}/events/${event.id}`} className="block">
+      <Link href={eventDetailUrl} className="block">
         <div className={styles.eventDetailBox}>
           {/* Event Title */}
           <h3 className={styles.eventTitle}>
