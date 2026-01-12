@@ -1,12 +1,24 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-const infoTexts: Record<string, string[]> = {
-  en: ["Annoucement", "Our Experience", "Activities"],
-  th: ["ประกาศ", "เล่าประสบการณ์", "กิจกรรม"],
+const infoTexts: Record<
+  string,
+  { label: string; href: string }[]
+> = {
+  en: [
+    { label: "Announcement", href: "/community/announcement" },
+    { label: "Our Experience", href: "/community/experience" },
+    { label: "Activities", href: "/community/activities" },
+  ],
+  th: [
+    { label: "ประกาศ", href: "/community/announcement" },
+    { label: "เล่าประสบการณ์", href: "/community/experience" },
+    { label: "กิจกรรม", href: "/community/activities" },
+  ],
 };
 
 const infoLabel: Record<string, string> = {
@@ -38,13 +50,14 @@ export default function CommunityDropdown() {
         >
           <div className="py-1 px-3 space-y-1">
             {items.map((item, idx) => (
-              <button
-                key={idx}
-                onClick={() => setOpen(false)}
-                className="px-4 py-2 text-gray-700 block w-full text-center text-sm rounded-full border border-transparent hover:bg-[#A51D2C]/10 hover:text-[#A51D2C] hover:border hover:border-[#A51D2C]/50 hover:rounded-full"
-              >
-                {item}
-              </button>
+              <Link
+              key={idx}
+              href={`/${locale}${item.href}`}
+              onClick={() => setOpen(false)}
+              className="px-4 py-2 text-gray-700 block w-full text-center text-sm rounded-full border border-transparent hover:bg-[#A51D2C]/10 hover:text-[#A51D2C] hover:border-[#A51D2C]/50"
+            >
+              {item.label}
+            </Link>
             ))}
           </div>
         </div>

@@ -1,12 +1,29 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-const infoTexts: Record<string, string[]> = {
-  en: ["About Visa", "ARC issuing", "Basic Laws", "Part-time jobs", "TOPIK exam", "Scholarships"],
-  th: ["เกี่ยวกับ Visa", "การทำบัตร ARC", "กฎหมายพื้นฐาน", "การทำงาน Part-time", "การสอบ TOPIK", "ทุนการศึกษา"],
+const infoTexts: Record<string, 
+  { label: string; href: string}[]
+> = {
+  en: [
+    { label: "About Visa", href: "/info/visa"},
+    { label: "ARC issuing", href: "/info/visa" },
+    { label: "Basic Laws", href: "/info"},
+    { label: "Part-time jobs", href: "/info"},
+    { label: "TOPIK exam", href: "/info"},
+    { label: "Scholarships", href: "info"},
+  ],
+  th: [
+    { label: "เกี่ยวกับ Visa", href: "/info/visa"},
+    { label: "การทำบัตร ARC", href: "/info" },
+    { label: "กฎหมายพื้นฐาน", href: "/info"},
+    { label: "การทำงาน Part-time", href: "/info"},
+    { label: "การสอบ TOPIK", href: "/info"},
+    { label: "ทุนการศึกษา", href: "info"},
+  ],
 };
 
 const infoLabel: Record<string, string> = {
@@ -37,13 +54,14 @@ export default function InformationDropdown() {
         >
           <div className="py-1 px-3 space-y-1">
             {items.map((item, idx) => (
-              <button
-                key={idx}
-                onClick={() => setOpen(false)}
-                className="px-4 py-2 text-gray-700 block w-full text-center text-sm rounded-full border border-transparent hover:bg-[#A51D2C]/10 hover:text-[#A51D2C] hover:border hover:border-[#A51D2C]/50 hover:rounded-full"
-              >
-                {item}
-              </button>
+              <Link
+              key={idx}
+              href={`/${locale}${item.href}`}
+              onClick={() => setOpen(false)}
+              className="px-4 py-2 text-gray-700 block w-full text-center text-sm rounded-full border border-transparent hover:bg-[#A51D2C]/10 hover:text-[#A51D2C] hover:border-[#A51D2C]/50"
+            >
+              {item.label}
+            </Link>
             ))}
           </div>
         </div>
