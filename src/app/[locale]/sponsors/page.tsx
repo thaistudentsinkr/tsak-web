@@ -47,66 +47,49 @@ function NetworkCTA({ href, title, subtitle, }: { href: string; title: string; s
   );
 }
 
+async function getSponsors() {
+  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+  
+  try {
+    const response = await fetch(`${BACKEND_URL}/api/sponsors/`, {
+      cache: 'no-store', // or 'force-cache' for caching
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch sponsors: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    // Transform logo URLs to include full backend URL
+    const transformSponsors = (sponsors: any[]) => 
+      sponsors.map(sponsor => ({
+        ...sponsor,
+        logo: sponsor.logo.startsWith('http') 
+          ? sponsor.logo 
+          : `${BACKEND_URL}${sponsor.logo}`
+      }));
+    
+    return {
+      embassies: transformSponsors(data.embassies || []),
+      partners: transformSponsors(data.partners || []),
+      networks: transformSponsors(data.networks || []),
+    };
+  } catch (error) {
+    console.error('Error fetching sponsors:', error);
+    // Return empty data structure as fallback
+    return {
+      embassies: [],
+      partners: [],
+      networks: [],
+    };
+  }
+}
+
 export default async function Home({ params }: PageProps) {
   const { locale } = await params;
   const dict = getDictionary(locale);
-  //use fake data for now; use const sponsors = await getSponsors(); after have backend
-  const sponsors = {
-    embassies: [
-      {
-        id: "thai-embassy-seoul",
-        name: "Royal Thai Embassy, Seoul",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-        description: "สถานเอกอัครราชทูต ณ กรุงโซล ได้ให้การสนับสนุนสมาคมนักเรียนไทยในสาธารณรัฐเกาหลีอย่างต่อเนื่อง ทั้งในระยะเริ่มต้นของการรวมตัวจัดตั้งสมาคมและในการดำเนินการจัดกิจกรรมต่าง ๆ โดยมีเป้าหมายร่วมกันให้สมาคมฯ ทำหน้าที่เป็นศูนย์กลางประสานงานดูแลนักเรียนไทยในสาธารณรัฐเกาหลี เพื่อเสริมสร้างเครือข่ายและกระชับความสัมพันธ์ในหมู่นักเรียนไทยให้แน่นแฟ้นมากยิ่งขึ้น"
-      }
-    ],
-    partners: [
-      {
-        id: "partner-abc",
-        name: "ABC Corporation",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-        description: "ASEAN Youth Network in Korea (AYNK) คือ ชุมชนอาสาสมัครของนักศึกษาในสาธารณรัฐเกาหลีจากประเทศอาเซียน ในเดือนเมษายน 2568 สมาคมนักเรียนไทยในสาธารณรัฐเกาหลี พร้อมด้วยสมาคมนักศึกษาจากประเทศสมาชิกอาเซียนอื่นๆ ในเกาหลี ได้ลงนามบันทึกความเข้าใจ (MOU) เพื่อสนับสนุนวัตถุประสงค์หลักของ AYNK ในการมุ่งมั่นส่งเสริมการแลกเปลี่ยนเยาวชน การสร้างเครือข่าย และความร่วมมือระหว่างอาเซียนกับเกาหลี เพื่อเสริมสร้างความสัมพันธ์อาเซียน-เกาหลีให้แน่นแฟ้นยิ่งขึ้น",
-      },
-      {
-        id: "partner-abg",
-        name: "ABC Corporation",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-        description: "ASEAN Youth Network in Korea (AYNK) คือ ชุมชนอาสาสมัครของนักศึกษาในสาธารณรัฐเกาหลีจากประเทศอาเซียน ในเดือนเมษายน 2568 สมาคมนักเรียนไทยในสาธารณรัฐเกาหลี พร้อมด้วยสมาคมนักศึกษาจากประเทศสมาชิกอาเซียนอื่นๆ ในเกาหลี ได้ลงนามบันทึกความเข้าใจ (MOU) เพื่อสนับสนุนวัตถุประสงค์หลักของ AYNK ในการมุ่งมั่นส่งเสริมการแลกเปลี่ยนเยาวชน การสร้างเครือข่าย และความร่วมมือระหว่างอาเซียนกับเกาหลี เพื่อเสริมสร้างความสัมพันธ์อาเซียน-เกาหลีให้แน่นแฟ้นยิ่งขึ้น"
-      }
-    ],
-    networks: [
-      {
-        id: "network-xyz",
-        name: "XYZ Research Network",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-      },
-      {
-        id: "network-123",
-        name: "Open Science Network",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-      },
-      {
-        id: "network-124",
-        name: "Open Science Network",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-      },
-      {
-        id: "network-125",
-        name: "Open Science Network",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-      },
-      {
-        id: "network-126",
-        name: "Open Science Network",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-      },
-      {
-        id: "network-127",
-        name: "Open Science Network",
-        logo: "https://image.mfa.go.th/mfa/0/bE5KohkHoq/%E0%B8%AA%E0%B8%AD%E0%B8%97new.png",
-      },
-    ],
-  };
+  const sponsors = await getSponsors();
 
   const gridItems: GridItem[] = [
     ...sponsors.networks.map((n) => ({

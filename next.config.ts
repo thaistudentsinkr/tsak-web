@@ -24,6 +24,12 @@ const nextConfig: NextConfig = {
         hostname: 'image.mfa.go.th',
         pathname: '/**',
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8000',
+        pathname: '/media/**',
+      },
     ],
   },
 };
