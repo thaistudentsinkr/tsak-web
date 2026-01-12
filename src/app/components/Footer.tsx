@@ -77,7 +77,12 @@ export default function Footer() {
 
           <div className="text-sm mt-4">
             <p>Copyright © {new Date().getFullYear()}, All Rights Reserved by Thai Student Association in Republic of Korea</p>
-            <p>Design by Aphichaya Kreangwate, Pemika Chareonwongsa, Developed by</p>
+            <p>Project managed by Nunnalin Heimvichit
+            </p>
+            <p>Designed by Aphichaya Kreangwate, Pemika Chareonwongsa
+            </p>
+            <p>Developed by Jaden Jorradol, Thiwat Chatkham, Thommakoon Nitheekulawatn, Passavee Losripat   
+            </p>
             <Link href="#" className="underline">นโยบายเว็บไซต์และลิขสิทธิ์</Link>
           </div>
         </div>
