@@ -35,5 +35,23 @@
 
   "members": {
     "empty": "No members in this department"
+  },
+
+  "events": {
+    "loading": "Loading events...",
+    "error": "Failed to load events",
+    "empty": "No events available",
+    "notFound": "Event Not Found",
+    "loadingEvent": "Loading event...",
+    "errorEvent": "Failed to load event",
+    "sponsors": "Sponsors",
+    "details": "Event Details",
+    "photos": "Event Photos",
+    "register": "Register to join event",
+    "status": {
+      "ended": "Ended",
+      "closed": "Registration Closed",
+      "open": "Registration Open"
+    }
   }
 }
