@@ -12,12 +12,12 @@ const infoTexts: Record<
   en: [
     { label: "Announcement", href: "/community/announcement" },
     { label: "Experiences", href: "/community/experience" },
-    { label: "Events", href: "/community/activities" },
+    { label: "Events", href: "/events" },
   ],
   th: [
     { label: "ประกาศ", href: "/community/announcement" },
     { label: "เล่าประสบการณ์", href: "/community/experience" },
-    { label: "กิจกรรม", href: "/community/activities" },
+    { label: "กิจกรรม", href: "/events" },
   ],
 };
 
