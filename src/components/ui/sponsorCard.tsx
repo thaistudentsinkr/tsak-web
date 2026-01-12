@@ -8,8 +8,8 @@ type SponsorCardProps = {
 
 export function SponsorCard({ logo, name, description }: SponsorCardProps) {
   return (
-    <div className="flex gap-6 p-6 rounded-lg">
-      <div className="flex-shrink-0 flex items-start">
+    <div className="flex gap-6 p-6">
+      <div className="flex-shrink-0">
         <Image
           src={logo}
           alt={name}
@@ -19,15 +19,18 @@ export function SponsorCard({ logo, name, description }: SponsorCardProps) {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <h3 className="font-bold text-xl">
+      <div className="flex flex-col gap-3">
+        <h3 className="font-bold text-xl text-gray-900">
           {name}
         </h3>
-        <p className="text-sm leading-relaxed text-gray-800">
+
+        <p className="
+          text-sm leading-relaxed text-gray-800
+          text-justify
+        ">
           {description}
         </p>
       </div>
-
     </div>
   );
 }

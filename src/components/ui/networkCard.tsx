@@ -15,7 +15,7 @@ export function NetworkCard({ logo, name }: NetworkCardProps) {
         height={80}
         className="object-contain"
       />
-      <span className="font-medium text-gray-800">
+      <span className="font-medium text-gray-900">
         {name}
       </span>
     </div>
