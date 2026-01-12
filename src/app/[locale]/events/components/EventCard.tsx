@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { EventData } from "../event_data/events";
+import { EventData } from "@/lib/api/events";
+import { getDictionary } from "@/lib/i18n";
 import styles from "./EventCard.module.css";
 
 interface EventCardProps {
@@ -11,7 +12,14 @@ interface EventCardProps {
 }
 
 export default function EventCard({ event, locale }: EventCardProps) {
+  const dict = getDictionary(locale);
   const eventDetailUrl = `/${locale}/events/${event.id}`;
+
+  // Get title based on locale: use titleEn for English, title for Thai
+  const displayTitle = locale === 'en' ? (event.titleEn || event.title) : event.title;
+  
+  // Get translated status text
+  const statusText = dict.events.status[event.status as keyof typeof dict.events.status] || event.statusText;
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -35,7 +43,7 @@ export default function EventCard({ event, locale }: EventCardProps) {
           <div className={styles.eventImage}>
             <Image
               src={event.imageUrl}
-              alt={event.title}
+              alt={displayTitle}
               fill
               className="object-cover"
             />
@@ -59,7 +67,7 @@ export default function EventCard({ event, locale }: EventCardProps) {
         <div className={styles.eventDetailBox}>
           {/* Event Title */}
           <h3 className={styles.eventTitle}>
-            {event.title}
+            {displayTitle}
           </h3>
           
           {/* Date and Status Row */}
@@ -73,7 +81,7 @@ export default function EventCard({ event, locale }: EventCardProps) {
               </span>
             </p>
             <div className={`${getStatusColor(event.status)} ${styles.eventStatus}`}>
-              {event.statusText}
+              {statusText}
             </div>
           </div>
         </div>

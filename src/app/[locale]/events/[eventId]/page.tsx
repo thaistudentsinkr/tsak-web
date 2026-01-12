@@ -1,26 +1,74 @@
-import { events } from "../event_data/events";
+"use client";
+
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import EventsHeader from "../components/EventsHeader";
 import Image from "next/image";
+import { fetchEventById, EventData } from "@/lib/api/events";
+import { getDictionary } from "@/lib/i18n";
 
-export default async function EventPage({
-  params,
-}: Readonly<{
-  params: Promise<{ eventId: string }>;
-}>) {
-  const eventId = (await params).eventId;
-  const event = events.find(e => e.id === eventId);
+export default function EventPage() {
+  const params = useParams<{ locale: string; eventId: string }>();
+  const locale = params?.locale || 'en';
+  const eventId = params?.eventId;
+  const dict = getDictionary(locale);
+  
+  const [event, setEvent] = useState<EventData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!event) {
+  // Fetch event from Django API
+  useEffect(() => {
+    async function loadEvent() {
+      if (!eventId) {
+        setError(dict.events.notFound);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await fetchEventById(eventId);
+        setEvent(data);
+      } catch (err) {
+        console.error(err);
+        if (err instanceof Error && err.message === "Event not found") {
+          setError(dict.events.notFound);
+        } else {
+          setError(dict.events.errorEvent);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadEvent();
+  }, [eventId, dict.events]);
+
+  if (loading) {
+    return (
+      <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+          <p className="text-xl">{dict.events.loadingEvent}</p>
+        </main>
+      </div>
+    );
+  }
+
+  if (error || !event) {
     return (
       <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
         <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           <h1 className="text-4xl sm:text-5xl font-bold text-center sm:text-left">
-            Event Not Found
+            {error || dict.events.notFound}
           </h1>
         </main>
       </div>
     );
   }
+
+  // Get title based on locale: use titleEn for English, title for Thai
+  const displayTitle = locale === 'en' ? (event.titleEn || event.title) : event.title;
+  const displaySubtitle = event.subtitle || displayTitle;
 
   return (
     <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -30,7 +78,7 @@ export default async function EventPage({
 
         {/* Event Subtitle */}
         <h2 className="text-2xl sm:text-3xl font-medium text-center">
-          {event.subtitle || event.title}
+          {displaySubtitle}
         </h2>
 
         {/* Event Image */}
@@ -39,7 +87,7 @@ export default async function EventPage({
             <div className="relative w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg overflow-hidden">
               <Image
                 src={event.imageUrl}
-                alt={event.title}
+                alt={displayTitle}
                 fill
                 className="object-cover"
               />
@@ -52,7 +100,7 @@ export default async function EventPage({
           {event.status === 'open' && (
             <div className="flex justify-center mt-6">
               <button className="py-4 px-8 bg-[#2C3985] text-[#FFFCDD] rounded-full text-lg font-medium hover:bg-[#1e2a6b] transition-colors">
-                ลงทะเบียนเข้าร่วมงาน
+                {dict.events.register}
               </button>
             </div>
           )}
@@ -61,7 +109,7 @@ export default async function EventPage({
         {/* Sponsors Section */}
         <div className="w-full max-w-4xl">
           <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
-            ผู้สนับสนุน
+            {dict.events.sponsors}
           </h2>
           {event.sponsors && event.sponsors.length > 0 && (
             <div className="flex flex-wrap gap-6 items-center">
@@ -82,7 +130,7 @@ export default async function EventPage({
         {/* Event Details Section */}
         <div className="w-full max-w-4xl">
           <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
-            รายละเอียดกิจกรรม
+            {dict.events.details}
           </h2>
           {event.description && (
             <p className="text-lg text-left whitespace-pre-line">
@@ -94,7 +142,7 @@ export default async function EventPage({
         {/* Event Photos Section */}
         <div className="w-full max-w-4xl">
           <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
-            ภาพกิจกรรม
+            {dict.events.photos}
           </h2>
           {event.imageDir && event.imageDir.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -102,7 +150,7 @@ export default async function EventPage({
                 <div key={index} className="relative w-full aspect-square bg-[#f3f4f6] rounded-lg overflow-hidden">
                   <Image
                     src={imageUrl}
-                    alt={`${event.title} - Image ${index + 1}`}
+                    alt={`${displayTitle} - Image ${index + 1}`}
                     fill
                     className="object-cover"
                   />
