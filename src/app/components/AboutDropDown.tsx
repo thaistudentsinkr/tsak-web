@@ -9,9 +9,9 @@ const infoTexts: Record<string,
   { label: string; href: string}[]
 > = {
   en: [
-    { label: "History Background", href: "/about/history_bg"}, 
-    { label: "Executive Commitee", href: "/about/executive_commitee"},
-    { label: "Sponsors", href: "/sponsors"}, 
+    { label: "About TSAK", href: "/about/history_bg"}, 
+    { label: "Executive Members", href: "/about/executive_commitee"},
+    { label: "Sponsorships", href: "/sponsors"}, 
     { label: "Regulations", href: "/about/regulations"}, 
     { label: "Statistic", href: "/about/statistic"}
   ],

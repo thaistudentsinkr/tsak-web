@@ -10,17 +10,13 @@ const infoTexts: Record<string,
 > = {
   en: [
     { label: "About Visa", href: "/info/visa"},
-    { label: "ARC issuing", href: "/info/visa" },
     { label: "Basic Laws", href: "/info"},
-    { label: "Part-time jobs", href: "/info"},
     { label: "TOPIK exam", href: "/info"},
     { label: "Scholarships", href: "info"},
   ],
   th: [
-    { label: "เกี่ยวกับ Visa", href: "/info/visa"},
-    { label: "การทำบัตร ARC", href: "/info" },
+    { label: "ข้อมูลวีซ่า", href: "/info/visa"},
     { label: "กฎหมายพื้นฐาน", href: "/info"},
-    { label: "การทำงาน Part-time", href: "/info"},
     { label: "การสอบ TOPIK", href: "/info"},
     { label: "ทุนการศึกษา", href: "info"},
   ],

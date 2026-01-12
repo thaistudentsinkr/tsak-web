@@ -11,7 +11,7 @@ const infoTexts: Record<
 > = {
   en: [
     { label: "Announcement", href: "/community/announcement" },
-    { label: "Our Experience", href: "/community/experience" },
+    { label: "Experiences", href: "/community/experience" },
     { label: "Activities", href: "/community/activities" },
   ],
   th: [
@@ -23,7 +23,7 @@ const infoTexts: Record<
 
 const infoLabel: Record<string, string> = {
   en: "Community",
-  th: "เครือค่าย",
+  th: "ชุมชน",
 };
 
 export default function CommunityDropdown() {
