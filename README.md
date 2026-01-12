@@ -5,7 +5,7 @@ Thai Students Association in Republic of Korea Official Website
 ### Make migrations
 ```
 python ./manage.py makemigrations
-python ./manage.py makemigrations
+python ./manage.py migrate
 ```
 We need to make migrations every time we updated database schema or fleshly clone
 
