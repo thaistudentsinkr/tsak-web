@@ -15,7 +15,7 @@ export default async function Home({ params }: PageProps) {
         {/* Image */}
         <div className="relative w-full">
           <Image
-            src="/home_group_photo.png"
+            src="/fall_2025_group_photo.jpg"
             alt="TSAK Group Photo"
             width={1920}
             height={1080}
