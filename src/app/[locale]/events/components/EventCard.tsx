@@ -15,8 +15,18 @@ export default function EventCard({ event, locale }: EventCardProps) {
   const dict = getDictionary(locale);
   const eventDetailUrl = `/${locale}/events/${event.id}`;
 
-  // Get title based on locale: use titleEn for English, title for Thai
-  const displayTitle = locale === 'en' ? (event.titleEn || event.title) : event.title;
+  // Get title based on locale: use titleEn for English, title for Thai and other locales
+  const getDisplayTitle = () => {
+    if (locale === 'en') {
+      // For English, prefer titleEn, fallback to title
+      return event.titleEn || event.title;
+    } else {
+      // For Thai and other locales, use title (which should be in that language)
+      return event.title;
+    }
+  };
+  
+  const displayTitle = getDisplayTitle();
   
   // Get translated status text
   const statusText = dict.events.status[event.status as keyof typeof dict.events.status] || event.statusText;

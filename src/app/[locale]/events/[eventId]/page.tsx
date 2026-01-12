@@ -47,9 +47,9 @@ export default function EventPage() {
   if (loading) {
     return (
       <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <div className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           <p className="text-xl">{dict.events.loadingEvent}</p>
-        </main>
+        </div>
       </div>
     );
   }
@@ -57,11 +57,11 @@ export default function EventPage() {
   if (error || !event) {
     return (
       <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <div className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
           <h1 className="text-4xl sm:text-5xl font-bold text-center sm:text-left">
             {error || dict.events.notFound}
           </h1>
-        </main>
+        </div>
       </div>
     );
   }
@@ -82,7 +82,7 @@ export default function EventPage() {
 
   return (
     <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center pt-24">
+      <div className="flex flex-col gap-[32px] row-start-2 items-center pt-24">
         {/* Event Header */}
         <EventsHeader />
 
@@ -186,8 +186,8 @@ export default function EventPage() {
             <p><strong>Status:</strong> {event.statusText}</p>
             {event.description && <p><strong>Description:</strong> {event.description}</p>}
           </div>
-        </div> */}
-      </main>
+          </div> */}
+      </div>
     </div>
   );
 }
