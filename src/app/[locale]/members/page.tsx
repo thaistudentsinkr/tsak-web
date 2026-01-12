@@ -36,7 +36,7 @@ type MemberData = {
 export default function Home() {
   const params = useParams<{ locale: string }>();
   const locale = params?.locale || 'en';
-  
+
   const dict = getDictionary(locale);
   const [selectedDept, setSelectedDept] = useState<Department>("honorary");
   const [memberData, setMemberData] = useState<MemberData[]>([]);
@@ -135,8 +135,8 @@ export default function Home() {
           {selectedDept === "executive" ? (
             <div className="relative flex flex-col gap-12 w-full max-w-7xl items-center justify-center py-12">
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="border-4 border-[#A51D2C]/20 rounded-[50%] w-[320px] h-[100px] rotate-[9.47deg] flex items-center justify-center p-4">
-                  <p className="text-[#A51D2C]/20 font-bold text-lg sm:text-xl leading-snug text-center whitespace-pre-line">
+                <div className="border-2 border-[#A51D2C]/20 rounded-[50%] w-[320px] h-[100px] rotate-[9.47deg] flex items-center justify-center p-4">
+                  <p className="text-[#A51D2C]/20 text-lg sm:text-xl leading-[1.1] text-center whitespace-pre-line max-w-[90%] tracking-tighter">
                     Thai Students Association{'\n'}in the Republic of Korea
                   </p>
                 </div>
@@ -147,8 +147,8 @@ export default function Home() {
                   {filteredMembers
                     .filter((m) => m.position === "president")
                     .map((member) => (
-                      <MemberCard 
-                        key={member.id} 
+                      <MemberCard
+                        key={member.id}
                         member={{
                           ...member,
                           positionLabel: getPositionLabel(member.position, member.department),
@@ -178,7 +178,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="w-full max-w-7xl">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+              <div className="flex flex-wrap gap-8 justify-center">
                 {filteredMembers.length > 0 ? (
                   filteredMembers.map((member) => (
                     <MemberCard
@@ -197,8 +197,8 @@ export default function Home() {
               </div>
 
               <div className="absolute bottom-4 right-4 w-[320px] h-[100px] flex items-center justify-center">
-                <div className="border-4 border-[#A51D2C]/20 rounded-[50%] rotate-[-17.11deg] w-full h-full flex items-center justify-center p-4">
-                  <p className="text-[#A51D2C]/20 font-bold text-lg sm:text-xl leading-snug text-center whitespace-pre-line">
+                <div className="border-2 border-[#A51D2C]/20 rounded-[50%] rotate-[-17.11deg] w-full h-full flex items-center justify-center p-2">
+                  <p className="text-[#A51D2C]/20 text-lg sm:text-xl leading-[1.1] text-center whitespace-pre-line max-w-[90%] tracking-tighter">
                     Thai Students Association{'\n'}in the Republic of Korea
                   </p>
                 </div>
