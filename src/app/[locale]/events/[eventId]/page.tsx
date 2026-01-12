@@ -66,8 +66,18 @@ export default function EventPage() {
     );
   }
 
-  // Get title based on locale: use titleEn for English, title for Thai
-  const displayTitle = locale === 'en' ? (event.titleEn || event.title) : event.title;
+  // Get title based on locale: use titleEn for English, title for Thai and other locales
+  const getDisplayTitle = () => {
+    if (locale === 'en') {
+      // For English, prefer titleEn, fallback to title
+      return event.titleEn || event.title;
+    } else {
+      // For Thai and other locales, use title (which should be in that language)
+      return event.title;
+    }
+  };
+  
+  const displayTitle = getDisplayTitle();
   const displaySubtitle = event.subtitle || displayTitle;
 
   return (

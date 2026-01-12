@@ -1,5 +1,5 @@
 from django.db import models
-from sponsors.models import Sponsor
+# from sponsors.models import Sponsor
 
 
 class Event(models.Model):
@@ -31,7 +31,7 @@ class Event(models.Model):
     organizer = models.CharField(max_length=255, blank=True, null=True)
     
     # Relationships
-    sponsors = models.ManyToManyField(Sponsor, blank=True, related_name='events')
+    # sponsors = models.ManyToManyField(Sponsor, blank=True, related_name='events')
     
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)

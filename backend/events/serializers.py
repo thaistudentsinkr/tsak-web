@@ -1,24 +1,24 @@
 from rest_framework import serializers
 from .models import Event, EventImage
-from sponsors.models import Sponsor
+# from sponsors.models import Sponsor
 
 
-class SponsorSerializer(serializers.ModelSerializer):
-    """Serializer for sponsor in event context"""
-    logoUrl = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Sponsor
-        fields = ['name', 'logoUrl']
-    
-    def get_logoUrl(self, obj):
-        """Return the full URL to the logo"""
-        if obj.logo:
-            request = self.context.get('request')
-            if request:
-                return request.build_absolute_uri(obj.logo.url)
-            return obj.logo.url
-        return None
+# class SponsorSerializer(serializers.ModelSerializer):
+#     """Serializer for sponsor in event context"""
+#     logoUrl = serializers.SerializerMethodField()
+#     
+#     class Meta:
+#         model = Sponsor
+#         fields = ['name', 'logoUrl']
+#     
+#     def get_logoUrl(self, obj):
+#         """Return the full URL to the logo"""
+#         if obj.logo:
+#             request = self.context.get('request')
+#             if request:
+#                 return request.build_absolute_uri(obj.logo.url)
+#             return obj.logo.url
+#         return None
 
 
 class EventImageSerializer(serializers.ModelSerializer):
@@ -46,7 +46,8 @@ class EventSerializer(serializers.ModelSerializer):
     titleEn = serializers.CharField(source='title_en', read_only=True)
     dateRange = serializers.CharField(source='date_range', read_only=True)
     statusText = serializers.CharField(source='status_text', read_only=True)
-    sponsors = SponsorSerializer(many=True, read_only=True)
+    # sponsors = SponsorSerializer(many=True, read_only=True)
+    sponsors = serializers.SerializerMethodField()  # Return empty array for now
     imageDir = serializers.SerializerMethodField()
     
     class Meta:
@@ -80,6 +81,10 @@ class EventSerializer(serializers.ModelSerializer):
                 return request.build_absolute_uri(obj.image.url)
             return obj.image.url
         return None
+    
+    def get_sponsors(self, obj):
+        """Return empty array for sponsors (commented out for now)"""
+        return []
     
     def get_imageDir(self, obj):
         """Return array of image URLs from EventImage objects"""

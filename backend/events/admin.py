@@ -16,7 +16,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['title', 'title_en', 'subtitle', 'description', 'location']
     list_editable = ['status']
     ordering = ['-created_at']
-    filter_horizontal = ['sponsors']
+    # filter_horizontal = ['sponsors']  # Commented out - sponsors not available yet
     inlines = [EventImageInline]
     
     fieldsets = (
@@ -29,9 +29,9 @@ class EventAdmin(admin.ModelAdmin):
         ('Details', {
             'fields': ('description', 'location', 'organizer')
         }),
-        ('Relationships', {
-            'fields': ('sponsors',)
-        }),
+        # ('Relationships', {
+        #     'fields': ('sponsors',)
+        # }),  # Commented out - sponsors not available yet
     )
 
 
