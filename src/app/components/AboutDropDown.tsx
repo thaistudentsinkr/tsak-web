@@ -9,18 +9,18 @@ const infoTexts: Record<string,
   { label: string; href: string}[]
 > = {
   en: [
-    { label: "About TSAK", href: "/about/history_bg"}, 
+    { label: "About TSAK", href: "/about"}, 
     { label: "Executive Members", href: "/about/executive_commitee"},
     { label: "Sponsorships", href: "/sponsors"}, 
     { label: "Regulations", href: "/about/regulations"}, 
-    { label: "Statistic", href: "/about/statistic"}
+    { label: "Contact Us", href: "/contact"}
   ],
   th: [
-    { label: "ที่มาของสมาคม", href: "/about/history_bg"},
+    { label: "ที่มาของสมาคม", href: "/about"},
     { label: "คณะกรรมการบริหาร", href: "/about/executive_commitee"},
     { label: "ผู้สนับสนุนสมาคม", href: "/sponsors"},
     { label: "ข้อบังคับสมาคม", href: "/about/regulations"},
-    { label: "ข้อมูลเชิงสถิติ", href: "/about/statistic"},
+    { label: "ติดต่อเรา", href: "/contact"},
   ],
 };
 
