@@ -1,7 +1,13 @@
 import Image from "next/image";
-import Link from "next/link"
+import { getDictionary } from "@/lib/i18n";
 
-export default function Home() {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function AboutPage({ params }: PageProps) {
+  const { locale } = await params;
+  const dict = getDictionary(locale);
   const contact = [
     {
       text: "thaistudentsinkorea@gmail.com",
@@ -73,8 +79,12 @@ export default function Home() {
               lineHeight: '15px'
             }}
           >
-            Thai Students Association<br />
-            in the Republic of Korea
+            {dict.about.associationName.split('\n').map((line, index) => (
+              <span key={index}>
+                {line}
+                {index < dict.about.associationName.split('\n').length - 1 && <br />}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -98,7 +108,7 @@ export default function Home() {
             lineHeight: 'normal'
           }}
         >
-          ABOUT TSAK
+          {dict.about.title}
         </h1>
         <h1
           className="absolute left-1/2 translate-x-[400px]"
@@ -111,26 +121,46 @@ export default function Home() {
             lineHeight: 'normal'
           }}
         >
-          สนทก.
+          {dict.about.titleTh}
         </h1>
       </div>
       
       <div className="w-full py-8">
         {/* Rectangle 1 */}
-        <div className="relative w-full h-48 flex items-center">
-          <h2
-            className="absolute left-1/2 -translate-x-[600px]"
-            style={{
-              color: '#2C3985',
-              fontFamily: 'Onest',
-              fontSize: '48px',
-              fontStyle: 'normal',
-              fontWeight: 600,
-              lineHeight: 'normal'
-            }}
-          >
-            ความเป็นมาของสมาคม
-          </h2>
+        <div className="w-full py-8">
+          <div className="relative w-full">
+            <div className="w-full max-w-4xl" style={{ marginLeft: 'calc(50% - 600px)' }}>
+              <h2
+                style={{
+                  color: '#2C3985',
+                  fontFamily: 'Onest',
+                  fontSize: '48px',
+                  fontStyle: 'normal',
+                  fontWeight: 600,
+                  lineHeight: 'normal',
+                  marginBottom: '24px'
+                }}
+              >
+                {dict.about.history}
+              </h2>
+              {(dict.about as any).historyContent && (
+                <p
+                  style={{
+                    color: '#2C3985',
+                    fontFamily: 'Onest',
+                    fontSize: '16px',
+                    fontStyle: 'normal',
+                    fontWeight: 400,
+                    lineHeight: '1.6',
+                    textAlign: 'left',
+                    whiteSpace: 'pre-line'
+                  }}
+                >
+                  {(dict.about as any).historyContent}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
         
         {/* Rectangle 2 */}
@@ -146,7 +176,7 @@ export default function Home() {
               lineHeight: 'normal'
             }}
           >
-            TSAK เราทำอะไร
+            {dict.about.whatWeDo}
           </h2>
         </div>
         
@@ -163,7 +193,7 @@ export default function Home() {
               lineHeight: 'normal'
             }}
           >
-            วิสัยทัศน์ของ TSAK
+            {dict.about.vision}
           </h2>
         </div>
         
@@ -180,38 +210,12 @@ export default function Home() {
               lineHeight: 'normal'
             }}
           >
-            ความหมายของ LOGO ของสมาคม
+            {dict.about.logoMeaning}
           </h2>
         </div>
       </div>
       
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <center>
-          <h1 className="text-3xl font-bold">Contact Us</h1>
-          <p className="text-lg text-gray-600 mb-6">Feel free and don't hesitate to contact us!</p>
-          <div className="flex flex-col item-center justify-center gap-4">
-            {contact.map((item, index) => (
-              <Link
-                key={index}
-                href={item.link}
-                target="_blank"
-                className="flex items-center gap-3 bg-white px-10 py-5 rounded-[20px] shadow-md hover:bg-gray-100 hover:scale-105 transition-transform duration-200"
-              >
-                <Image
-                  src={item.logo}
-                  alt={item.text}
-                  width={50}
-                  height={50}
-                  className="rounded-md"
-                />
-                <span className="text-gray-800 font-medium text-lg">{item.text}</span>
-              </Link>
-            ))}
-          </div>
-        </center>
-      </main>
-      </div>
+      
     </div>
   );
 }
