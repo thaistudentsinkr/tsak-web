@@ -31,6 +31,46 @@ export default async function Home({ params }: PageProps) {
           </h1>
         </div>
       </main>
+
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  
+        {/* Background ellipse */}
+        <div
+          className="
+            absolute
+            w-[5000px]
+            h-[350px]
+            bg-[radial-gradient(ellipse_at_center,theme(colors.yellow.200),transparent_70%)]
+    blur-3xl
+    opacity-80
+    -z-10
+          "
+        />
+        <div
+          className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 px-6 max-w-6xl w-full"
+        >
+          {/* Left logo */}
+          <div className="w-[190px] h-[60px] rounded-[100%/100%] flex justify-center items-center text-center border-1 border-[#A51D2C] text-[12px] font-[400]">
+            Thai Students Association<br />
+            in the Republic of Korea
+          </div>
+
+          {/* Center text */}
+          <div className="text-center space-y-4">
+            <div className="text-sm md:text-base leading-relaxed text-gray-800">
+              {dict.hero.maintext.split('\n').map((line, i) => (<p key={i}>{line}</p>))}
+            </div>
+          </div>
+
+          {/* Right logo */}
+          <div className="w-[190px] h-[60px] rounded-[100%/100%] flex justify-center items-center text-center border-1 border-[#A51D2C] text-[12px] font-[400]">
+            Thai Students Association<br />
+            in the Republic of Korea
+          </div>
+          
+        </div>
+      </section>
+
     </div>
   );
 }
