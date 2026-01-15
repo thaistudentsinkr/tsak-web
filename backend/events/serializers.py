@@ -25,8 +25,11 @@ class EventSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()  # Convert to string for frontend
     imageUrl = serializers.SerializerMethodField()
     titleEn = serializers.CharField(source='title_en', read_only=True)
+    subtitleEn = serializers.CharField(source='subtitle_en', read_only=True)
+    descriptionEn = serializers.CharField(source='description_en', read_only=True)
     dateRange = serializers.CharField(source='date_range', read_only=True)
     statusText = serializers.CharField(source='status_text', read_only=True)
+    registrationUrl = serializers.URLField(source='registration_url', read_only=True)
     imageDir = serializers.SerializerMethodField()
     
     class Meta:
@@ -36,13 +39,16 @@ class EventSerializer(serializers.ModelSerializer):
             'title',
             'titleEn',
             'subtitle',
+            'subtitleEn',
             'imageUrl',
             'date',
             'dateRange',
             'status',
             'statusText',
             'description',
+            'descriptionEn',
             'location',
+            'registrationUrl',
             'organizer',
             'imageDir',
         ]

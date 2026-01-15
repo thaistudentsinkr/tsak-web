@@ -12,6 +12,7 @@ class Event(models.Model):
     title = models.CharField(max_length=255)
     title_en = models.CharField(max_length=255, blank=True, null=True, help_text="English title")
     subtitle = models.CharField(max_length=255, blank=True, null=True)
+    subtitle_en = models.CharField(max_length=255, blank=True, null=True, help_text="English subtitle")
     
     # Image
     image = models.ImageField(upload_to='events/', blank=True, null=True)
@@ -26,7 +27,9 @@ class Event(models.Model):
     
     # Details
     description = models.TextField(blank=True, null=True)
+    description_en = models.TextField(blank=True, null=True, help_text="English description")
     location = models.CharField(max_length=255, blank=True, null=True)
+    registration_url = models.URLField(blank=True, null=True, help_text="Registration/Event URL (for the register button)")
     organizer = models.CharField(max_length=255, blank=True, null=True)
     
     # Metadata
