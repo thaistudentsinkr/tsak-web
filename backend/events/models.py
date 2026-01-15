@@ -1,4 +1,5 @@
 from django.db import models
+from sponsors.models import Sponsor
 
 
 class Event(models.Model):
@@ -31,6 +32,9 @@ class Event(models.Model):
     location = models.CharField(max_length=255, blank=True, null=True)
     registration_url = models.URLField(blank=True, null=True, help_text="Registration/Event URL (for the register button)")
     organizer = models.CharField(max_length=255, blank=True, null=True)
+    
+    # Relationships
+    sponsors = models.ManyToManyField(Sponsor, blank=True, related_name='events')
     
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)

@@ -1,5 +1,24 @@
 from rest_framework import serializers
 from .models import Event, EventImage
+from sponsors.models import Sponsor
+
+
+class SponsorSerializer(serializers.ModelSerializer):
+    """Serializer for sponsor in event context"""
+    logoUrl = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Sponsor
+        fields = ['name', 'logoUrl']
+    
+    def get_logoUrl(self, obj):
+        """Return the full URL to the logo"""
+        if obj.logo:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.logo.url)
+            return obj.logo.url
+        return None
 
 
 class EventImageSerializer(serializers.ModelSerializer):
@@ -30,6 +49,7 @@ class EventSerializer(serializers.ModelSerializer):
     dateRange = serializers.CharField(source='date_range', read_only=True)
     statusText = serializers.CharField(source='status_text', read_only=True)
     registrationUrl = serializers.URLField(source='registration_url', read_only=True)
+    sponsors = SponsorSerializer(many=True, read_only=True)
     imageDir = serializers.SerializerMethodField()
     
     class Meta:
@@ -50,6 +70,7 @@ class EventSerializer(serializers.ModelSerializer):
             'location',
             'registrationUrl',
             'organizer',
+            'sponsors',
             'imageDir',
         ]
     

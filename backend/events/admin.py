@@ -16,6 +16,7 @@ class EventAdmin(admin.ModelAdmin):
     search_fields = ['title', 'title_en', 'subtitle', 'subtitle_en', 'description', 'description_en', 'location']
     list_editable = ['status']
     ordering = ['-created_at']
+    filter_horizontal = ['sponsors']
     inlines = [EventImageInline]
     
     fieldsets = (
@@ -27,6 +28,10 @@ class EventAdmin(admin.ModelAdmin):
         }),
         ('Details', {
             'fields': ('description', 'description_en', 'location', 'registration_url', 'organizer')
+        }),
+        ('Relationships', {
+            'fields': ('sponsors',),
+            'description': 'Select sponsors for this event. If no sponsors are available, add them in the Sponsors section first.'
         }),
     )
 
