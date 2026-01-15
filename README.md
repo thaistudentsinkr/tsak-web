@@ -12,7 +12,7 @@ We need to make migrations every time we updated database schema or fleshly clon
 ### Run Backend Server
 ```
 cd backend
-pip install -r requirements.txt
+uv sync (you got to have uv)
 python ./manage.py runserver
 ```
 The backend API should now be available at `http://localhost:8000/api/`

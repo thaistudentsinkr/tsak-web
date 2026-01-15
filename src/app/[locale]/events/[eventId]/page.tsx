@@ -77,8 +77,31 @@ export default function EventPage() {
     }
   };
   
+  // Get subtitle based on locale: use subtitleEn for English, subtitle for Thai and other locales
+  const getDisplaySubtitle = () => {
+    if (locale === 'en') {
+      // For English, prefer subtitleEn, fallback to subtitle, then title
+      return event.subtitleEn || event.subtitle || getDisplayTitle();
+    } else {
+      // For Thai and other locales, use subtitle, fallback to title
+      return event.subtitle || getDisplayTitle();
+    }
+  };
+  
+  // Get description based on locale: use descriptionEn for English, description for Thai and other locales
+  const getDisplayDescription = () => {
+    if (locale === 'en') {
+      // For English, prefer descriptionEn, fallback to description
+      return event.descriptionEn || event.description;
+    } else {
+      // For Thai and other locales, use description
+      return event.description;
+    }
+  };
+  
   const displayTitle = getDisplayTitle();
-  const displaySubtitle = event.subtitle || displayTitle;
+  const displaySubtitle = getDisplaySubtitle();
+  const displayDescription = getDisplayDescription();
 
   return (
     <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20">
@@ -93,7 +116,7 @@ export default function EventPage() {
 
         {/* Event Image */}
         <div className="w-full max-w-4xl">
-          {event.imageUrl ? (
+          {event.imageUrl && event.imageUrl.trim() ? (
             <div className="relative w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg overflow-hidden">
               <Image
                 src={event.imageUrl}
@@ -106,12 +129,17 @@ export default function EventPage() {
             <div className="w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg" />
           )}
           
-          {/* Registration Button - Only show if event is open */}
-          {event.status === 'open' && (
+          {/* Registration Button - Only show if event is open and has registration URL */}
+          {event.status === 'open' && event.registrationUrl && (
             <div className="flex justify-center mt-6">
-              <button className="py-4 px-8 bg-[#2C3985] text-[#FFFCDD] rounded-full text-lg font-medium hover:bg-[#1e2a6b] transition-colors">
+              <a
+                href={event.registrationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="py-4 px-8 bg-[#2C3985] text-[#FFFCDD] rounded-full text-lg font-medium hover:bg-[#1e2a6b] transition-colors inline-block"
+              >
                 {dict.events.register}
-              </button>
+              </a>
             </div>
           )}
         </div>
@@ -123,16 +151,18 @@ export default function EventPage() {
           </h2>
           {event.sponsors && event.sponsors.length > 0 && (
             <div className="flex flex-wrap gap-6 items-center">
-              {event.sponsors.map((sponsor, index) => (
-                <div key={index} className="relative w-32 h-32 sm:w-40 sm:h-40">
-                  <Image
-                    src={sponsor.logoUrl}
-                    alt={sponsor.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              ))}
+              {event.sponsors
+                .filter((sponsor) => sponsor.logoUrl && sponsor.logoUrl.trim())
+                .map((sponsor, index) => (
+                  <div key={index} className="relative w-32 h-32 sm:w-40 sm:h-40">
+                    <Image
+                      src={sponsor.logoUrl}
+                      alt={sponsor.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
             </div>
           )}
         </div>
@@ -142,9 +172,9 @@ export default function EventPage() {
           <h2 className="text-2xl sm:text-3xl font-medium text-left mb-8">
             {dict.events.details}
           </h2>
-          {event.description && (
+          {displayDescription && (
             <p className="text-lg text-left whitespace-pre-line">
-              {event.description}
+              {displayDescription}
             </p>
           )}
         </div>
@@ -156,16 +186,18 @@ export default function EventPage() {
           </h2>
           {event.imageDir && event.imageDir.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {event.imageDir.map((imageUrl, index) => (
-                <div key={index} className="relative w-full aspect-square bg-[#f3f4f6] rounded-lg overflow-hidden">
-                  <Image
-                    src={imageUrl}
-                    alt={`${displayTitle} - Image ${index + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {event.imageDir
+                .filter((imageUrl) => imageUrl && imageUrl.trim())
+                .map((imageUrl, index) => (
+                  <div key={index} className="relative w-full aspect-square bg-[#f3f4f6] rounded-lg overflow-hidden">
+                    <Image
+                      src={imageUrl}
+                      alt={`${displayTitle} - Image ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
             </div>
           )}
         </div>

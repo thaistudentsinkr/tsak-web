@@ -8,13 +8,16 @@ export interface EventData {
   title: string;
   titleEn?: string;
   subtitle?: string;
+  subtitleEn?: string;
   imageUrl: string;
   date: string;
   dateRange?: string;
   status: 'ended' | 'closed' | 'open';
   statusText: string;
   description?: string;
+  descriptionEn?: string;
   location?: string;
+  registrationUrl?: string;
   organizer?: string;
   sponsors?: Sponsor[];
   imageDir?: string[];
