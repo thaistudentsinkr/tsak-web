@@ -47,7 +47,7 @@ export default async function AboutPage({ params }: PageProps) {
         <div className="absolute bottom-20 left-1/2 -translate-x-[600px]">
           <div className="w-[180px] h-[180px] bg-[#FFFCDD] rounded-full flex items-center justify-center">
             <Image
-              src="/tsak_logo.png"
+              src="/tsak_logo_no_bg.png"
               alt="TSAK Logo"
               width={150}
               height={150}

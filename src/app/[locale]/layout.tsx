@@ -4,6 +4,7 @@ import InformationDropdown from "../components/InformationDropDown";
 import AboutDropdown from "../components/AboutDropDown";
 import CommunityDropdown from "../components/CommunityDropDown";
 import Footer from "../components/Footer";
+import MobileMenuWrapper from "../components/MobileMenuWrapper";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -18,7 +19,8 @@ export default async function LocaleLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="bg-[#A51D2C] fixed rounded-[50px] py-2 px-4 top-4 left-1/2 -translate-x-1/2 shadow-[0_4px_6px_rgba(0,0,0,0.4)] h-[60px] w-[87%] max-w-[1240px] flex z-[100]">
+      {/* Desktop Navigation - Hidden on mobile */}
+      <nav className="hidden lg:flex bg-[#A51D2C] fixed rounded-[50px] py-2 px-4 top-4 left-1/2 -translate-x-1/2 shadow-[0_4px_6px_rgba(0,0,0,0.4)] h-[60px] w-[87%] max-w-[1240px] z-[100]">
         <Link href={`/${locale}`} className="flex items-center">
           <img src="/tsak.png" alt="tsak.png" className="w-[42px] h-auto rounded-full object-cover" />
           <img src="/TSAK_word.png" alt="TSAK_word.png" className="w-[135px] h-[41px]" />
@@ -40,6 +42,10 @@ export default async function LocaleLayout({
           </li>
         </ul>
       </nav>
+
+      {/* Mobile Navigation - Hidden on desktop */}
+      <MobileMenuWrapper locale={locale} />
+
       <main className="flex-grow">
         {children}
       </main>
@@ -47,4 +53,3 @@ export default async function LocaleLayout({
     </div>
   );
 }
-
