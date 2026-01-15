@@ -38,6 +38,8 @@
   },
 
   "events": {
+    "title": "Events",
+    "viewAsCalendar": "view as calendar",
     "loading": "Loading events...",
     "error": "Failed to load events",
     "empty": "No events available",

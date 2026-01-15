@@ -51,12 +51,16 @@ export default function EventCard({ event, locale }: EventCardProps) {
         {/* Event Image - Clickable to navigate to event detail */}
         <Link href={eventDetailUrl} className="block">
           <div className={styles.eventImage}>
-            <Image
-              src={event.imageUrl}
-              alt={displayTitle}
-              fill
-              className="object-cover"
-            />
+            {event.imageUrl && event.imageUrl.trim() ? (
+              <Image
+                src={event.imageUrl}
+                alt={displayTitle}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-[#f3f4f6]" />
+            )}
           </div>
         </Link>
         

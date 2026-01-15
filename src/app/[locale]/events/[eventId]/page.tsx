@@ -93,7 +93,7 @@ export default function EventPage() {
 
         {/* Event Image */}
         <div className="w-full max-w-4xl">
-          {event.imageUrl ? (
+          {event.imageUrl && event.imageUrl.trim() ? (
             <div className="relative w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg overflow-hidden">
               <Image
                 src={event.imageUrl}
@@ -123,16 +123,18 @@ export default function EventPage() {
           </h2>
           {event.sponsors && event.sponsors.length > 0 && (
             <div className="flex flex-wrap gap-6 items-center">
-              {event.sponsors.map((sponsor, index) => (
-                <div key={index} className="relative w-32 h-32 sm:w-40 sm:h-40">
-                  <Image
-                    src={sponsor.logoUrl}
-                    alt={sponsor.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              ))}
+              {event.sponsors
+                .filter((sponsor) => sponsor.logoUrl && sponsor.logoUrl.trim())
+                .map((sponsor, index) => (
+                  <div key={index} className="relative w-32 h-32 sm:w-40 sm:h-40">
+                    <Image
+                      src={sponsor.logoUrl}
+                      alt={sponsor.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                ))}
             </div>
           )}
         </div>
@@ -156,16 +158,18 @@ export default function EventPage() {
           </h2>
           {event.imageDir && event.imageDir.length > 0 && (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {event.imageDir.map((imageUrl, index) => (
-                <div key={index} className="relative w-full aspect-square bg-[#f3f4f6] rounded-lg overflow-hidden">
-                  <Image
-                    src={imageUrl}
-                    alt={`${displayTitle} - Image ${index + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {event.imageDir
+                .filter((imageUrl) => imageUrl && imageUrl.trim())
+                .map((imageUrl, index) => (
+                  <div key={index} className="relative w-full aspect-square bg-[#f3f4f6] rounded-lg overflow-hidden">
+                    <Image
+                      src={imageUrl}
+                      alt={`${displayTitle} - Image ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
             </div>
           )}
         </div>
