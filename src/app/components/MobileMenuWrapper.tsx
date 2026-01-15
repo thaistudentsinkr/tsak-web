@@ -14,9 +14,8 @@ export default function MobileMenuWrapper({ locale }: MobileMenuWrapperProps) {
 
   return (
     <>
-      {/* Mobile Header Bar - Only visible below 1024px, hidden when menu is open */}
+      {/* Mobile Header Bar - hidden when menu is open */}
       <nav className={`flex lg:hidden bg-[#A51D2C] fixed rounded-[50px] py-2 px-4 top-4 left-1/2 -translate-x-1/2 shadow-[0_4px_6px_rgba(0,0,0,0.4)] h-[60px] w-[87%] max-w-[1240px] z-[100] items-center justify-between transition-opacity duration-300 ${mobileMenuOpen ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
-        {/* Logo */}
         <Link href={`/${locale}`} className="flex items-center">
           <img 
             src="/tsak.png" 

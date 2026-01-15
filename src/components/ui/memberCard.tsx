@@ -44,7 +44,7 @@ export default function MemberCard({ member }: { member: Member }) {
 
     return (
         <div
-            className="w-full max-w-xs border shadow-md overflow-hidden aspect-[354.67/224.59] flex flex-col"
+            className="w-full max-w-sm border shadow-md overflow-hidden flex flex-col h-[280px]"
             style={{ backgroundColor: cardBg }}
         >
             <div className="relative flex-shrink-0">
@@ -63,8 +63,8 @@ export default function MemberCard({ member }: { member: Member }) {
                 </div>
             </div>
 
-            <div className="flex flex-1 gap-3 p-2 items-start">
-                <div className="flex-shrink-0 w-1/3 bg-gray-300 rounded-md overflow-hidden">
+            <div className="flex flex-1 gap-3 p-2 items-center">
+                <div className="flex-shrink-0 w-1/3 bg-gray-300 rounded-md overflow-hidden aspect-[3/4]">
                     {picture && (
                         <img
                             src={imageSrc}
@@ -74,7 +74,7 @@ export default function MemberCard({ member }: { member: Member }) {
                     )}
                 </div>
 
-                <div className="flex flex-col flex-1 justify-between text-black text-xs sm:text-sm">
+                <div className="flex flex-col flex-1 justify-between text-black text-xs sm:text-sm h-full">
                     <div>
                         <div className="border-b pb-1 font-medium text-left">{firstname}</div>
                         <div className="border-b pb-1 font-medium text-right">{lastname}</div>
@@ -82,7 +82,7 @@ export default function MemberCard({ member }: { member: Member }) {
                         <div className="border-b pb-1 text-center">{major}</div>
                     </div>
 
-                    <div className="text-center mt-3 sm:mt-4 pb-4">
+                    <div className="text-center pb-2 mt-auto">
                         <span className="bg-[#9d2b2b] text-[#f7f5dc] text-xs sm:text-sm font-medium py-1 px-3 rounded-full inline-block">
                             {positionLabel || position}
                         </span>
