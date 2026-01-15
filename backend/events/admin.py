@@ -13,25 +13,26 @@ class EventImageInline(admin.TabularInline):
 class EventAdmin(admin.ModelAdmin):
     list_display = ['title', 'status', 'date', 'location', 'created_at']
     list_filter = ['status', 'created_at']
-    search_fields = ['title', 'title_en', 'subtitle', 'description', 'location']
+    search_fields = ['title', 'title_en', 'subtitle', 'subtitle_en', 'description', 'description_en', 'location']
     list_editable = ['status']
     ordering = ['-created_at']
-    # filter_horizontal = ['sponsors']  # Commented out - sponsors not available yet
+    filter_horizontal = ['sponsors']
     inlines = [EventImageInline]
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'title_en', 'subtitle', 'image')
+            'fields': ('title', 'title_en', 'subtitle', 'subtitle_en', 'image')
         }),
         ('Date & Status', {
             'fields': ('date', 'date_range', 'status', 'status_text')
         }),
         ('Details', {
-            'fields': ('description', 'location', 'organizer')
+            'fields': ('description', 'description_en', 'location', 'registration_url', 'organizer')
         }),
-        # ('Relationships', {
-        #     'fields': ('sponsors',)
-        # }),  # Commented out - sponsors not available yet
+        ('Relationships', {
+            'fields': ('sponsors',),
+            'description': 'Select sponsors for this event. If no sponsors are available, add them in the Sponsors section first.'
+        }),
     )
 
 
