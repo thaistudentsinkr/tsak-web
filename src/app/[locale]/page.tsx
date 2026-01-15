@@ -71,6 +71,9 @@ export default async function Home({ params }: PageProps) {
         </div>
       </section>
 
+      <section>
+        
+      </section>
     </div>
   );
 }

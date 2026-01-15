@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-project"
+version = "0.1.0"
+description = "Django project configuration"
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "asgiref==3.11.0",
+    "Django==6.0.1",
+    "django-cors-headers==4.9.0",
+    "djangorestframework==3.16.1",
+    "pillow==12.1.0",
+    "sqlparse==0.5.5",
+]
+
+[tool.setuptools]
+packages = []
