@@ -1,0 +1,184 @@
+{
+    "title": "TOPIK Exam Guide",
+    "subtitle": "Test of Proficiency in Korean",
+    "author": "TSAK",
+    "date": "2024-12-01",
+    "introduction": "The Test of Proficiency in Korean (TOPIK) is a standardized test designed to measure the Korean language proficiency of non-native speakers. It is widely recognized by Korean universities, employers, and immigration authorities.",
+    "officialWebsite": "Official Website",
+    "visitTopik": "Visit TOPIK Official Site",
+    "sections": {
+      "importance": {
+        "title": "Why is TOPIK Important?",
+        "items": [
+          {
+            "title": "University Admission",
+            "description": "Most Korean universities require TOPIK Level 3-4 for undergraduate programs and Level 4-5 for graduate programs."
+          },
+          {
+            "title": "Scholarships",
+            "description": "GKS (Global Korea Scholarship) and many university scholarships require or give preference to applicants with TOPIK scores."
+          },
+          {
+            "title": "Employment",
+            "description": "Korean companies often require TOPIK Level 4+ for foreign employees. Some government jobs require Level 5-6."
+          },
+          {
+            "title": "Visa & Immigration",
+            "description": "TOPIK scores can be used for visa applications, including the F-2 points-based visa and naturalization."
+          },
+          {
+            "title": "Language School Placement",
+            "description": "Korean language institutes use TOPIK scores to place students in appropriate class levels."
+          }
+        ]
+      },
+      "comparison": {
+        "title": "TOPIK IBT vs PBT Comparison",
+        "headers": ["Feature", "TOPIK IBT (Computer-based)", "TOPIK PBT (Paper-based)"],
+        "rows": [
+          ["Test Format", "Computer-based test", "Paper-based test"],
+          ["Test Location", "Designated test centers with computers", "Test centers worldwide"],
+          ["Frequency", "More frequent (monthly in Korea)", "6 times per year"],
+          ["Results", "Faster (within 2 weeks)", "4-6 weeks"],
+          ["Writing Section", "Typing on computer", "Handwriting on paper"],
+          ["Availability", "Mainly in Korea", "Korea and overseas"],
+          ["Registration", "Online via TOPIK website", "Online via TOPIK website"],
+          ["Score Validity", "2 years", "2 years"]
+        ]
+      },
+      "structure": {
+        "title": "Exam Structure Comparison",
+        "ibt": {
+          "title": "TOPIK IBT (Computer-based)",
+          "topik1": {
+            "title": "TOPIK I (Beginner)",
+            "levels": "Level 1-2",
+            "headers": ["Section", "Questions", "Time", "Score"],
+            "rows": [
+              ["Listening (듣기)", "30 questions", "40 minutes", "100 points"],
+              ["Reading (읽기)", "30 questions", "50 minutes", "100 points"]
+            ],
+            "total": "Total: 60 questions | 90 minutes | 200 points"
+          },
+          "topik2": {
+            "title": "TOPIK II (Intermediate-Advanced)",
+            "levels": "Level 3-6",
+            "headers": ["Section", "Questions", "Time", "Score"],
+            "rows": [
+              ["Listening (듣기)", "40 questions", "50 minutes", "100 points"],
+              ["Reading (읽기)", "40 questions", "60 minutes", "100 points"],
+              ["Writing (쓰기)", "2 questions", "50 minutes", "100 points"]
+            ],
+            "total": "Total: 82 questions | 160 minutes | 300 points"
+          }
+        },
+        "pbt": {
+          "title": "TOPIK PBT (Paper-based)",
+          "topik1": {
+            "title": "TOPIK I (Beginner)",
+            "levels": "Level 1-2",
+            "headers": ["Section", "Questions", "Time", "Score"],
+            "rows": [
+              ["Listening (듣기)", "30 questions", "40 minutes", "100 points"],
+              ["Reading (읽기)", "40 questions", "60 minutes", "100 points"]
+            ],
+            "total": "Total: 70 questions | 100 minutes | 200 points"
+          },
+          "topik2": {
+            "title": "TOPIK II (Intermediate-Advanced)",
+            "levels": "Level 3-6",
+            "headers": ["Section", "Questions", "Time", "Score"],
+            "rows": [
+              ["Listening (듣기)", "50 questions", "60 minutes", "100 points"],
+              ["Writing (쓰기)", "4 questions", "50 minutes", "100 points"],
+              ["Reading (읽기)", "50 questions", "70 minutes", "100 points"]
+            ],
+            "total": "Total: 104 questions | 180 minutes | 300 points"
+          }
+        }
+      },
+      "scoring": {
+        "title": "Score & Level System",
+        "description": "TOPIK levels are determined by your total score. Here's how the scoring works:",
+        "topik1": {
+          "title": "TOPIK I Levels",
+          "levels": [
+            { "level": "Level 1", "score": "80-139 points", "description": "Basic everyday Korean, simple sentences" },
+            { "level": "Level 2", "score": "140-200 points", "description": "Daily conversations, basic public facility use" }
+          ]
+        },
+        "topik2": {
+          "title": "TOPIK II Levels",
+          "levels": [
+            { "level": "Level 3", "score": "120-149 points", "description": "Daily life without difficulty, paragraph writing" },
+            { "level": "Level 4", "score": "150-189 points", "description": "News comprehension, common idioms, work functions" },
+            { "level": "Level 5", "score": "190-229 points", "description": "Professional contexts, unfamiliar topics" },
+            { "level": "Level 6", "score": "230-300 points", "description": "Near-native fluency, professional/academic use" }
+          ]
+        }
+      },
+      "pricing": {
+        "title": "Exam Fees",
+        "description": "TOPIK exam fees vary by test type and location:",
+        "ibt": {
+          "title": "TOPIK IBT (Computer-based)",
+          "headers": ["Test Type", "Korea", "Thailand"],
+          "rows": [
+            ["TOPIK I", "₩79,000", "1,500 THB"],
+            ["TOPIK II", "₩99,000", "1,800 THB"]
+          ]
+        },
+        "pbt": {
+          "title": "TOPIK PBT (Paper-based)",
+          "headers": ["Test Type", "Korea", "Thailand"],
+          "rows": [
+            ["TOPIK I", "₩40,000", "1,000 THB"],
+            ["TOPIK II", "₩55,000", "1,200 THB"]
+          ]
+        },
+        "note": "* Fees are subject to change. Check the official TOPIK website for current pricing."
+      },
+      "tips": {
+        "title": "Preparation Tips",
+        "items": [
+          "Practice with official past papers available on the TOPIK website",
+          "Focus on time management - the reading section is often tight on time",
+          "For TOPIK II writing, practice essay structures and connective expressions",
+          "Use Korean media (dramas, news, podcasts) for listening practice",
+          "Join study groups with other TOPIK test-takers"
+        ],
+        "practiceTest": "Try TOPIK Practice Test"
+      },
+      "speaking": {
+        "title": "TOPIK Speaking Test",
+        "description": "TOPIK Speaking is a separate test that evaluates Korean speaking ability. It was introduced in 2023 and is conducted via computer.",
+        "structure": {
+          "title": "Test Structure",
+          "headers": ["Section", "Task Type", "Questions", "Time"],
+          "rows": [
+            ["Part 1", "Read aloud", "2 questions", "Preparation: 20s, Response: 30s each"],
+            ["Part 2", "Picture description", "2 questions", "Preparation: 30s, Response: 60s each"],
+            ["Part 3", "Respond to situation", "2 questions", "Preparation: 30s, Response: 60s each"],
+            ["Part 4", "Express opinion", "1 question", "Preparation: 60s, Response: 90s"]
+          ],
+          "total": "Total: 7 questions | Approximately 20 minutes"
+        },
+        "levels": {
+          "title": "Speaking Levels",
+          "items": [
+            { "level": "Novice", "score": "0-49 points", "description": "Limited speaking ability, simple words and phrases" },
+            { "level": "Intermediate Low", "score": "50-99 points", "description": "Can handle basic conversations on familiar topics" },
+            { "level": "Intermediate Mid", "score": "100-129 points", "description": "Can participate in conversations on various topics" },
+            { "level": "Intermediate High", "score": "130-159 points", "description": "Can express opinions and handle unexpected situations" },
+            { "level": "Advanced Low", "score": "160-179 points", "description": "Can discuss abstract topics with accuracy" },
+            { "level": "Advanced Mid/High", "score": "180-200 points", "description": "Near-native fluency with sophisticated expression" }
+          ]
+        },
+        "pricing": {
+          "title": "Speaking Test Fee",
+          "fee": "₩79,000 (Korea) / Varies by country"
+        },
+        "note": "* TOPIK Speaking is currently available only in select countries. Check the official website for availability."
+      }
+    }
+  }
