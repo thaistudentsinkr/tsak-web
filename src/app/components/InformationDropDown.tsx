@@ -10,15 +10,15 @@ const infoTexts: Record<string,
 > = {
   en: [
     { label: "About Visa", href: "/info/visa"},
-    { label: "Basic Laws", href: "/info"},
-    { label: "TOPIK exam", href: "/info"},
-    { label: "Scholarships", href: "info"},
+    { label: "Basic Laws", href: "/info/koreanlaws"},
+    { label: "TOPIK exam", href: "/info/topik"},
+    { label: "Scholarships", href: "/info/scholarships"},
   ],
   th: [
     { label: "ข้อมูลวีซ่า", href: "/info/visa"},
-    { label: "กฎหมายพื้นฐาน", href: "/info"},
-    { label: "การสอบ TOPIK", href: "/info"},
-    { label: "ทุนการศึกษา", href: "info"},
+    { label: "กฎหมายพื้นฐาน", href: "/info/koreanlaws"},
+    { label: "การสอบ TOPIK", href: "/info/topik"},
+    { label: "ทุนการศึกษา", href: "/info/scholarships"},
   ],
 };
 
