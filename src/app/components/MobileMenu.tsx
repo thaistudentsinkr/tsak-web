@@ -39,9 +39,9 @@ const menuStructure: Record<
       label: "Information",
       items: [
         { label: "About Visa", href: "/info/visa" },
-        { label: "Basic Laws", href: "/info" },
-        { label: "TOPIK Exam", href: "/info" },
-        { label: "Scholarships", href: "/info" },
+        { label: "Basic Laws", href: "/info/koreanlaws" },
+        { label: "TOPIK Exam", href: "/info/topik" },
+        { label: "Scholarships", href: "/info/scholarships" },
       ],
     },
     {
@@ -70,7 +70,7 @@ const menuStructure: Record<
         { label: "ข้อมูลวีซ่า", href: "/info/visa" },
         { label: "กฎหมายพื้นฐาน", href: "/info" },
         { label: "การสอบ TOPIK", href: "/info" },
-        { label: "ทุนการศึกษา", href: "/info" },
+        { label: "ทุนการศึกษา", href: "/info/scholarships" },
       ],
     },
     {

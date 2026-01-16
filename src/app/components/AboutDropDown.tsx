@@ -12,14 +12,14 @@ const infoTexts: Record<string,
     { label: "About TSAK", href: "/about"}, 
     { label: "Executive Members", href: "/members"},
     { label: "Sponsorships", href: "/sponsors"}, 
-    { label: "Regulations", href: "/about/regulations"}, 
+    { label: "Regulations", href: "/regulations"}, 
     { label: "Contact Us", href: "/contact"}
   ],
   th: [
     { label: "ที่มาของสมาคม", href: "/about"},
     { label: "คณะกรรมการบริหาร", href: "/members"},
     { label: "ผู้สนับสนุนสมาคม", href: "/sponsors"},
-    { label: "ข้อบังคับสมาคม", href: "/about/regulations"},
+    { label: "ข้อบังคับสมาคม", href: "/regulations"},
     { label: "ติดต่อเรา", href: "/contact"},
   ],
 };
