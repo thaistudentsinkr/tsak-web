@@ -7,7 +7,17 @@ class SponsorSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Sponsor
-        fields = ['id', 'name', 'logo', 'description', 'type', 'created_at', 'updated_at']
+        fields = [
+            'id', 
+            'name',           # Thai name
+            'name_en',        # English name
+            'description',    # Thai description
+            'description_en', # English description
+            'logo', 
+            'type', 
+            'created_at', 
+            'updated_at'
+        ]
         read_only_fields = ['created_at', 'updated_at']
     
     def get_logo(self, obj):
