@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'members',
     'sponsors',
     'events',
+    'scholarships',
     "corsheaders",
 ]
 

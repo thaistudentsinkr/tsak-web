@@ -6,11 +6,18 @@ class Sponsor(models.Model):
         ("embassy", "Embassy"),
         ("partner", "Partner"),
         ("network", "Network"),
+        ("sponsor", "Sponsor"),
     ]
 
+    # Thai fields
     name = models.CharField(max_length=255)
-    logo = models.ImageField(upload_to="sponsors/logos/")
     description = models.TextField(blank=True)
+    
+    # English fields
+    name_en = models.CharField(max_length=255, blank=True, verbose_name="Name (English)")
+    description_en = models.TextField(blank=True, verbose_name="Description (English)")
+    
+    logo = models.ImageField(upload_to="sponsors/logos/")
     type = models.CharField(max_length=20, choices=SPONSOR_TYPES)
     order = models.IntegerField(default=0, help_text="Display order (lower numbers first)")
 
