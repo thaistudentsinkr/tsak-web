@@ -56,5 +56,64 @@
       "closed": "Registration Closed",
       "open": "Registration Open"
     }
+  },
+  "scholarships": {
+    "title": "Scholarships",
+    "subtitle": "Scholarship Information for Thai Students",
+
+    "benefits": "Benefits",
+    "deadline": "Deadline",
+    "eligibility": "Eligibility",
+    "monthlyAllowance": "Monthly Allowance",
+    "learnMore": "Learn More",
+
+    "disclaimer": "Disclaimer",
+    "disclaimerText": "Scholarship information may change. Please verify the latest information from the official website of each scholarship.",
+
+    "contactQuestion": "For additional information or inquiries",
+    "contactUs": "Contact Us",
+
+    "loading": "Loading...",
+    "error": "Please try again later",
+    "noResults": "No scholarships match your filters. Try adjusting your criteria.",
+    "clearFilters": "Clear Filters",
+
+    "filters": {
+      "all": "All",
+      "fundingType": "Funding Type",
+      "studyLevel": "Study Level",
+      "fieldOfStudy": "Field of Study",
+      "provider": "Provider Type"
+    },
+
+    "fundingTypes": {
+      "full-tuition": "Full Tuition",
+      "partial-tuition": "Partial Tuition",
+      "merit-based": "Merit Based",
+      "need-based": "Need Based"
+    },
+
+    "studyLevels": {
+      "undergraduate": "Undergraduate",
+      "graduate": "Graduate",
+      "masters": "Master's",
+      "phd": "PhD",
+      "all-levels": "All Levels"
+    },
+
+    "fieldTypes": {
+      "all-fields": "All Fields",
+      "science": "Science & Engineering",
+      "arts": "Arts & Humanities",
+      "business": "Business",
+      "medicine": "Medicine"
+    },
+
+    "types": {
+      "government": "Government",
+      "university": "University",
+      "private": "Private",
+      "organization": "Organization"
+    }
   }
 }
