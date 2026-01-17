@@ -10,7 +10,7 @@ const infoTexts: Record<string,
 > = {
   en: [
     { label: "About TSAK", href: "/about"}, 
-    { label: "Executive Members", href: "/members"},
+    { label: "TSAK Committee", href: "/members"},
     { label: "Sponsorships", href: "/sponsors"}, 
     { label: "Regulations", href: "/regulations"}, 
     { label: "Contact Us", href: "/contact"}

@@ -22,7 +22,7 @@ const content = {
   th: thContent,
 };
 
-// Sample data - replace with actual data fetching
+// Mock data
 const announcements: Announcement[] = [
   {
     id: "1",
@@ -35,8 +35,8 @@ const announcements: Announcement[] = [
 ];
 
 const semesters = ["All", "Spring 2025", "Fall 2024", "Spring 2024"];
-const departments = ["All", "ฝ่ายบริหาร", "ฝ่ายวิชาการ", "ฝ่ายกิจกรรม", "ฝ่ายประชาสัมพันธ์"];
-
+const departments = ["TSAK", "ฝ่ายบริหาร", "ฝ่ายเอกสาร", "ฝ่ายบัญชีและการเงิน", "ฝ่ายประสานงาน", "ฝ่ายประชาสัมพันธ์", "ฝ่ายเทคโนโลยีสารสนเทศ","ฝ่ายกิจกรรม"];
+// ภาษาอังกฤ​ษ​ departments = ["TSAK", "Executive Board", "Documentation", "Accounting", "Liaison", "Public Relations", "IT","Events"];
 const ITEMS_PER_PAGE = 10;
 
 export default function AnnouncementPage({
@@ -121,7 +121,7 @@ export default function AnnouncementPage({
                   setDateFrom(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#A51D2C] w-[150px]"
+                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] w-[150px]"
               />
             </div>
 
@@ -135,7 +135,7 @@ export default function AnnouncementPage({
                   setDateTo(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#A51D2C] w-[150px]"
+                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] w-[150px]"
               />
             </div>
 
@@ -167,7 +167,7 @@ export default function AnnouncementPage({
                   setSelectedDepartment(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#A51D2C] bg-white min-w-[150px]"
+                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] bg-white min-w-[150px]"
               >
                 {departments.map((dept) => (
                   <option key={dept} value={dept}>
@@ -188,7 +188,7 @@ export default function AnnouncementPage({
                 setSearchQuery(e.target.value);
                 setCurrentPage(1);
               }}
-              className="flex-1 max-w-2xl px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#A51D2C]"
+              className="flex-1 max-w-2xl px-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C]"
             />
           </div>
 
@@ -205,7 +205,7 @@ export default function AnnouncementPage({
                   setSortBy(e.target.value as "date" | "views");
                   setCurrentPage(1);
                 }}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#A51D2C] bg-white"
+                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] bg-white"
               >
                 <option value="date">{locale === "th" ? "วันที่" : "Date"}</option>
                 <option value="views">{locale === "th" ? "ยอดเข้าชม" : "Views"}</option>
@@ -218,7 +218,7 @@ export default function AnnouncementPage({
                   setSortOrder(e.target.value as "asc" | "desc");
                   setCurrentPage(1);
                 }}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-[#A51D2C] bg-white"
+                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] bg-white"
               >
                 <option value="desc">{locale === "th" ? "มากไปน้อย" : "Descending"}</option>
                 <option value="asc">{locale === "th" ? "น้อยไปมาก" : "Ascending"}</option>
@@ -232,7 +232,7 @@ export default function AnnouncementPage({
           <table className="w-full">
             <thead>
               <tr className="bg-[#A51D2C] text-white">
-                <th className="px-4 py-3 text-left text-sm font-medium rounded-tl-lg w-[100px]">
+                <th className="px-4 py-3 text-left text-sm font-medium rounded-tl-3xl w-[100px]">
                   {t.table.headers[0]}
                 </th>
                 <th className="px-4 py-3 text-left text-sm font-medium w-[110px]">
@@ -244,7 +244,7 @@ export default function AnnouncementPage({
                 <th className="px-4 py-3 text-left text-sm font-medium">
                   {t.table.headers[3]}
                 </th>
-                <th className="px-4 py-3 text-center text-sm font-medium rounded-tr-lg w-[80px]">
+                <th className="px-4 py-3 text-center text-sm font-medium rounded-tr-3xl w-[80px]">
                   <Eye className="w-4 h-4 mx-auto" />
                 </th>
               </tr>

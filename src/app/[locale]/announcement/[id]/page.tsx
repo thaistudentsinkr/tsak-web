@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowLeft, Building, Eye } from "lucide-react";
+import { ArrowLeft, Building, Eye, ExternalLink, LinkIcon } from "lucide-react";
 import enContent from "@/locales/announcement/en.json";
 import thContent from "@/locales/announcement/th.json";
 
@@ -13,7 +13,7 @@ const contentMap = {
   th: thContent,
 };
 
-//to be implementd : API
+//to be implementd :
 const announcements: Record<string, {
   id: string;
   date: string;
@@ -22,6 +22,7 @@ const announcements: Record<string, {
   title: string;
   content: string;
   views: number;
+  relatedLinks?: { name: string; url: string }[];
 }> = {
   "1": {
     id: "1",
@@ -38,6 +39,11 @@ const announcements: Record<string, {
 ด้วยความเสียใจอย่างสุดซึ้ง
 คณะกรรมการบริหาร TSAK`,
     views: 1250,
+    relatedLinks: [
+      { name: "แบบฟอร์มแจ้งความช่วยเหลือ", url: "https://forms.google.com/example1" },
+      { name: "ข้อมูลการบริจาค", url: "https://example.com/donate" },
+      { name: "ติดต่อฝ่ายประชาสัมพันธ์", url: "https://facebook.com/thaistudentkorea" },
+    ],
   },
   "2": {
     id: "2",
@@ -54,7 +60,7 @@ const announcements: Record<string, {
     id: "3",
     date: "2025-03-15",
     semester: "Spring 2025",
-    department: "ฝ่ายวิชาการ",
+    department: "TSAK",
     title: "ประกาศรับสมัครทุนการศึกษาประจำปี 2025",
     content: `ฝ่ายวิชาการ TSAK ขอประกาศเปิดรับสมัครทุนการศึกษาประจำปี 2025
 
@@ -72,6 +78,10 @@ const announcements: Record<string, {
 
 สอบถามข้อมูลเพิ่มเติมได้ที่ฝ่ายวิชาการ TSAK`,
     views: 2340,
+    relatedLinks: [
+      { name: "ใบสมัครทุนการศึกษา", url: "https://forms.google.com/scholarship" },
+      { name: "รายละเอียดทุนการศึกษา", url: "https://tsak.org/scholarship-details" },
+    ],
   },
 };
 
@@ -120,10 +130,10 @@ function ShareButtons({ title, locale }: { title: string; locale: string }) {
       <button
         type="button"
         onClick={() => handleShare("facebook")}
-        className="w-9 h-9 flex items-center justify-center rounded-full bg-[#1877F2] text-white hover:opacity-80 transition-opacity"
+        className="w-9 h-9 flex items-center justify-center rounded-full bg-[#FFFFFF] text-[#2f3784] hover:opacity-80 transition-opacity"
         aria-label="Share on Facebook"
       >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-9 h9" fill="currentColor" viewBox="0 0 24 24">
           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
         </svg>
       </button>
@@ -132,10 +142,10 @@ function ShareButtons({ title, locale }: { title: string; locale: string }) {
       <button
         type="button"
         onClick={() => handleShare("twitter")}
-        className="w-9 h-9 flex items-center justify-center rounded-full bg-black text-white hover:opacity-80 transition-opacity"
+        className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#2f3784] hover:opacity-80 transition-opacity"
         aria-label="Share on X"
       >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-9 h-9" fill="currentColor" viewBox="0 0 24 24">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
       </button>
@@ -144,10 +154,10 @@ function ShareButtons({ title, locale }: { title: string; locale: string }) {
       <button
         type="button"
         onClick={() => handleShare("line")}
-        className="w-9 h-9 flex items-center justify-center rounded-full bg-[#00B900] text-white hover:opacity-80 transition-opacity"
+        className="w-9 h-9 flex items-center justify-center rounded-full bg-white text-[#2f3784] hover:opacity-80 transition-opacity"
         aria-label="Share on LINE"
       >
-        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+        <svg className="w-9 h-9" fill="currentColor" viewBox="0 0 24 24">
           <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
         </svg>
       </button>
@@ -156,7 +166,7 @@ function ShareButtons({ title, locale }: { title: string; locale: string }) {
       <button
         type="button"
         onClick={copyToClipboard}
-        className="w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors relative"
+        className="w-9 h-9 flex items-center justify-center rounded-full bg-[#2f3784] text-white hover:bg-gray-300 transition-colors relative"
         aria-label={t?.copyLink || "Copy Link"}
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,6 +178,42 @@ function ShareButtons({ title, locale }: { title: string; locale: string }) {
           </span>
         )}
       </button>
+    </div>
+  );
+}
+
+// Related Links Component
+function RelatedLinks({ 
+  links, 
+  locale 
+}: { 
+  links: { name: string; url: string }[]; 
+  locale: string;
+}) {
+  if (!links || links.length === 0) return null;
+
+  return (
+    <div className="bg-white rounded-2xl p-6 mb-6 border border-gray-300">
+      <div className="flex items-center gap-2 mb-4">
+        <LinkIcon className="w-5 h-5 text-[#2C3985]" />
+        <h3 className="text-[#2C3985] font-semibold text-lg">
+          {locale === "th" ? "ลิงก์ที่เกี่ยวข้อง" : "Related Links"}
+        </h3>
+      </div>
+      <div className="flex flex-wrap gap-3">
+        {links.map((link, index) => (
+          <a
+            key={index}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white rounded-full text-[#2C3985] text-sm font-medium shadow-sm hover:shadow-md hover:bg-[#FFFFFF] hover:text-[#A50729] transition-all duration-200"
+          >
+            <span>{link.name}</span>
+            <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
@@ -235,7 +281,7 @@ export default function AnnouncementDetailPage({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <div className="relative w-full bg-[#2C3985]">
         <div className="max-w-4xl mx-auto px-4 sm:px-8 py-15 sm:py-25">
@@ -244,7 +290,7 @@ export default function AnnouncementDetailPage({
             href={`/${locale}/announcement`}
             className="inline-flex items-center gap-2 text-[#FFFCDD] hover:text-white mb-6 transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="w-5 h-40" />
             {t?.back}
           </Link>
 
@@ -275,15 +321,9 @@ export default function AnnouncementDetailPage({
         </div>
       </div>
 
+
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
-        {/* Share Buttons */}
-        <div className="flex justify-end mb-8">
-          <ShareButtons 
-            title={announcement.title}
-            locale={locale}
-          />
-        </div>
 
         {/* Article Content */}
         <article className="bg-white rounded-2xl p-6 sm:p-8 mb-6">
@@ -293,6 +333,16 @@ export default function AnnouncementDetailPage({
             </p>
           ))}
         </article>
+
+        {/* Related Links Section */}
+        {announcement.relatedLinks && announcement.relatedLinks.length > 0 && (
+          <RelatedLinks links={announcement.relatedLinks} locale={locale} />
+        )}
+
+        {/* Share Buttons */}
+        <div className="flex justify-end mb-8">
+            <ShareButtons title={announcement.title} locale={locale}/>
+        </div>
 
         {/* Related Announcements */}
         <section className="mt-8">
@@ -320,6 +370,7 @@ export default function AnnouncementDetailPage({
               ))}
           </div>
         </section>
+
 
         {/* Back Button */}
         <div className="text-center mt-10">
