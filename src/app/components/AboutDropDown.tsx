@@ -10,13 +10,13 @@ const infoTexts: Record<string,
 > = {
   en: [
     { label: "About TSAK", href: "/about"}, 
-    { label: "Executive Members", href: "/members"},
+    { label: "TSAK Committee", href: "/members"},
     { label: "Sponsorships", href: "/sponsors"}, 
     { label: "Regulations", href: "/regulations"}, 
     { label: "Contact Us", href: "/contact"}
   ],
   th: [
-    { label: "ที่มาของสมาคม", href: "/about"},
+    { label: "ความเป็นมาของสมาคม", href: "/about"},
     { label: "คณะกรรมการบริหาร", href: "/members"},
     { label: "ผู้สนับสนุนสมาคม", href: "/sponsors"},
     { label: "ข้อบังคับสมาคม", href: "/regulations"},

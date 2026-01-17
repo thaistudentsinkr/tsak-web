@@ -41,6 +41,18 @@ export default async function AboutPage({ params }: PageProps) {
     },
   ];
 
+  const colorPalette = [
+    { color: "#2f3784", name: "Primary Blue", label: "Primary Color", cmyk: "C98 M93 Y14 K3" },
+    { color: "#a50729", name: "Primary Red", label: "Primary Color", cmyk: "C23 M100 Y88 K18" },
+    { color: "#85bcf9", name: "Secondary Blue", label: "Secondary", cmyk: "C43 M16 Y0 K0" },
+    { color: "#fffdc0", name: "Highlight Yellow", label: "Highlight", cmyk: "C2 M0 Y30 K0" },
+  ];
+
+  const grayScale = [
+    { color: "#fffdfa", name: "Off White" },
+    { color: "#202020", name: "Dark" },
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Top Rectangle - Hero Section */}
@@ -148,15 +160,95 @@ export default async function AboutPage({ params }: PageProps) {
             )}
           </section>
         
-          <section className="py-8 sm:py-12">
-            <h2 className="text-[#2C3985] text-2xl sm:text-3xl lg:text-5xl font-semibold mb-6">
-              {dict.about.logoMeaning}
+          {/* Our Logo Section - Enhanced */}
+          <section className="py-12 sm:py-16">
+            <h2 className="text-[#2C3985] text-2xl sm:text-3xl lg:text-5xl font-semibold mb-10">
+              {locale === "th" ? "โลโก้ของเรา" : "Our Logo"}
             </h2>
-            {(dict.about as any).logoMeaningContent && (
-              <p className="text-[#2C3985] text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                {(dict.about as any).logoMeaningContent}
-              </p>
-            )}
+            
+            {/* Logo Display */}
+            <div className="flex flex-col lg:flex-row items-center gap-12 mb-12">
+              {/* Logo Image */}
+              <div className="relative">
+                <div className="w-[180px] h-[180px] sm:w-[200px] sm:h-[200px] rounded-2xl flex items-center justify-center">
+                  <Image
+                    src="/tsak_logo_no_bg.png"
+                    alt="TSAK Logo"
+                    width={160}
+                    height={160}
+                    className="object-contain w-[140px] sm:w-[160px]"
+                  />
+                </div>
+              </div>
+
+              {/* Logo Description */}
+              <div className="flex-1 max-w-xl">
+                {(dict.about as any).logoMeaningContent && (
+                  <p className="text-[#2C3985] text-sm sm:text-base leading-relaxed whitespace-pre-line mb-4">
+                    {(dict.about as any).logoMeaningContent}
+                  </p>
+                )}
+                <p className="text-[#2C3985] text-sm sm:text-base">
+                  {locale === "th" 
+                    ? "ออกแบบโดย: [ชื่อผู้ออกแบบ]" 
+                    : "Designed by: [Designer Name]"}
+                </p>
+              </div>
+            </div>
+
+            {/* Color Palette Section */}
+            <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
+              <h3 className="text-[#2C3985] text-xl sm:text-2xl font-semibold mb-8">
+                {locale === "th" ? "จานสี" : "Color Palette"}
+              </h3>
+
+              {/* Gray Scale */}
+              <div className="mb-8">
+                <p className="text-[#2C3985] text-sm sm:text-base mb-4 font-medium">
+                  {locale === "th" ? "โทนสีเทา" : "Gray Scale"}
+                </p>
+                <div className="flex flex-wrap gap-6">
+                  {grayScale.map((item, index) => (
+                    <div key={index} className="flex items-center gap-4">
+                      <div 
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 shadow-md"
+                        style={{ 
+                          backgroundColor: item.color,
+                          borderColor: item.color === "#fffdfa" ? "#e5e5e5" : item.color
+                        }}
+                      />
+                      <div>
+                        <p className="text-[#2C3985] text-sm sm:text-base font-mono">{item.color}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Brand Colors */}
+              <div>
+                <p className="text-[#2C3985] text-sm sm:text-base mb-4 font-medium">
+                  {locale === "th" ? "สีแบรนด์" : "Brand Colors"}
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {colorPalette.map((item, index) => (
+                    <div key={index} className="flex items-center gap-4">
+                      <div 
+                        className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-4 shadow-md flex-shrink-0"
+                        style={{ 
+                          backgroundColor: item.color,
+                          borderColor: item.color === "#fffdc0" ? "#e5e5e5" : item.color
+                        }}
+                      />
+                      <div>
+                        <p className="text-[#2C3985] text-sm sm:text-base font-medium">{item.label}</p>
+                        <p className="text-[#2C3985] text-sm sm:text-base font-mono">{item.color}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
 
         </div>

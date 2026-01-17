@@ -47,7 +47,7 @@ const menuStructure: Record<
     {
       label: "Community",
       items: [
-        { label: "Announcement", href: "/community/announcement" },
+        { label: "Announcement", href: "/announcement" },
         { label: "Experiences", href: "/community/experience" },
         { label: "Events", href: "/events" },
       ],
@@ -76,7 +76,7 @@ const menuStructure: Record<
     {
       label: "ชุมชน",
       items: [
-        { label: "ประกาศ", href: "/community/announcement" },
+        { label: "ประกาศ", href: "/announcement" },
         { label: "เล่าประสบการณ์", href: "/community/experience" },
         { label: "กิจกรรม", href: "/events" },
       ],
