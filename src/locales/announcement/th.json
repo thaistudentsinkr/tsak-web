@@ -1,0 +1,35 @@
+{
+    "title": "ประชาสัมพันธ์",
+    "filters": {
+      "date": "วันที่",
+      "to": "ถึง",
+      "semester": "ภาคการศึกษา",
+      "department": "ฝ่าย",
+      "search": "ค้นหา",
+      "all": "ทั้งหมด"
+    },
+    "table": {
+      "headers": ["Date", "Semester", "Department", "Title"],
+      "noResults": "ไม่พบประกาศ"
+    },
+    "detail": {
+      "back": "กลับไปหน้าประกาศ",
+      "breadcrumb": {
+        "home": "หน้าแรก",
+        "announcements": "ประกาศ"
+      },
+      "share": "แชร์",
+      "copyLink": "คัดลอกลิงก์",
+      "copied": "คัดลอกลิงก์แล้ว!",
+      "notFound": "ไม่พบประกาศ",
+      "notFoundDesc": "ประกาศที่คุณกำลังค้นหาไม่มีอยู่หรือถูกลบไปแล้ว",
+      "backToList": "กลับไปหน้าประกาศ",
+      "otherAnnouncements": "ประกาศอื่นๆ"
+    },
+    "departments": {
+      "executive": "ฝ่ายบริหาร",
+      "academic": "ฝ่ายวิชาการ",
+      "activities": "ฝ่ายกิจกรรม",
+      "pr": "ฝ่ายประชาสัมพันธ์"
+    }
+  }

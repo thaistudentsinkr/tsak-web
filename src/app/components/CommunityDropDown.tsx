@@ -10,12 +10,12 @@ const infoTexts: Record<
   { label: string; href: string }[]
 > = {
   en: [
-    { label: "Announcement", href: "/community/announcement" },
+    { label: "Notice", href: "/announcement" },
     { label: "Experiences", href: "/community/experience" },
     { label: "Events", href: "/events" },
   ],
   th: [
-    { label: "ประกาศ", href: "/community/announcement" },
+    { label: "ประชาสัมพันธ์", href: "/announcement" },
     { label: "เล่าประสบการณ์", href: "/community/experience" },
     { label: "กิจกรรม", href: "/events" },
   ],
