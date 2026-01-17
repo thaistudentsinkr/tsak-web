@@ -1,78 +1,126 @@
 {
-    "title": "Insights",
-    "subtitle": "Stories and insights from Thai students studying in Korea",
-    "introduction": "Read about the experiences of Thai students who have studied or are currently studying in South Korea. Learn about their journey, challenges, and advice for prospective students.",
-    "readMore": "Read Full Story",
-    "backToList": "Back to Previous Page",
-    "filters": {
-      "all": "All",
-      "university": "University",
-      "major": "Major",
-      "degree": "Degree Level",
-      "language": "Language",
-      "fieldOfStudy": "Field of Study"
-    },
-    "degrees": {
-      "bachelor": "Bachelor's",
-      "master": "Master's",
-      "phd": "PhD",
-      "exchange": "Exchange"
-    },
-    "languages": {
-      "korean": "Korean",
-      "english": "English",
-      "mixed": "Mixed"
-    },
-    "fieldTypes": {
-      "science": "Science & Engineering",
-      "arts": "Arts & Humanities",
-      "business": "Business",
-      "medicine": "Medicine",
-      "social-science": "Social Science"
-    },
-    "fields": {
-      "whyKorea": "Why South Korea?",
-      "whyMajor": "Why This Major?",
-      "major": "Major",
-      "university": "University",
-      "degree": "Degree",
-      "curriculumLanguage": "Curriculum Language",
-      "majorPros": "Pros of Major",
-      "majorCons": "Cons of Major",
-      "uniPros": "Pros of University",
-      "uniCons": "Cons of University",
-      "lifeInKorea": "Life in South Korea",
-      "recommendations": "Recommendations",
-      "contactInfo": "Contact"
-    },
-    "noResults": "No experiences match your filters.",
-    "clearFilters": "Clear Filters",
-    "shareExperience": "Want to share your experience?",
-    "contactUs": "Contact Us",
-    "experiences": [
-      {
-        "id": "exp-001",
-        "name": "Nunnalin Heimvichit",
-        "photo": "/experience/bamgeut.png",
-        "university": "Ewha Womans University",
-        "major": "Computer Science and Engineering",
-        "degree": "bachelor",
-        "curriculumLanguage": "korean",
-        "fieldOfStudy": "science",
-        "shortBio": "Currently pursuing Bachelor's in Computer Science at Ewha with focus on Machine Learning. Currently pursuing Bachelor's in Computer Science at Ewha with focus on Machine Learning. Currently pursuing Bachelor's in Computer Science at Ewha with focus on Machine Learning.",
-        "whyKorea": "I chose South Korea because of its advanced technology sector and the opportunity to learn from world-class researchers. The scholarship opportunities were also a major factor. Korea's tech industry is booming, and being here gives me direct access to companies like Samsung, LG, and numerous startups.",
-        "whyMajor": "Computer Science has always been my passion since high school. I wanted to specialize in AI because I believe it will shape the future. SNU's CS department has excellent faculty members who are leaders in machine learning research.",
-        "majorPros": ["Cutting-edge research opportunities", "Strong industry connections", "Excellent lab facilities", "Diverse international community"],
-        "majorCons": ["Heavy workload", "Competitive environment", "Can be stressful during thesis period"],
-        "uniPros": ["Prestigious reputation", "Beautiful campus", "Great library resources", "Strong alumni network", "Located in Seoul"],
-        "uniCons": ["Large campus can be tiring", "Some administrative processes are slow", "Competitive atmosphere"],
-        "lifeInKorea": "Life in Korea has been an incredible journey. The public transportation is amazing, and Seoul has everything you need. Korean food took some getting used to, but now I love it. The four seasons are beautiful, though winter can be quite cold. I've made friends from all over the world and have traveled to many places in Korea.",
-        "recommendations": "For those interested in CS at Ewha: 1) Start learning Korean basics before coming, 2) Prepare a strong SOP highlighting your passion for CS, 3) Engage in coding projects or competitions to build your skills, 4) Network with current students or alumni for insights.",
-        "contact": {
-          "email": "nunnalin.h@gmail.com",
-          "instagram": "@nalinsta"
+  "title": "Insights",
+  "subtitle": "Stories and insights from Thai students studying in Korea",
+  "introduction": "Read about the experiences of Thai students who have studied or are currently studying in South Korea. Learn about their journey, challenges, and advice for prospective students.",
+  "readMore": "Read Full Story",
+  "backToList": "Back to Previous Page",
+  "filters": {
+    "all": "All",
+    "university": "University",
+    "major": "Major",
+    "degree": "Degree Level",
+    "language": "Language",
+    "fieldOfStudy": "Field of Study"
+  },
+  "degrees": {
+    "bachelor": "Bachelor's",
+    "master": "Master's",
+    "phd": "PhD",
+    "exchange": "Exchange"
+  },
+  "languages": {
+    "korean": "Korean",
+    "english": "English",
+    "mixed": "Mixed"
+  },
+  "fieldTypes": {
+    "science": "Science & Engineering",
+    "arts": "Arts & Humanities",
+    "business": "Business",
+    "medicine": "Medicine",
+    "social-science": "Social Science"
+  },
+  "fields": {
+    "whyKorea": "Why South Korea?",
+    "whyMajor": "Why This Major?",
+    "major": "Major",
+    "university": "University",
+    "degree": "Degree",
+    "curriculumLanguage": "Curriculum Language",
+    "majorPros": "Pros of Major",
+    "majorCons": "Cons of Major",
+    "uniPros": "Pros of University",
+    "uniCons": "Cons of University",
+    "lifeInKorea": "Life in South Korea",
+    "recommendations": "Recommendations",
+    "recommendedCourses": "Recommended Courses",
+    "achievements": "Achievements & Activities",
+    "preparation": "How to Prepare Yourself",
+    "contactInfo": "Contact"
+  },
+  "noResults": "No experiences match your filters.",
+  "clearFilters": "Clear Filters",
+  "shareExperience": "Want to share your experience?",
+  "contactUs": "Contact Us",
+  "experiences": [
+    {
+      "id": "exp-001",
+      "name": "Nunnalin Heimvichit",
+      "photo": "/experience/bamgeut.png",
+      "university": "Ewha Womans University",
+      "major": "Computer Science and Engineering",
+      "degree": "bachelor",
+      "curriculumLanguage": "korean",
+      "fieldOfStudy": "science",
+      "shortBio": "Currently pursuing Bachelor's in Computer Science at Ewha with focus on Machine Learning. Currently pursuing Bachelor's in Computer Science at Ewha with focus on Machine Learning. Currently pursuing Bachelor's in Computer Science at Ewha with focus on Machine Learning.",
+      "whyKorea": "I chose South Korea because of its advanced technology sector and the opportunity to learn from world-class researchers. The scholarship opportunities were also a major factor. Korea's tech industry is booming, and being here gives me direct access to companies like Samsung, LG, and numerous startups.",
+      "whyMajor": "Computer Science has always been my passion since high school. I wanted to specialize in AI because I believe it will shape the future. SNU's CS department has excellent faculty members who are leaders in machine learning research.",
+      "majorPros": ["Cutting-edge research opportunities", "Strong industry connections", "Excellent lab facilities", "Diverse international community"],
+      "majorCons": ["Heavy workload", "Competitive environment", "Can be stressful during thesis period"],
+      "uniPros": ["Prestigious reputation", "Beautiful campus", "Great library resources", "Strong alumni network", "Located in Seoul"],
+      "uniCons": ["Large campus can be tiring", "Some administrative processes are slow", "Competitive atmosphere"],
+      "recommendedCourses": [
+        {
+          "name": "Machine Learning Fundamentals",
+          "professor": "Prof. Kim Jihoon",
+          "reason": "Excellent introduction to ML concepts with hands-on projects. Prof. Kim explains complex topics very clearly."
         },
-        "datePosted": "2025-01-17"
+        {
+          "name": "Data Structures and Algorithms",
+          "professor": "Prof. Park Soyeon",
+          "reason": "Essential foundation for any CS student. The assignments really help solidify your understanding."
+        },
+        {
+          "name": "Database Systems",
+          "reason": "Very practical course that prepares you for real-world applications. Great for internship preparation."
+        }
+      ],
+      "achievements": [
+        {
+          "title": "Dean's List 2024",
+          "description": "Achieved GPA above 4.3 for two consecutive semesters, recognized for academic excellence.",
+          "type": "achievement"
+        },
+        {
+          "title": "AI Chatbot for Campus Navigation",
+          "description": "Developed a LINE chatbot using NLP to help international students navigate Ewha campus and find resources. Used by over 500 students.",
+          "type": "project"
+        },
+        {
+          "title": "TSAK Academic Committee",
+          "description": "Served as a member organizing workshops and study sessions for Thai students in Korea.",
+          "type": "extracurricular"
+        },
+        {
+          "title": "K-Startup Hackathon Finalist",
+          "description": "Led a team of 4 to develop an AI-powered study buddy app. Reached top 10 out of 150 teams.",
+          "type": "achievement"
+        }
+      ],
+      "preparation": [
+        "Start learning Korean basics at least 6 months before arrival - even TOPIK level 2 helps tremendously in daily life",
+        "Build a strong coding portfolio with personal projects on GitHub - Korean companies value practical experience",
+        "Research scholarship deadlines early (GKS applications open in February, university scholarships vary)",
+        "Connect with current Thai students through TSAK or university Facebook groups to get insider tips",
+        "Prepare mentally for culture shock and homesickness - it's normal and temporary"
+      ],
+      "lifeInKorea": "Life in Korea has been an incredible journey. The public transportation is amazing, and Seoul has everything you need. Korean food took some getting used to, but now I love it. The four seasons are beautiful, though winter can be quite cold. I've made friends from all over the world and have traveled to many places in Korea.",
+      "recommendations": "For those interested in CS at Ewha: 1) Start learning Korean basics before coming, 2) Prepare a strong SOP highlighting your passion for CS, 3) Engage in coding projects or competitions to build your skills, 4) Network with current students or alumni for insights.",
+      "contact": {
+        "email": "nunnalin.h@gmail.com",
+        "instagram": "@nalinsta"
+      },
+      "datePosted": "2025-01-17"
     }
-    ]
-  }
+  ]
+}

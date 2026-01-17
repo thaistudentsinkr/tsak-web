@@ -13,7 +13,10 @@ import {
   ThumbsDown,
   MapPin,
   Lightbulb,
-  Calendar
+  Calendar,
+  BookOpen,
+  Trophy,
+  ClipboardList
 } from "lucide-react";
 
 import enMessages from "@/locales/community/experience/en.json";
@@ -39,6 +42,9 @@ type Experience = {
   uniCons: string[];
   lifeInKorea: string;
   recommendations: string;
+  recommendedCourses?: { name: string; professor?: string; reason: string }[];
+  achievements?: { title: string; description: string; type: "achievement" | "project" | "extracurricular" }[];
+  preparation?: string[];
   contact: {
     email?: string;
     instagram?: string;
@@ -75,6 +81,9 @@ type Messages = {
     uniCons: string;
     lifeInKorea: string;
     recommendations: string;
+    recommendedCourses?: string;
+    achievements?: string;
+    preparation?: string;
     contactInfo: string;
   };
   noResults: string;
@@ -94,6 +103,18 @@ const degreeColors: Record<DegreeType, { bg: string; text: string }> = {
   master: { bg: "bg-purple-100", text: "text-purple-800" },
   phd: { bg: "bg-amber-100", text: "text-amber-800" },
   exchange: { bg: "bg-green-100", text: "text-green-800" },
+};
+
+const achievementTypeColors: Record<string, { bg: string; text: string; border: string }> = {
+  achievement: { bg: "bg-[#2C3985]/5", text: "text-[#2C3985]", border: "border-[#2C3985]/20" },
+  project: { bg: "bg-[#A51D2C]/5", text: "text-[#A51D2C]", border: "border-[#A51D2C]/20" },
+  extracurricular: { bg: "bg-gray-50", text: "text-gray-700", border: "border-gray-200" },
+};
+
+const achievementTypeLabels: Record<string, { en: string; th: string }> = {
+  achievement: { en: "Achievement", th: "ความสำเร็จ" },
+  project: { en: "Project", th: "โปรเจกต์" },
+  extracurricular: { en: "Extracurricular", th: "กิจกรรมนอกหลักสูตร" },
 };
 
 type PageProps = {
@@ -129,7 +150,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
             href={`/${locale}/community/experience`}
             className="inline-flex items-center gap-2 text-[#FFFCDD] hover:text-white mb-2 transition-colors"
           >
-            <ArrowLeft className="w-5 h-40" />
+            <ArrowLeft className="w-5 h-5" />
             {t.backToList}
           </Link>
 
@@ -298,6 +319,88 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
             </div>
           </div>
         </section>
+
+        {/* Recommended Courses */}
+        {experience.recommendedCourses && experience.recommendedCourses.length > 0 && (
+          <section className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
+            <h2 className="text-[#A51D2C] text-xl sm:text-2xl font-semibold mb-4 flex items-center gap-2">
+              <BookOpen className="w-6 h-6" />
+              {t.fields.recommendedCourses || (locale === "th" ? "วิชาที่แนะนำ" : "Recommended Courses")}
+            </h2>
+            <ul className="space-y-3">
+              {experience.recommendedCourses.map((course, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2C3985] mt-2.5 flex-shrink-0"></span>
+                  <div>
+                    <span className="text-[#2C3985] font-medium">{course.name}</span>
+                    {course.reason && (
+                      <p className="text-gray-600 text-sm mt-0.5">{course.reason}</p>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Achievements / Projects / Extracurricular */}
+        {experience.achievements && experience.achievements.length > 0 && (
+          <section className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
+            <h2 className="text-[#A51D2C] text-xl sm:text-2xl font-semibold mb-6 flex items-center gap-2">
+              <Trophy className="w-6 h-6" />
+              {t.fields.achievements || (locale === "th" ? "ผลงานและกิจกรรม" : "Achievements & Activities")}
+            </h2>
+            <div className="space-y-4">
+              {experience.achievements.map((item, idx) => {
+                const colors = achievementTypeColors[item.type] || achievementTypeColors.achievement;
+                const label = achievementTypeLabels[item.type] || achievementTypeLabels.achievement;
+                return (
+                  <div 
+                    key={idx} 
+                    className={`${colors.bg} rounded-xl p-5 border ${colors.border}`}
+                  >
+                    <div className="flex flex-wrap items-center gap-3 mb-2">
+                      <span className={`${colors.text} text-xs font-medium px-2.5 py-1 rounded-full border ${colors.border} bg-white`}>
+                        {locale === "th" ? label.th : label.en}
+                      </span>
+                      <h3 className="text-[#2C3985] font-semibold text-lg">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* How to Prepare */}
+        {experience.preparation && experience.preparation.length > 0 && (
+          <section className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
+            <h2 className="text-[#A51D2C] text-xl sm:text-2xl font-semibold mb-6 flex items-center gap-2">
+              <ClipboardList className="w-6 h-6" />
+              {t.fields.preparation || (locale === "th" ? "เตรียมตัวอย่างไร?" : "How to Prepare Yourself")}
+            </h2>
+            <div className="space-y-3">
+              {experience.preparation.map((item, idx) => (
+                <div 
+                  key={idx} 
+                  className="flex items-start gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100"
+                >
+                  <div className="w-8 h-8 bg-[#2C3985] rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-semibold text-sm">{idx + 1}</span>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed pt-1">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Life in Korea */}
         <section className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 mb-6">
