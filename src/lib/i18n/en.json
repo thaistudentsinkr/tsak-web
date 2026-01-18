@@ -53,8 +53,8 @@
     "register": "Register to join event",
     "status": {
       "ended": "Ended",
-      "closed": "Registration Closed",
-      "open": "Registration Open"
+      "closed": "Closed",
+      "open": "Open"
     }
   },
   "scholarships": {
