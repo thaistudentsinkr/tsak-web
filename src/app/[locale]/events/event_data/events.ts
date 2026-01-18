@@ -19,6 +19,7 @@ export interface EventData {
   location?: string;
   registrationUrl?: string;
   organizer?: string;
+  organizerLogoUrl?: string;
   sponsors?: Sponsor[];
   imageDir?: string[];
 }

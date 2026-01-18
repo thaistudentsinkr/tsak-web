@@ -11,11 +11,11 @@ class EventImageInline(admin.TabularInline):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status', 'date', 'location', 'created_at']
-    list_filter = ['status', 'created_at']
+    list_display = ['title', 'status', 'date', 'ordering_type', 'order', 'location', 'created_at']
+    list_filter = ['status', 'ordering_type', 'created_at']
     search_fields = ['title', 'title_en', 'subtitle', 'subtitle_en', 'description', 'description_en', 'location']
-    list_editable = ['status']
-    ordering = ['-created_at']
+    list_editable = ['status', 'ordering_type', 'order']
+    ordering = ['order', '-created_at']
     filter_horizontal = ['sponsors']
     inlines = [EventImageInline]
     
@@ -26,8 +26,12 @@ class EventAdmin(admin.ModelAdmin):
         ('Date & Status', {
             'fields': ('date', 'date_range', 'status', 'status_text')
         }),
+        ('Ordering', {
+            'fields': ('ordering_type', 'order'),
+            'description': "Choose 'Manual Order' to set custom order using the order field, or 'Sort by Date' to automatically sort by event date."
+        }),
         ('Details', {
-            'fields': ('description', 'description_en', 'location', 'registration_url', 'organizer')
+            'fields': ('description', 'description_en', 'location', 'registration_url', 'organizer', 'organizer_logo')
         }),
         ('Relationships', {
             'fields': ('sponsors',),

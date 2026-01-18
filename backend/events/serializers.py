@@ -43,6 +43,7 @@ class EventSerializer(serializers.ModelSerializer):
     """Main event serializer matching frontend EventData interface"""
     id = serializers.SerializerMethodField()  # Convert to string for frontend
     imageUrl = serializers.SerializerMethodField()
+    organizerLogoUrl = serializers.SerializerMethodField()
     titleEn = serializers.CharField(source='title_en', read_only=True)
     subtitleEn = serializers.CharField(source='subtitle_en', read_only=True)
     descriptionEn = serializers.CharField(source='description_en', read_only=True)
@@ -70,6 +71,7 @@ class EventSerializer(serializers.ModelSerializer):
             'location',
             'registrationUrl',
             'organizer',
+            'organizerLogoUrl',
             'sponsors',
             'imageDir',
         ]
@@ -85,6 +87,15 @@ class EventSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(obj.image.url)
             return obj.image.url
+        return None
+    
+    def get_organizerLogoUrl(self, obj):
+        """Return the full URL to the organizer logo"""
+        if obj.organizer_logo:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.organizer_logo.url)
+            return obj.organizer_logo.url
         return None
     
     def get_imageDir(self, obj):
