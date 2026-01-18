@@ -190,8 +190,8 @@ export default async function AboutPage({ params }: PageProps) {
                 )}
                 <p className="text-[#2C3985] text-sm sm:text-base">
                   {locale === "th" 
-                    ? "ออกแบบโดย: [ชื่อผู้ออกแบบ]" 
-                    : "Designed by: [Designer Name]"}
+                    ? "ออกแบบโดย: เปมิกา เจริญวงศา" 
+                    : "Designed by: Pemika Chareonwongsa"}
                 </p>
               </div>
             </div>
