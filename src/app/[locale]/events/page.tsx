@@ -6,6 +6,7 @@ import EventCard from "./components/EventCard";
 import EventsHeader from "./components/EventsHeader";
 import { fetchEvents, EventData } from "@/lib/api/events";
 import { getDictionary } from "@/lib/i18n";
+import styles from "./page.module.css";
 
 export default function EventPage() {
   const params = useParams<{ locale: string }>();
@@ -15,6 +16,22 @@ export default function EventPage() {
   const [events, setEvents] = useState<EventData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is actually mobile (not just zoomed)
+  useEffect(() => {
+    // Check actual screen width, not viewport (which changes with zoom)
+    const checkIsMobile = () => {
+      // Use screen.width which represents the actual device width, not affected by zoom
+      // Also check window.screen.availWidth as fallback
+      const actualWidth = window.screen.width || window.screen.availWidth;
+      setIsMobile(actualWidth < 600); // Only true mobile devices, not zoomed desktop
+    };
+
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
 
   // Fetch events from Django API
   useEffect(() => {
@@ -56,16 +73,13 @@ export default function EventPage() {
         <EventsHeader />
 
         {/* Events Grid */}
-        <div
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full max-w-[90rem] mx-auto justify-items-center"
-          style={{ columnGap: 'clamp(1rem,3vw,1.5rem)', rowGap: '92px' }}
-        >
+        <div className={`${styles.eventsGrid} ${!isMobile ? styles.threeColumns : ''}`}>
           {events.length > 0 ? (
             events.map((event) => (
               <EventCard key={event.id} event={event} locale={locale} />
             ))
           ) : (
-            <div className="col-span-full text-center text-gray-600 mt-10 text-lg">
+            <div className={`${styles.emptyState} text-center text-gray-600 mt-10 text-lg`}>
               {dict.events.empty}
             </div>
           )}
