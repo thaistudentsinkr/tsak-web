@@ -10,7 +10,7 @@ export default function EventsHeader() {
   const dict = getDictionary(locale);
 
   return (
-    <div className={styles.headerContainer}>
+    <div className={`font-sans ${styles.headerContainer}`}>
       <div className={styles.headerRow}>
         <h1 className={styles.headerTitle}>{dict.events.title}</h1>
         <img

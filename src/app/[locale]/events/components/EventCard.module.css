@@ -106,7 +106,6 @@
 
 .eventTitle {
   color: #FFFCDD;
-  font-family: 'Onest', sans-serif;
   font-weight: 400;
   font-style: normal;
   font-size: clamp(1.5rem, 4vw, 2.25rem); /* 24px to 36px responsive */
@@ -116,7 +115,6 @@
 
 .eventDate {
     color: #FFFCDD;
-    font-family: Poppins;
     font-size: clamp(0.875rem, 2vw, 0.9375rem); /* 14px to 15px responsive */
     font-style: normal;
     font-weight: 400;
