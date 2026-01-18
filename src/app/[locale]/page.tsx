@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { getDictionary } from "@/lib/i18n";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +8,7 @@ import { useEffect, useState, useRef } from "react";
 import { ArrowRight, Users, MessageCircle, ChevronDown, X, GraduationCap, BookOpen, Repeat, FlaskConical } from "lucide-react";
 
 type PageProps = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 function EligibilityModal({ 
@@ -218,7 +219,7 @@ function AnimatedSection({
 }
 
 export default function Home({ params }: PageProps) {
-  const { locale } = params;
+  const { locale } = React.use(params);
   const dict = getDictionary(locale);
   const [scrollY, setScrollY] = useState(0);
   const [isEligibilityOpen, setIsEligibilityOpen] = useState(false);
