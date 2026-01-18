@@ -67,8 +67,8 @@ export default function EventCard({ event, locale }: EventCardProps) {
         {/* Organization logo in circular cutout */}
         <div className={styles.organizationLogo}>
           <Image
-            src="/tsak.png"
-            alt="TSAK Logo"
+            src={event.organizerLogoUrl || "/tsak_logo.png"}
+            alt={event.organizer || "TSAK Logo"}
             width={60}
             height={60}
             className="rounded-full"

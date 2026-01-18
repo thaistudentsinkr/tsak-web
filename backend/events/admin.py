@@ -27,7 +27,7 @@ class EventAdmin(admin.ModelAdmin):
             'fields': ('date', 'date_range', 'status', 'status_text')
         }),
         ('Details', {
-            'fields': ('description', 'description_en', 'location', 'registration_url', 'organizer')
+            'fields': ('description', 'description_en', 'location', 'registration_url', 'organizer', 'organizer_logo')
         }),
         ('Relationships', {
             'fields': ('sponsors',),

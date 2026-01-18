@@ -32,6 +32,7 @@ class Event(models.Model):
     location = models.CharField(max_length=255, blank=True, null=True)
     registration_url = models.URLField(blank=True, null=True, help_text="Registration/Event URL (for the register button)")
     organizer = models.CharField(max_length=255, blank=True, null=True)
+    organizer_logo = models.ImageField(upload_to='events/organizers/', blank=True, null=True, help_text="Organizer logo. If not provided, will use default TSAK logo.")
     
     # Relationships
     sponsors = models.ManyToManyField(Sponsor, blank=True, related_name='events')
