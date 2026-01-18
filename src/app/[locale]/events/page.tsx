@@ -57,7 +57,7 @@ export default function EventPage() {
 
         {/* Events Grid */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full max-w-[90rem]"
+          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 w-full max-w-[90rem] mx-auto justify-items-center"
           style={{ columnGap: 'clamp(1rem,3vw,1.5rem)', rowGap: '92px' }}
         >
           {events.length > 0 ? (
