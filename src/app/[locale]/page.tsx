@@ -33,8 +33,8 @@ function EligibilityModal({
 
   if (!isOpen) return null;
 
-  const dict = getDictionary(locale);
-  const regEligi = dict.memberRegister.eligibility;
+  const newMem = getDictionary(locale).memberRegister;
+  const regEligi = newMem.eligibility;
   const eligibilityItems =[
     {
       icon: GraduationCap,
@@ -60,7 +60,7 @@ function EligibilityModal({
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-[999] flex items-center justify-center p-4"
       onClick={onClose}
     >
       {/* Backdrop */}
@@ -74,7 +74,7 @@ function EligibilityModal({
         {/* Header */}
         <div className="sticky top-0 bg-[#2C3985] text-white px-6 py-4 rounded-t-2xl flex items-center justify-between">
           <h2 className="text-xl font-bold">
-            {locale === "th" ? "ใครสมัครเป็นสมาชิกได้บ้าง?" : "Who is Eligible?"}
+            {newMem.header}
           </h2>
           <button 
             onClick={onClose}
@@ -87,9 +87,7 @@ function EligibilityModal({
         {/* Content */}
         <div className="p-6 space-y-4">
           <p className="text-gray-600 text-sm mb-6">
-            {locale === "th" 
-              ? "นักศึกษาไทยในประเภทต่อไปนี้สามารถสมัครเป็นสมาชิก TSAK ได้:" 
-              : "Thai students in the following categories are eligible to register as TSAK members:"}
+            {newMem.description}
           </p>
           
           {eligibilityItems.map((item, index) => (
@@ -116,7 +114,7 @@ function EligibilityModal({
             rel="noopener noreferrer"
             className="block w-full text-center px-6 py-3 bg-[#2C3985] text-white rounded-full font-semibold hover:bg-[#1e2a5e] transition-colors"
           >
-            {locale === "th" ? "สมัครเลย" : "Register Now"}
+            {newMem.footer}
           </a>
         </div>
       </div>
@@ -256,7 +254,7 @@ export default function Home({ params }: PageProps) {
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-8 py-4 bg-[#2C3985] text-[#fffdc0] rounded-full font-semibold text-lg hover:bg-[#1e2a5e] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
               >
-                <Users className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                <Users className="w-5 h-5 group-hover:rotate-12 transition-transform duration-0" />
                 {locale === "th" ? "สมัครเป็นสมาชิก TSAK" : "Register as TSAK Member"}
               </a>
             </div>
