@@ -257,7 +257,7 @@ export default function ScholarshipsPage({ params }: PageProps) {
                     <select
                       value={selectedLevel}
                       onChange={(e) => setSelectedLevel(e.target.value as StudyLevel | "all")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-fulls text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
                     >
                       <option value="all">{t.filters.all}</option>
                       {Object.entries(t.studyLevels).map(([key, value]) => (
