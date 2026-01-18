@@ -1,7 +1,26 @@
 {
     "home.introduction": "Hello, We are Thai Student Association in the Republic of Korea",
-    "hero":
-    {
+    "hero":{
         "maintext": "TSAK serves as a central organization for public relations, supports, and activities for Thai students throughout the Republic of Korea.\nThe mission is to promote the exchange of knowledge and perspectives, and to foster unity and solidarity among Thai students.\nThe Association also acts as an official liaison with the Royal Thai Embassy and external organizations, while providing guidance, consultation, and assistance to Thai students across all regions of the Republic of Korea."
+    },
+    "memberRegister": {
+        "eligibility": {
+            "degreeProgram": {
+                "title": "Degree Program Student",
+                "description": "Students pursuing a Bachelor's, Master's, or Doctoral degree"
+            },
+            "koreanLanguageProgram": {
+                "title": "Korean Language Program Student",
+                "description": "Students studying Korean at language institutes"
+            },
+            "shortTermExchange": {
+                "title": "Short-term Exchange Student",
+                "description": "Students participating in exchange programs at Korean universities"
+            },
+            "researchAffiliation": {
+                "title": "Research Student",
+                "description": "Students conducting research at educational institutions or research centers in Korea"
+            }
+        }
     }
 }

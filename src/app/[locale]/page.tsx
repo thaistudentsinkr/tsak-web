@@ -33,47 +33,28 @@ function EligibilityModal({
 
   if (!isOpen) return null;
 
-  const eligibilityItems = locale === "th" ? [
+  const dict = getDictionary(locale);
+  const regEligi = dict.memberRegister.eligibility;
+  const eligibilityItems =[
     {
       icon: GraduationCap,
-      title: "นักศึกษาในหลักสูตรปริญญา",
-      description: "นักศึกษาที่กำลังศึกษาในระดับปริญญาตรี ปริญญาโท หรือปริญญาเอก",
+      title: regEligi.degreeProgram.title,
+      description: regEligi.degreeProgram.description,
     },
     {
       icon: BookOpen,
-      title: "นักศึกษาโรงเรียนสอนภาษาเกาหลี",
-      description: "นักศึกษาที่กำลังศึกษาภาษาเกาหลีในสถาบันสอนภาษา",
+      title: regEligi.koreanLanguageProgram.title,
+      description: regEligi.koreanLanguageProgram.description,
     },
     {
       icon: Repeat,
-      title: "นักศึกษาแลกเปลี่ยนระยะสั้น",
-      description: "นักศึกษาที่เข้าร่วมโครงการแลกเปลี่ยนระยะสั้นในมหาวิทยาลัยเกาหลี",
+      title:regEligi.shortTermExchange.title,
+      description: regEligi.shortTermExchange.description,
     },
     {
       icon: FlaskConical,
-      title: "นักศึกษาวิจัย",
-      description: "นักศึกษาที่กำลังทำวิจัยในสถาบันการศึกษาหรือศูนย์วิจัยในเกาหลี",
-    },
-  ] : [
-    {
-      icon: GraduationCap,
-      title: "Degree-seeking Student",
-      description: "Students pursuing a Bachelor's, Master's, or Doctoral degree",
-    },
-    {
-      icon: BookOpen,
-      title: "Korean Language School Student",
-      description: "Students studying Korean at language institutes",
-    },
-    {
-      icon: Repeat,
-      title: "Short-term Exchange Student",
-      description: "Students participating in exchange programs at Korean universities",
-    },
-    {
-      icon: FlaskConical,
-      title: "Research Student",
-      description: "Students conducting research at educational institutions or research centers in Korea",
+      title: regEligi.researchAffiliation.title,
+      description: regEligi.researchAffiliation.description,
     },
   ];
 
@@ -310,7 +291,7 @@ export default function Home({ params }: PageProps) {
         <AnimatedSection className="w-full">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] items-center gap-8 px-6 max-w-6xl w-full mx-auto">
             {/* Left logo */}
-            <div className="hidden md:flex w-[190px] h-[60px] rounded-[100%/100%] justify-center items-center text-center border border-[#A51D2C] text-[12px] font-[400]">
+            <div className="hidden md:flex w-[190px] h-[60px] rounded-[100%/100%] justify-center items-center text-center border border-[#2C3985] text-[12px] text-[#2C3985] font-[400]">
               Thai Students Association<br />
               in the Republic of Korea
             </div>
@@ -325,7 +306,7 @@ export default function Home({ params }: PageProps) {
             </div>
 
             {/* Right logo */}
-            <div className="hidden md:flex w-[190px] h-[60px] rounded-[100%/100%] justify-center items-center text-center border border-[#A51D2C] text-[12px] font-[400]">
+            <div className="hidden md:flex w-[190px] h-[60px] rounded-[100%/100%] justify-center items-center text-center border border-[#2C3985] text-[12px] text-[#2C3985] font-[400]">
               Thai Students Association<br />
               in the Republic of Korea
             </div>
