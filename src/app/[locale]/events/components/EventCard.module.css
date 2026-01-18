@@ -99,7 +99,7 @@
 .eventDetailBox {
   background-color: #2C3985;
   width: 372.704px;
-  min-height: 70px;
+  min-height: 84px;
   flex-shrink: 0;
   padding: 16px;
   display: flex;
@@ -113,8 +113,8 @@
   color: #FFFCDD;
   font-weight: 400;
   font-style: normal;
-  font-size: clamp(1.5rem, 1vw, 2.2rem); /* 24px to 36px responsive */
-  line-height: 2;
+  font-size: clamp(1.5rem, 4vw, 2.25rem); /* 24px to 36px responsive */
+  line-height: 1.1;
   margin: 0;
 }
 
