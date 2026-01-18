@@ -104,7 +104,7 @@ export default function EventPage() {
   const displayDescription = getDisplayDescription();
 
   return (
-    <div className="font-sans min-h-screen p-8 pb-20 gap-16 sm:p-20">
+    <div className="min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <div className="flex flex-col gap-[32px] row-start-2 items-center pt-24">
         {/* Event Header */}
         <EventsHeader />
@@ -117,12 +117,14 @@ export default function EventPage() {
         {/* Event Image */}
         <div className="w-full max-w-4xl">
           {event.imageUrl && event.imageUrl.trim() ? (
-            <div className="relative w-full aspect-[4/3] bg-[#f3f4f6] rounded-lg overflow-hidden">
+            <div className="relative w-full bg-[#f3f4f6] rounded-lg overflow-hidden">
               <Image
                 src={event.imageUrl}
                 alt={displayTitle}
-                fill
-                className="object-cover"
+                width={1200}
+                height={800}
+                className="w-full h-auto"
+                style={{ objectFit: "contain" }}
               />
             </div>
           ) : (
@@ -201,24 +203,6 @@ export default function EventPage() {
             </div>
           )}
         </div>
-
-        {/* Event Detail Content */}
-        {/* <div className="w-full max-w-4xl">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-4">
-            {event.title}
-          </h2>
-          {event.titleEn && (
-            <h3 className="text-2xl text-gray-600 text-center mb-8">{event.titleEn}</h3>
-          )}
-          <div className="text-lg text-center max-w-2xl mx-auto space-y-4">
-            <p><strong>Event ID:</strong> {event.id}</p>
-            <p><strong>Date:</strong> {event.date}</p>
-            {event.location && <p><strong>Location:</strong> {event.location}</p>}
-            {event.organizer && <p><strong>Organizer:</strong> {event.organizer}</p>}
-            <p><strong>Status:</strong> {event.statusText}</p>
-            {event.description && <p><strong>Description:</strong> {event.description}</p>}
-          </div>
-          </div> */}
       </div>
     </div>
   );
