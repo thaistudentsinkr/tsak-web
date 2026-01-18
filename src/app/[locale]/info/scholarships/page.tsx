@@ -240,7 +240,7 @@ export default function ScholarshipsPage({ params }: PageProps) {
                     <select
                       value={selectedFunding}
                       onChange={(e) => setSelectedFunding(e.target.value as FundingType | "all")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
                     >
                       <option value="all">{t.filters.all}</option>
                       {Object.entries(t.fundingTypes).map(([key, value]) => (
@@ -257,7 +257,7 @@ export default function ScholarshipsPage({ params }: PageProps) {
                     <select
                       value={selectedLevel}
                       onChange={(e) => setSelectedLevel(e.target.value as StudyLevel | "all")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-fulls text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
                     >
                       <option value="all">{t.filters.all}</option>
                       {Object.entries(t.studyLevels).map(([key, value]) => (
@@ -274,7 +274,7 @@ export default function ScholarshipsPage({ params }: PageProps) {
                     <select
                       value={selectedField}
                       onChange={(e) => setSelectedField(e.target.value as FieldOfStudy | "all")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
                     >
                       <option value="all">{t.filters.all}</option>
                       {Object.entries(t.fieldTypes).filter(([key]) => key !== 'all-fields').map(([key, value]) => (
@@ -291,7 +291,7 @@ export default function ScholarshipsPage({ params }: PageProps) {
                     <select
                       value={selectedProvider}
                       onChange={(e) => setSelectedProvider(e.target.value as ScholarshipType | "all")}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-full text-sm focus:ring-2 focus:ring-[#2C3985] focus:border-transparent"
                     >
                       <option value="all">{t.filters.all}</option>
                       {Object.entries(t.types).map(([key, value]) => (
