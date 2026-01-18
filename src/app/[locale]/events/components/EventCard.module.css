@@ -18,6 +18,7 @@
   height: 443.593px;
   flex: none;
   position: relative;
+  box-sizing: border-box;
 }
 
 .whiteRectangle::before {
@@ -52,12 +53,16 @@
   position: relative;
   background-color: #f3f4f6;
   cursor: pointer;
-  width: 325px;
+  width: calc(100% - 48px);
+  max-width: 324.704px;
   height: 405px;
-  margin: 19.3px auto;
+  margin-top: 19.3px;
+  margin-bottom: 19.3px;
   margin-left: 24px;
   margin-right: 24px;
   z-index: 4;
+  box-sizing: content-box;
+  flex-shrink: 0;
 }
 
 .organizationLogo {
@@ -146,12 +151,12 @@
     height: auto;
   }
   .eventImage {
-    width: 92vw;
+    width: calc(100% - 48px);
     height: 54vw;
     min-width: unset;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    max-width: calc(100% - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }
 @media (min-width: 481px) and (max-width: 768px) {
@@ -165,12 +170,12 @@
     height: auto;
   }
   .eventImage {
-    width: 80vw;
+    width: calc(100% - 48px);
     height: 48vw;
     min-width: unset;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+    max-width: calc(100% - 48px);
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }
 
