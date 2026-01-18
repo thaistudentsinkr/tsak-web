@@ -45,7 +45,7 @@ export default function EventCard({ event, locale }: EventCardProps) {
   };
 
   return (
-    <div className={styles.eventCard}>
+    <div className={`font-sans ${styles.eventCard}`}>
       {/* White Rectangle - Contains Image */}
       <div className={styles.whiteRectangle}>
         {/* Event Image - Clickable to navigate to event detail */}

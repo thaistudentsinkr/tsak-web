@@ -35,7 +35,7 @@ export default function EventPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)] flex items-center justify-center">
+      <div className="font-sans min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)] flex items-center justify-center">
         <p className="text-xl">{dict.events.loading}</p>
       </div>
     );
@@ -43,14 +43,14 @@ export default function EventPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)] flex items-center justify-center">
+      <div className="font-sans min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)] flex items-center justify-center">
         <p className="text-xl text-red-600">{error}</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)]">
+    <div className="font-sans min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)]">
       <main className="flex flex-col gap-[clamp(1.5rem,4vw,2rem)] items-center pt-[clamp(4rem,8vw,6rem)] relative z-0">
         {/* Event Header */}
         <EventsHeader />
