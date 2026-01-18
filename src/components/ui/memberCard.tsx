@@ -44,7 +44,7 @@ export default function MemberCard({ member }: { member: Member }) {
 
     return (
         <div
-            className="w-full max-w-xs border shadow-md overflow-hidden aspect-[354.67/224.59] flex flex-col"
+            className="w-full max-w-xs border shadow-md overflow-hidden aspect-[330/224.59] flex flex-col"
             style={{ backgroundColor: cardBg }}
         >
             <div className="relative flex-shrink-0">
@@ -83,7 +83,10 @@ export default function MemberCard({ member }: { member: Member }) {
                     </div>
 
                     <div className="text-center mt-3 sm:mt-4 pb-4">
-                        <span className="bg-[#9d2b2b] text-[#f7f5dc] text-xs sm:text-sm font-medium py-1 px-3 rounded-full inline-block">
+                        <span 
+                            className="bg-[#9d2b2b] text-[#f7f5dc] text-[10px] sm:text-xs font-medium py-1 px-2 sm:px-3 rounded-full inline-block max-w-full truncate"
+                            title={positionLabel || position}
+                        >
                             {positionLabel || position}
                         </span>
                     </div>
