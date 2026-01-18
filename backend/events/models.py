@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from datetime import datetime
 from sponsors.models import Sponsor
 
 
@@ -19,8 +21,24 @@ class Event(models.Model):
     image = models.ImageField(upload_to='events/', blank=True, null=True)
     
     # Date Information
-    date = models.CharField(max_length=100, help_text="Date string format, e.g., '20.07.2025 - 23.07.2025'")
+    date = models.CharField(max_length=100, help_text="Date string format, e.g., '20.07.2025 - 23.07.2025' or '20.07.2025'")
     date_range = models.CharField(max_length=100, blank=True, null=True)
+    
+    # Ordering
+    ORDERING_CHOICES = [
+        ('manual', 'Manual Order'),
+        ('date', 'Sort by Date'),
+    ]
+    ordering_type = models.CharField(
+        max_length=10,
+        choices=ORDERING_CHOICES,
+        default='date',
+        help_text="Choose 'Manual Order' to use custom order field, or 'Sort by Date' to automatically sort by date"
+    )
+    order = models.IntegerField(
+        default=0,
+        help_text="Manual order number (lower numbers appear first). Only used when ordering_type is 'Manual Order'"
+    )
     
     # Status
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
@@ -42,9 +60,39 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['order', '-created_at']
         verbose_name = 'Event'
         verbose_name_plural = 'Events'
+    
+    def clean(self):
+        """Validate date field"""
+        super().clean()
+        if self.date:
+            # Try to parse the date string
+            # Format can be: "20.07.2025" or "20.07.2025 - 23.07.2025"
+            date_str = self.date.strip()
+            if ' - ' in date_str:
+                # Date range format
+                parts = date_str.split(' - ')
+                if len(parts) != 2:
+                    raise ValidationError({'date': "Date range must be in format 'DD.MM.YYYY - DD.MM.YYYY'"})
+                for part in parts:
+                    self._validate_date_format(part.strip())
+            else:
+                # Single date format
+                self._validate_date_format(date_str)
+    
+    def _validate_date_format(self, date_str):
+        """Validate a single date string in DD.MM.YYYY format"""
+        try:
+            datetime.strptime(date_str, '%d.%m.%Y')
+        except ValueError:
+            raise ValidationError({'date': f"Invalid date format: '{date_str}'. Expected format: DD.MM.YYYY (e.g., 20.07.2025)"})
+    
+    def save(self, *args, **kwargs):
+        """Override save to run validation"""
+        self.full_clean()
+        super().save(*args, **kwargs)
     
     def __str__(self):
         return f"{self.title} ({self.get_status_display()})"
