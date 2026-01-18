@@ -1,10 +1,12 @@
 .eventCard {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 372.704px;
   max-width: 372.704px;
+  min-width: 372.704px;
   gap: 0.5625rem;
   position: relative;
+  flex-shrink: 0;
 }
 
 .whiteRectangle {
@@ -139,7 +141,7 @@
   flex-shrink: 0;
 }
 
-/* Keep mobile/tablet responsiveness */
+/* Keep mobile responsiveness only - maintain fixed width on larger screens */
 @media (max-width: 480px) {
   .eventCard {
     max-width: 20rem;
@@ -159,23 +161,25 @@
     margin-right: 24px;
   }
 }
-@media (min-width: 481px) and (max-width: 768px) {
+/* For tablet and above, maintain fixed card dimensions to prevent image cropping */
+@media (min-width: 481px) {
   .eventCard {
-    max-width: 22rem;
+    width: 372.704px;
+    max-width: 372.704px;
+    min-width: 372.704px;
   }
-  .whiteRectangle, .eventDetailBox {
-    width: 100%;
-    min-width: unset;
-    max-width: 100%;
-    height: auto;
+  .whiteRectangle {
+    width: 372.704px;
+    min-width: 372.704px;
+  }
+  .eventDetailBox {
+    width: 372.704px;
+    min-width: 372.704px;
   }
   .eventImage {
     width: calc(100% - 48px);
-    height: 48vw;
-    min-width: unset;
-    max-width: calc(100% - 48px);
-    margin-left: 24px;
-    margin-right: 24px;
+    max-width: 324.704px;
+    min-width: calc(372.704px - 48px);
   }
 }
 
