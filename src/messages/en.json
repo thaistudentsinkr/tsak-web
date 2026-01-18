@@ -4,6 +4,8 @@
         "maintext": "TSAK serves as a central organization for public relations, supports, and activities for Thai students throughout the Republic of Korea.\nThe mission is to promote the exchange of knowledge and perspectives, and to foster unity and solidarity among Thai students.\nThe Association also acts as an official liaison with the Royal Thai Embassy and external organizations, while providing guidance, consultation, and assistance to Thai students across all regions of the Republic of Korea."
     },
     "memberRegister": {
+        "header": "Who is Eligible?",
+        "description": "Thai students in the following categories are eligible to register as TSAK members:",
         "eligibility": {
             "degreeProgram": {
                 "title": "Degree Program Student",
@@ -21,6 +23,7 @@
                 "title": "Research Student",
                 "description": "Students conducting research at educational institutions or research centers in Korea"
             }
-        }
+        },
+        "footer": "Register Now"
     }
 }
