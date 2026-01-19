@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 
 const DEPARTMENTS = [
+  "current",
   "honorary",
   "executive",
   "liaison",
@@ -39,7 +40,7 @@ export default function Home() {
   const locale = params?.locale || 'en';
 
   const dict = getDictionary(locale);
-  const [selectedDept, setSelectedDept] = useState<Department>("honorary");
+  const [selectedDept, setSelectedDept] = useState<Department>("current");
   const [memberData, setMemberData] = useState<MemberData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -91,12 +92,47 @@ export default function Home() {
     fetchMembers();
   }, []);
 
+  // Helper function to sort members for "current" view
+  const sortCurrentMembers = (members: MemberData[]) => {
+    const positionOrder: Record<Position, number> = {
+      president: 1,
+      vice_president: 2,
+      secretary: 3,
+      head: 4,
+      member: 5,
+      advisor: 6,
+    };
+
+    const deptOrder: Department[] = ["executive", "liaison", "pr", "events", "accounting", "documents", "it"];
+
+    return members.sort((a, b) => {
+      // First sort by department
+      const deptIndexA = deptOrder.indexOf(a.department);
+      const deptIndexB = deptOrder.indexOf(b.department);
+      
+      if (deptIndexA !== deptIndexB) {
+        return deptIndexA - deptIndexB;
+      }
+
+      // Within same department, sort by position
+      return positionOrder[a.position] - positionOrder[b.position];
+    });
+  };
+
   const filteredMembers = memberData.filter((m) => {
-    if (selectedDept === "alumni") {
+    if (selectedDept === "current") {
+      // Show all active members across all departments, excluding honorary
+      return m.working === true && m.department !== "honorary";
+    } else if (selectedDept === "alumni") {
       return m.working === false;
     }
     return m.department === selectedDept && m.working === true;
   });
+
+  // Sort members if "current" is selected
+  const displayMembers = selectedDept === "current" 
+    ? sortCurrentMembers([...filteredMembers])
+    : filteredMembers;
 
   const handleSelectDept = (dept: Department) => {
     setSelectedDept(dept);
@@ -194,9 +230,10 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col gap-8 sm:gap-15 relative z-10 w-full">
+                {/* President */}
                 <div className="flex justify-center mb-4 sm:mb-8">
-                  {filteredMembers
-                    .filter((m) => m.position === "president")
+                  {memberData
+                    .filter((m) => m.position === "president" && m.working === true)
                     .map((member) => (
                       <MemberCard
                         key={member.id}
@@ -208,21 +245,39 @@ export default function Home() {
                     ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-30">
-                  {filteredMembers
+                {/* Vice President and Secretary */}
+                <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 max-w-4xl mx-auto">
+                  {memberData
                     .filter(
                       (m) =>
-                        m.position === "vice_president" ||
-                        m.position === "secretary"
+                        (m.position === "vice_president" || m.position === "secretary") &&
+                        m.working === true
                     )
                     .map((member) => (
-                      <MemberCard
-                        key={member.id}
-                        member={{
-                          ...member,
-                          positionLabel: getPositionLabel(member.position, member.department),
-                        }}
-                      />
+                      <div key={member.id} className="w-full sm:w-[calc(50%-1rem)]">
+                        <MemberCard
+                          member={{
+                            ...member,
+                            positionLabel: getPositionLabel(member.position, member.department),
+                          }}
+                        />
+                      </div>
+                    ))}
+                </div>
+
+                {/* All Department Heads - 2 per row */}
+                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 max-w-4xl mx-auto">
+                  {memberData
+                    .filter((m) => m.position === "head" && m.working === true)
+                    .map((member) => (
+                      <div key={member.id} className="w-full sm:w-[calc(50%-1rem)]">
+                        <MemberCard
+                          member={{
+                            ...member,
+                            positionLabel: getPositionLabel(member.position, member.department),
+                          }}
+                        />
+                      </div>
                     ))}
                 </div>
               </div>
@@ -230,8 +285,8 @@ export default function Home() {
           ) : (
             <div className="w-full max-w-7xl">
               <div className="flex flex-wrap gap-4 sm:gap-8 justify-center">
-                {filteredMembers.length > 0 ? (
-                  filteredMembers.map((member) => (
+                {displayMembers.length > 0 ? (
+                  displayMembers.map((member) => (
                     <MemberCard
                       key={member.id}
                       member={{
@@ -247,7 +302,7 @@ export default function Home() {
                 )}
               </div>
 
-              <div className="hidden sm:flex absolute bottom-4 right-4 w-[320px] h-[100px] items-center justify-center">
+              <div className="hidden sm:flex absolute bottom-4 right-4 w-[320px] h-[100px] items-center justify-center -z-10">
                 <div className="border-2 border-[#A51D2C]/20 rounded-[50%] rotate-[-17.11deg] w-full h-full flex items-center justify-center p-2">
                   <p className="text-[#A51D2C]/20 text-lg sm:text-xl leading-[1.1] text-center whitespace-pre-line max-w-[90%] tracking-tighter">
                     Thai Students Association{'\n'}in the Republic of Korea

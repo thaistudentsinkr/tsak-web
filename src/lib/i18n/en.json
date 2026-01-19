@@ -15,6 +15,7 @@
   },
 
   "departments": {
+    "current": "Current Members",
     "honorary": "Honorary Members",
     "executive": "Executive Board",
     "liaison": "Liaison",
