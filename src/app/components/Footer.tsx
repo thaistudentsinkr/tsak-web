@@ -45,11 +45,11 @@ export default function Footer() {
 
         <div className="hidden md:block mt-6 pt-4 border-t border-[#FFFCDD]/20 text-xs text-right">
           <p>Copyright © {new Date().getFullYear()}, All Rights Reserved by Thai Student Association in Republic of Korea</p>
-          <p>Project managed by Nunnalin Heimvichit
+          <p>Project Managed by Nunnalin Heimvichit
           </p>
-          <p>Designed by Aphichaya Kreangwate, Pemika Chareonwongsa
+          <p>Designed by Aphichaya Kreangwate, Pemika Chareonwongsa, Supitchaya Chindanonda
           </p>
-          <p>Developed by Jaden Jorradol, Thiwat Chatkham, Thommakoon Nitheekulawatn, Passavee Losripat
+          <p>Developed by Jaden Jorradol, Thiwat Chatkham, Thommakoon Nitheekulawatn, Passavee Losripat, Nunnalin Heimvichit
           </p>
           <Link href="#" className="underline">นโยบายเว็บไซต์และลิขสิทธิ์</Link>
         </div>
@@ -79,9 +79,9 @@ export default function Footer() {
             <p>Copyright © {new Date().getFullYear()}, All Rights Reserved by Thai Student Association in Republic of Korea</p>
             <p>Project managed by Nunnalin Heimvichit
             </p>
-            <p>Designed by Aphichaya Kreangwate, Pemika Chareonwongsa
+            <p>Designed by Aphichaya Kreangwate, Pemika Chareonwongsa, Supitchaya Chindanonda
             </p>
-            <p>Developed by Jaden Jorradol, Thiwat Chatkham, Thommakoon Nitheekulawatn, Passavee Losripat   
+            <p>Developed by Jaden Jorradol, Thiwat Chatkham, Thommakoon Nitheekulawatn, Passavee Losripat, Nunnalin Heimvichit   
             </p>
             <Link href="#" className="underline">นโยบายเว็บไซต์และลิขสิทธิ์</Link>
           </div>

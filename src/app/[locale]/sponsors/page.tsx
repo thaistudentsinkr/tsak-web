@@ -130,7 +130,7 @@ export default async function Home({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen p-8 sm:p-20">
+    <div className="min-h-screen p-8 sm:p-30">
       <main className="mx-auto max-w-5xl flex flex-col gap-16">
 
         <h1 className="text-3xl font-bold text-center">

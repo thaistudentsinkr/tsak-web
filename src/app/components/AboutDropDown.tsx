@@ -16,7 +16,7 @@ const infoTexts: Record<string,
     { label: "Contact Us", href: "/contact"}
   ],
   th: [
-    { label: "ความเป็นมาของสมาคม", href: "/about"},
+    { label: "เกี่ยวกับ TSAK", href: "/about"},
     { label: "คณะกรรมการบริหาร", href: "/members"},
     { label: "ผู้สนับสนุนสมาคม", href: "/sponsors"},
     { label: "ข้อบังคับสมาคม", href: "/regulations"},

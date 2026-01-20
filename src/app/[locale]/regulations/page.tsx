@@ -24,7 +24,7 @@ export default async function RegulationsPage({ params }: PageProps) {
 
       {/* Title Section */}
       <div 
-        className="relative w-full py-6 sm:py-10 lg:py-14 flex flex-col items-center justify-center px-4 sm:px-8"
+        className="relative w-full py-6 sm:py-10 lg:py-30 flex flex-col items-center justify-center px-4 sm:px-8"
         style={{
           background: 'linear-gradient(to bottom, #FFFFFF 0%, #FFFCDD 50%, #FFFFFF 100%)'
         }}
