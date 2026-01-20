@@ -163,7 +163,7 @@ export default async function AboutPage({ params }: PageProps) {
           {/* Our Logo Section - Enhanced */}
           <section className="py-12 sm:py-16">
             <h2 className="text-[#2C3985] text-2xl sm:text-3xl lg:text-5xl font-semibold mb-10">
-              {locale === "th" ? "โลโก้ของเรา" : "Our Logo"}
+              {locale === "th" ? "Brand CI" : "Brand CI"}
             </h2>
             
             {/* Logo Display */}
@@ -198,9 +198,6 @@ export default async function AboutPage({ params }: PageProps) {
 
             {/* Color Palette Section */}
             <div className="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100">
-              <h3 className="text-[#2C3985] text-xl sm:text-2xl font-semibold mb-8">
-                {locale === "th" ? "จานสี" : "Color Palette"}
-              </h3>
 
               {/* Gray Scale */}
               <div className="mb-8">

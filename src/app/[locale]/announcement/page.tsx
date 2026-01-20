@@ -101,7 +101,7 @@ export default function AnnouncementPage({
 
   return (
     <div className="min-h-screen bg-white">
-      <main className="max-w-5xl mx-auto px-6 py-12">
+      <main className="max-w-5xl mx-auto px-6 py-30">
         {/* Title */}
         <h1 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-10">
           {t.title}
