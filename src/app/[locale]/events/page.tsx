@@ -107,13 +107,13 @@ export default function EventPage() {
   }
 
   return (
-    <div className="font-sans min-h-screen p-[clamp(1rem,4vw,5rem)] pb-[clamp(3rem,8vw,5rem)]">
+    <div className="font-sans min-h-screen p-[clamp(1rem,30vw,5rem)] pb-[clamp(3rem,30vw,5rem)]">
       <main className="flex flex-col gap-[clamp(1.5rem,4vw,2rem)] items-center pt-[clamp(4rem,8vw,6rem)]">
 
         <EventsHeader />
 
         {/* Search & Filter */}
-        <div className="w-full max-w-[30rem] flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <div className="w-full max-w-[30rem] flex flex-row sm:flex-row gap-4 items-center justify-between">
           
           {/* Search */}
           <div className="relative w-full sm:min-w-[24rem] lg:min-w-[600px]">
@@ -134,13 +134,13 @@ export default function EventPage() {
               className="
                 w-full sm:w-auto
                 flex items-center justify-between gap-3
-                px-5 py-4
+                px-8 py-4
                 bg-[#2C3985] text-[#FFFCDD]
                 rounded-full font-medium
                 hover:bg-[#1F2A6B]
               "
             >
-              <span>
+              <span className="whitespace-nowrap">
                 {getStatusLabel(statusFilter)}
               </span>
               <ChevronDown
