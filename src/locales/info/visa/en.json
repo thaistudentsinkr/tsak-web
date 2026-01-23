@@ -1,0 +1,192 @@
+{
+    "meta": {
+      "title": "Visa Information for Thai Students in Korea",
+      "subtitle": "ข้อมูลวีซ่าสำหรับนักเรียนไทยในสาธารณรัฐเกาหลี",
+      "description": "This page is prepared as a guide and preliminary information source for Thai students who wish to study, live, and reside in South Korea. The Thai Students Association in the Republic of Korea (TSAK) has compiled visa information specifically for students to help ensure preparation is accurate and smooth."
+    },
+    "navigation": {
+      "studentVisa": "Student Visas",
+      "relatedVisa": "Related Visas",
+      "arc": "Alien Registration",
+      "partTimeWork": "Part-time Work",
+      "warnings": "Important Warnings",
+      "contact": "Additional Info"
+    },
+    "sections": {
+      "studentVisa": {
+        "title": "1. Student Visas",
+        "d2": {
+          "title": "1.1 D-2 Visa: Higher Education Student Visa",
+          "suitableFor": {
+            "label": "Suitable for: Students enrolled in",
+            "items": [
+              "Bachelor's Degree",
+              "Master's Degree",
+              "Doctoral Degree",
+              "Exchange Student Program"
+            ]
+          },
+          "subcategories": {
+            "label": "D-2 Subcategories",
+            "items": [
+              "Bachelor's Degree (D-2-2)",
+              "Master's Degree (D-2-3)",
+              "Doctoral Degree (D-2-4)",
+              "Exchange Student (D-2-6)",
+              "Visiting Student (D-2-8)"
+            ]
+          },
+          "documents": {
+            "label": "Required Documents (General)",
+            "items": [
+              "Passport (valid for at least 6 months)",
+              "Visa application form",
+              "Standard visa photo",
+              "Certificate of Admission from Korean university",
+              "Academic Transcript",
+              "Highest educational qualification",
+              "Financial proof (e.g., bank statement)",
+              "Tuition payment receipt (if applicable)"
+            ]
+          },
+          "costs": {
+            "label": "Estimated Costs",
+            "items": [
+              "Visa fee: approximately 60–90 USD",
+              "ARC (Alien Registration Card) fee: approximately 35,000 KRW"
+            ]
+          },
+          "benefits": {
+            "label": "Key Benefits",
+            "items": [
+              "Long-term stay according to study period",
+              "Can apply for part-time work permit according to Immigration Office conditions"
+            ]
+          }
+        },
+        "d4": {
+          "title": "1.2 D-4 Visa: Language & Training Visa",
+          "suitableFor": {
+            "label": "Suitable for: Students studying",
+            "items": [
+              "Korean language",
+              "University preparatory courses",
+              "Specialized training programs"
+            ]
+          },
+          "subcategories": {
+            "label": "D-4 Subcategories",
+            "items": [
+              "D-4-1: Korean language study",
+              "D-4-6: Other training programs"
+            ]
+          },
+          "documents": {
+            "label": "Required Documents",
+            "items": [
+              "Passport",
+              "Visa application form",
+              "Acceptance letter from language institute",
+              "Tuition payment proof",
+              "Financial proof",
+              "Study Plan"
+            ]
+          },
+          "costs": {
+            "label": "Estimated Costs",
+            "items": [
+              "Visa fee: approximately 60–90 USD",
+              "ARC fee: approximately 35,000 KRW"
+            ]
+          },
+          "notes": {
+            "label": "Important Notes",
+            "items": [
+              "Part-time work is more restricted than D-2 visa",
+              "Must complete required study hours as specified"
+            ]
+          }
+        }
+      },
+      "relatedVisa": {
+        "title": "2. Student-Related Visas (Post-graduation)",
+        "d10": {
+          "title": "2.1 D-10 Visa: Job Seeker Visa",
+          "suitableFor": "Suitable for: Students who graduated from Korean institutions and want to find employment",
+          "details": [
+            "Valid for up to 6 months (extendable under certain conditions)",
+            "Must show proof of graduation from Korean institution",
+            "Must have a clear job search plan"
+          ]
+        },
+        "e7": {
+          "title": "2.2 E-7 Visa: Professional Work Visa",
+          "suitableFor": "Suitable for",
+          "details": [
+            "Those employed in positions requiring specialized skills",
+            "Must have employment contract",
+            "Employer sponsors the visa application",
+            "Can be extended from D-2 or D-10"
+          ]
+        }
+      },
+      "arc": {
+        "title": "3. Alien Registration Card (ARC)",
+        "description": "All foreign students staying over 90 days must register for ARC",
+        "documents": {
+          "label": "Required Documents",
+          "items": [
+            "Passport",
+            "Student certificate",
+            "Housing rental contract",
+            "Photo",
+            "Fee: 35,000 KRW"
+          ]
+        }
+      },
+      "partTimeWork": {
+        "title": "4. Part-time Work for Students",
+        "requirements": [
+          "Must obtain permission from Immigration Office",
+          "Working hours limited according to study level",
+          "Must meet required academic performance standards"
+        ]
+      },
+      "warnings": {
+        "title": "5. Important Warnings",
+        "items": [
+          "Do not work without permission",
+          "Must report address change within 14 days",
+          "Do not overstay your visa",
+          "Must renew visa before expiration date"
+        ]
+      },
+      "contact": {
+        "title": "6. Contact & Additional Information",
+        "items": [
+          {
+            "name": "Korea Immigration Service (HiKorea)",
+            "link": "www.hikorea.go.kr",
+            "extra": "or Immigration Contact Center ☎ 1345"
+          },
+          {
+            "name": "Royal Thai Embassy, Seoul",
+            "link": null,
+            "extra": null
+          },
+          {
+            "name": "TSAK – Thai Students Association in the Republic of Korea",
+            "link": null,
+            "extra": null
+          }
+        ],
+        "disclaimer": {
+          "label": "Note",
+          "text": "Information on this page is prepared as a preliminary guide. It may change according to Korean government policies. Visa applicants should verify the latest information from official agencies before proceeding."
+        }
+      }
+    },
+    "ui": {
+      "shareArticle": "Share"
+    }
+  }
