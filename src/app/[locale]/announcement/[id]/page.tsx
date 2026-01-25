@@ -8,82 +8,37 @@ import thContent from "@/locales/announcement/th.json";
 
 type Locale = "en" | "th";
 
+type RelatedLink = {
+  id: number;
+  name: string;
+  url: string;
+  order: number;
+};
+
+type Semester = {
+  code: string;
+  display_name: string;
+};
+
+type Announcement = {
+  id: string;
+  date: string;
+  semester: Semester;
+  department: string;
+  title: string;
+  content: string;
+  views: number;
+  related_links?: RelatedLink[];
+};
+
+
 const contentMap = {
   en: enContent,
   th: thContent,
 };
 
-//to be implementd :
-const announcements: Record<string, {
-  id: string;
-  date: string;
-  semester: string;
-  department: string;
-  title: string;
-  content: string;
-  views: number;
-  relatedLinks?: { name: string; url: string }[];
-}> = {
-  "1": {
-    id: "1",
-    date: "2025-04-02",
-    semester: "Spring 2025",
-    department: "ฝ่ายบริหาร",
-    title: "คำแถลงแสดงความเสียใจต่อเหตุการณ์ไฟป่าในพื้นที่ภาคตะวันออกเฉียงใต้",
-    content: `สมาคมนักเรียนไทยในสาธารณรัฐเกาหลี (TSAK) ขอแสดงความเสียใจอย่างสุดซึ้งต่อเหตุการณ์ไฟป่าที่เกิดขึ้นในพื้นที่ภาคตะวันออกเฉียงใต้ของประเทศไทย
-
-เราขอส่งกำลังใจไปยังผู้ประสบภัยทุกท่าน รวมถึงเจ้าหน้าที่และอาสาสมัครที่กำลังปฏิบัติหน้าที่อย่างเต็มกำลัง
-
-สมาคมฯ พร้อมให้การสนับสนุนและช่วยเหลือตามความเหมาะสม หากสมาชิกท่านใดต้องการข้อมูลเพิ่มเติมหรือความช่วยเหลือ สามารถติดต่อได้ที่ช่องทางประชาสัมพันธ์ของสมาคมฯ
-
-ด้วยความเสียใจอย่างสุดซึ้ง
-คณะกรรมการบริหาร TSAK`,
-    views: 1250,
-    relatedLinks: [
-      { name: "แบบฟอร์มแจ้งความช่วยเหลือ", url: "https://forms.google.com/example1" },
-      { name: "ข้อมูลการบริจาค", url: "https://example.com/donate" },
-      { name: "ติดต่อฝ่ายประชาสัมพันธ์", url: "https://facebook.com/thaistudentkorea" },
-    ],
-  },
-  "2": {
-    id: "2",
-    date: "2025-04-02",
-    semester: "Spring 2025",
-    department: "ฝ่ายบริหาร",
-    title: "คำแถลงแสดงความเสียใจต่อเหตุการณ์ไฟป่าในพื้นที่ภาคตะวันออกเฉียงใต้",
-    content: `สมาคมนักเรียนไทยในสาธารณรัฐเกาหลี (TSAK) ขอแสดงความเสียใจอย่างสุดซึ้งต่อเหตุการณ์ไฟป่าที่เกิดขึ้นในพื้นที่ภาคตะวันออกเฉียงใต้ของประเทศไทย
-
-เราขอส่งกำลังใจไปยังผู้ประสบภัยทุกท่าน รวมถึงเจ้าหน้าที่และอาสาสมัครที่กำลังปฏิบัติหน้าที่อย่างเต็มกำลัง`,
-    views: 890,
-  },
-  "3": {
-    id: "3",
-    date: "2025-03-15",
-    semester: "Spring 2025",
-    department: "TSAK",
-    title: "ประกาศรับสมัครทุนการศึกษาประจำปี 2025",
-    content: `ฝ่ายวิชาการ TSAK ขอประกาศเปิดรับสมัครทุนการศึกษาประจำปี 2025
-
-คุณสมบัติผู้สมัคร:
-- เป็นสมาชิก TSAK
-- กำลังศึกษาในระดับปริญญาตรีหรือสูงกว่า
-- มีผลการเรียนดี
-
-เอกสารที่ต้องใช้:
-1. ใบสมัคร
-2. สำเนาบัตรนักศึกษา
-3. ใบแสดงผลการเรียน
-
-กำหนดรับสมัคร: 15 มีนาคม - 30 เมษายน 2025
-
-สอบถามข้อมูลเพิ่มเติมได้ที่ฝ่ายวิชาการ TSAK`,
-    views: 2340,
-    relatedLinks: [
-      { name: "ใบสมัครทุนการศึกษา", url: "https://forms.google.com/scholarship" },
-      { name: "รายละเอียดทุนการศึกษา", url: "https://tsak.org/scholarship-details" },
-    ],
-  },
-};
+// API Configuration
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 function ShareButtons({ title, locale }: { title: string; locale: string }) {
   const [copied, setCopied] = useState(false);
@@ -187,7 +142,7 @@ function RelatedLinks({
   links, 
   locale 
 }: { 
-  links: { name: string; url: string }[]; 
+  links: RelatedLink[]; 
   locale: string;
 }) {
   if (!links || links.length === 0) return null;
@@ -201,9 +156,9 @@ function RelatedLinks({
         </h3>
       </div>
       <div className="flex flex-wrap gap-3">
-        {links.map((link, index) => (
+        {links.map((link) => (
           <a
-            key={index}
+            key={link.id}
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
@@ -225,6 +180,10 @@ export default function AnnouncementDetailPage({
 }) {
   const [locale, setLocale] = useState<Locale>("th");
   const [id, setId] = useState<string>("");
+  const [announcement, setAnnouncement] = useState<Announcement | null>(null);
+  const [relatedAnnouncements, setRelatedAnnouncements] = useState<Announcement[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
     params.then((p) => {
@@ -233,8 +192,50 @@ export default function AnnouncementDetailPage({
     });
   }, [params]);
 
+  // Fetch announcement details
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchAnnouncement = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        // Fetch main announcement (this will increment view count)
+        const response = await fetch(`${API_BASE}/api/announcements/${id}/?locale=${locale}`);
+        
+        if (!response.ok) {
+          if (response.status === 404) {
+            throw new Error('Announcement not found');
+          }
+          throw new Error('Failed to fetch announcement');
+        }
+
+        const data = await response.json();
+        setAnnouncement(data);
+
+        // Fetch related announcements
+        try {
+          const relatedResponse = await fetch(`${API_BASE}/api/announcements/${id}/related/?locale=${locale}`);
+          if (relatedResponse.ok) {
+            const relatedData = await relatedResponse.json();
+            setRelatedAnnouncements(relatedData.slice(0, 2));
+          }
+        } catch (err) {
+          console.error('Failed to fetch related announcements:', err);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+        setAnnouncement(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAnnouncement();
+  }, [id, locale]);
+
   const t = contentMap[locale]?.detail;
-  const announcement = announcements[id];
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -245,8 +246,35 @@ export default function AnnouncementDetailPage({
     });
   };
 
+  const departmentMap: Record<Locale, Record<string, string>> = {
+    th: {
+      tsak: 'TSAK',
+      executive: 'ฝ่ายบริหาร',
+      documentation: 'ฝ่ายเอกสาร',
+      accounting: 'ฝ่ายบัญชีและการเงิน',
+      liaison: 'ฝ่ายประสานงาน',
+      pr: 'ฝ่ายประชาสัมพันธ์',
+      it: 'ฝ่ายเทคโนโลยีสารสนเทศ',
+      events: 'ฝ่ายกิจกรรม',
+    },
+    en: {
+      tsak: 'TSAK',
+      executive: 'Executive',
+      documentation: 'Documentation',
+      accounting: 'Accounting & Finance',
+      liaison: 'Liaison',
+      pr: 'Public Relations',
+      it: 'IT Supports',
+      events: 'Events',
+    },
+  };
+
+  const getDepartmentDisplay = (dept: string) => {
+    return departmentMap[locale]?.[dept] || dept;
+  };
+
   // Loading state
-  if (!id) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#2C3985]"></div>
@@ -254,8 +282,8 @@ export default function AnnouncementDetailPage({
     );
   }
 
-  // Not found state
-  if (!announcement) {
+  // Error or Not found state
+  if (error || !announcement) {
     return (
       <div className="min-h-screen bg-white">
         <main className="max-w-4xl mx-auto px-6 py-20">
@@ -266,7 +294,7 @@ export default function AnnouncementDetailPage({
               </svg>
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-2">{t?.notFound}</h1>
-            <p className="text-gray-500 mb-8">{t?.notFoundDesc}</p>
+            <p className="text-gray-500 mb-8">{error || t?.notFoundDesc}</p>
             <Link
               href={`/${locale}/announcement`}
               className="inline-flex items-center gap-2 px-6 py-3 bg-[#2C3985] text-white rounded-full font-medium hover:bg-[#1e2a5e] transition-colors"
@@ -298,10 +326,10 @@ export default function AnnouncementDetailPage({
           <div className="flex flex-wrap gap-2 mb-4">
             <span className="bg-[#FFFCDD]/20 text-[#FFFCDD] text-sm px-3 py-1 rounded-full flex items-center gap-1">
               <Building className="w-4 h-4" />
-              {announcement.department}
+              {getDepartmentDisplay(announcement.department)}
             </span>
             <span className="bg-[#FFFCDD]/20 text-[#FFFCDD] text-sm px-3 py-1 rounded-full">
-              {announcement.semester}
+              {announcement.semester.display_name}
             </span>
           </div>
 
@@ -321,10 +349,8 @@ export default function AnnouncementDetailPage({
         </div>
       </div>
 
-
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
-
         {/* Article Content */}
         <article className="bg-white rounded-2xl p-6 sm:p-8 mb-6">
           {announcement.content.split("\n").map((paragraph, idx) => (
@@ -335,32 +361,32 @@ export default function AnnouncementDetailPage({
         </article>
 
         {/* Related Links Section */}
-        {announcement.relatedLinks && announcement.relatedLinks.length > 0 && (
-          <RelatedLinks links={announcement.relatedLinks} locale={locale} />
+        {announcement.related_links && announcement.related_links.length > 0 && (
+          <RelatedLinks links={announcement.related_links} locale={locale} />
         )}
 
         {/* Share Buttons */}
         <div className="flex justify-end mb-8">
-            <ShareButtons title={announcement.title} locale={locale}/>
+          <ShareButtons title={announcement.title} locale={locale} />
         </div>
 
         {/* Related Announcements */}
-        <section className="mt-8">
-          <h2 className="text-[#2C3985] text-xl font-semibold mb-6">
-            {t?.otherAnnouncements}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {Object.values(announcements)
-              .filter((a) => a.id !== id)
-              .slice(0, 2)
-              .map((item) => (
+        {relatedAnnouncements.length > 0 && (
+          <section className="mt-8">
+            <h2 className="text-[#2C3985] text-xl font-semibold mb-6">
+              {t?.otherAnnouncements}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {relatedAnnouncements.map((item) => (
                 <Link
                   key={item.id}
                   href={`/${locale}/announcement/${item.id}`}
                   className="group bg-white rounded-2xl shadow-lg p-5 hover:shadow-xl transition-all"
                 >
                   <div className="flex items-center gap-2 text-xs text-gray-500 mb-2">
-                    <span className="px-2 py-0.5 bg-gray-100 rounded-full">{item.department}</span>
+                    <span className="px-2 py-0.5 bg-gray-100 rounded-full">
+                      {getDepartmentDisplay(item.department)}
+                    </span>
                     <span>{formatDate(item.date)}</span>
                   </div>
                   <h3 className="font-semibold text-[#2C3985] group-hover:text-[#A51D2C] transition-colors line-clamp-2">
@@ -368,9 +394,9 @@ export default function AnnouncementDetailPage({
                   </h3>
                 </Link>
               ))}
-          </div>
-        </section>
-
+            </div>
+          </section>
+        )}
 
         {/* Back Button */}
         <div className="text-center mt-10">

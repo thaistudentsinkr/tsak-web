@@ -8,35 +8,30 @@ import thContent from "@/locales/announcement/th.json";
 
 type Locale = "en" | "th";
 
+type Semester = {
+  code: string;
+  display_name: string;
+};
+
 type Announcement = {
   id: string;
   date: string;
-  semester: string;
+  semester: Semester;
   department: string;
   title: string;
   views: number;
 };
+
 
 const content = {
   en: enContent,
   th: thContent,
 };
 
-// Mock data
-const announcements: Announcement[] = [
-  {
-    id: "1",
-    date: "2025-04-02",
-    semester: "Spring 2025",
-    department: "ฝ่ายบริหาร",
-    title: "คำแถลงแสดงความเสียใจต่อเหตุการณ์ไฟป่าในพื้นที่ภาคตะวันออกเฉียงใต้...",
-    views: 1250,
-  },
-];
+// API Configuration
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-const semesters = ["All", "Spring 2025", "Fall 2024", "Spring 2024"];
-const departments = ["TSAK", "ฝ่ายบริหาร", "ฝ่ายเอกสาร", "ฝ่ายบัญชีและการเงิน", "ฝ่ายประสานงาน", "ฝ่ายประชาสัมพันธ์", "ฝ่ายเทคโนโลยีสารสนเทศ","ฝ่ายกิจกรรม"];
-// ภาษาอังกฤ​ษ​ departments = ["TSAK", "Executive Board", "Documentation", "Accounting", "Liaison", "Public Relations", "IT","Events"];
+const departments = ["All", "tsak", "executive", "documentation", "accounting", "liaison", "pr", "it", "events"];
 const ITEMS_PER_PAGE = 10;
 
 export default function AnnouncementPage({
@@ -51,52 +46,133 @@ export default function AnnouncementPage({
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
   const [selectedSemester, setSelectedSemester] = useState("All");
+  const [semesters, setSemesters] = useState<Semester[]>([]);
   const [selectedDepartment, setSelectedDepartment] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState<"date" | "views">("date");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
+  // Data states
+  const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [totalCount, setTotalCount] = useState(0);
+
   // Resolve locale from params
   useEffect(() => {
     params.then((p) => setLocale(p.locale || "th"));
   }, [params]);
 
-  // Filter and sort announcements
-  const filteredAnnouncements = useMemo(() => {
-    let filtered = announcements.filter((item) => {
-      if (dateFrom && new Date(item.date) < new Date(dateFrom)) return false;
-      if (dateTo && new Date(item.date) > new Date(dateTo)) return false;
-      if (selectedSemester !== "All" && item.semester !== selectedSemester) return false;
-      if (selectedDepartment !== "All" && item.department !== selectedDepartment) return false;
-      if (searchQuery && !item.title.toLowerCase().includes(searchQuery.toLowerCase())) return false;
-      return true;
-    });
+  // Fetch announcements from Django backend
+  useEffect(() => {
+    const fetchAnnouncements = async () => {
+      setLoading(true);
+      setError(null);
+      
+      try {
+        const queryParams = new URLSearchParams({
+          locale: locale,
+          page: currentPage.toString(),
+        });
 
-    // Sort
-    filtered.sort((a, b) => {
-      if (sortBy === "date") {
-        const dateA = new Date(a.date).getTime();
-        const dateB = new Date(b.date).getTime();
-        return sortOrder === "desc" ? dateB - dateA : dateA - dateB;
-      } else {
-        return sortOrder === "desc" ? b.views - a.views : a.views - b.views;
+        if (dateFrom) queryParams.append('date_from', dateFrom);
+        if (dateTo) queryParams.append('date_to', dateTo);
+        if (selectedSemester !== 'All') queryParams.append('semester', selectedSemester);
+        if (selectedDepartment !== 'All') queryParams.append('department', selectedDepartment);
+        if (searchQuery) queryParams.append('search', searchQuery);
+        queryParams.append('sort_by', sortBy);
+        queryParams.append('sort_order', sortOrder);
+
+        const response = await fetch(`${API_BASE}/api/announcements/?${queryParams}`);
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch announcements');
+        }
+
+        const data = await response.json();
+        
+        // Handle paginated response
+        if (data.results) {
+          setAnnouncements(data.results);
+          setTotalCount(data.count || 0);
+        } else {
+          // Handle non-paginated response
+          setAnnouncements(data);
+          setTotalCount(data.length);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+        setAnnouncements([]);
+      } finally {
+        setLoading(false);
       }
-    });
+    };
 
-    return filtered;
-  }, [dateFrom, dateTo, selectedSemester, selectedDepartment, searchQuery, sortBy, sortOrder]);
+    fetchAnnouncements();
+  }, [locale, currentPage, dateFrom, dateTo, selectedSemester, selectedDepartment, searchQuery, sortBy, sortOrder]);
 
-  // Pagination
-  const totalPages = Math.ceil(filteredAnnouncements.length / ITEMS_PER_PAGE);
-  const paginatedAnnouncements = filteredAnnouncements.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  useEffect(() => {
+    const fetchSemesters = async () => {
+      try {
+        const res = await fetch(
+          `${API_BASE}/api/announcements/filters/?locale=${locale}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch semesters");
+
+        const data = await res.json();
+        setSemesters(data.semesters);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchSemesters();
+  }, [locale]);
+
+  // Calculate total pages
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     return `${date.getDate()}. ${String(date.getMonth() + 1).padStart(2, "0")}. ${date.getFullYear()}`;
+  };
+
+  const getDepartmentDisplay = (dept: string) => {
+    const deptMap: Record<Locale, Record<string, string>> = {
+      th: {
+        tsak: 'TSAK',
+        executive: 'ฝ่ายบริหาร',
+        documentation: 'ฝ่ายเอกสาร',
+        accounting: 'ฝ่ายบัญชีและการเงิน',
+        liaison: 'ฝ่ายประสานงาน',
+        pr: 'ฝ่ายประชาสัมพันธ์',
+        it: 'ฝ่ายเทคโนโลยีสารสนเทศ',
+        events: 'ฝ่ายกิจกรรม',
+      },
+      en: {
+        tsak: 'TSAK',
+        executive: 'Executive Board',
+        documentation: 'Documentation',
+        accounting: 'Accounting',
+        liaison: 'Liaison',
+        pr: 'Public Relationas',
+        it: 'IT Support',
+        events: 'Events',
+      },
+    };
+
+    return deptMap[locale][dept] || dept;
+  };
+
+
+  const getSemesterDisplay = (sem: string) => {
+    const semMap: Record<string, string> = {
+      'spring_2025': 'Spring 2025',
+      'fall_2024': 'Fall 2024',
+      'spring_2024': 'Spring 2024',
+    };
+    return semMap[sem] || sem;
   };
 
   return (
@@ -144,18 +220,16 @@ export default function AnnouncementPage({
               <label className="text-sm text-gray-600">{t.filters.semester}</label>
               <select
                 value={selectedSemester}
-                onChange={(e) => {
-                  setSelectedSemester(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] bg-white"
+                onChange={(e) => setSelectedSemester(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:border-[#A51D2C] bg-white min-w-[150px]"
               >
                 {semesters.map((sem) => (
-                  <option key={sem} value={sem}>
-                    {sem === "All" ? t.filters.all : sem}
+                  <option key={sem.code} value={sem.code}>
+                    {sem.code === "All" ? t.filters.all : sem.display_name}
                   </option>
                 ))}
               </select>
+
             </div>
 
             {/* Department */}
@@ -171,7 +245,7 @@ export default function AnnouncementPage({
               >
                 {departments.map((dept) => (
                   <option key={dept} value={dept}>
-                    {dept === "All" ? t.filters.all : dept}
+                    {dept === "All" ? t.filters.all : getDepartmentDisplay(dept)}
                   </option>
                 ))}
               </select>
@@ -227,73 +301,89 @@ export default function AnnouncementPage({
           </div>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A51D2C]"></div>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+            {locale === "th" ? "เกิดข้อผิดพลาด: " : "Error: "}{error}
+          </div>
+        )}
+
         {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="bg-[#A51D2C] text-white">
-                <th className="px-4 py-3 text-left text-sm font-medium rounded-tl-3xl w-[100px]">
-                  {t.table.headers[0]}
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium w-[110px]">
-                  {t.table.headers[1]}
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium w-[120px]">
-                  {t.table.headers[2]}
-                </th>
-                <th className="px-4 py-3 text-left text-sm font-medium">
-                  {t.table.headers[3]}
-                </th>
-                <th className="px-4 py-3 text-center text-sm font-medium rounded-tr-3xl w-[80px]">
-                  <Eye className="w-4 h-4 mx-auto" />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedAnnouncements.length > 0 ? (
-                paginatedAnnouncements.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
-                  >
-                    <td className="px-4 py-4 text-sm text-gray-700">
-                      {formatDate(item.date)}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-gray-700">
-                      {item.semester}
-                    </td>
-                    <td className="px-4 py-4 text-sm text-gray-700">
-                      {item.department}
-                    </td>
-                    <td className="px-4 py-4 text-sm">
-                      <Link
-                        href={`/${locale}/announcement/${item.id}`}
-                        className="text-gray-700 hover:text-[#A51D2C] hover:underline transition-colors"
-                      >
-                        {item.title}
-                      </Link>
-                    </td>
-                    <td className="px-4 py-4 text-sm text-gray-500 text-center">
-                      <span className="flex items-center justify-center gap-1">
-                        <Eye className="w-3 h-3" />
-                        {item.views.toLocaleString()}
-                      </span>
+        {!loading && !error && (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-[#A51D2C] text-white">
+                  <th className="px-4 py-3 text-left text-sm font-medium rounded-tl-3xl w-[100px]">
+                    {t.table.headers[0]}
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium w-[110px]">
+                    {t.table.headers[1]}
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium w-[120px]">
+                    {t.table.headers[2]}
+                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-medium">
+                    {t.table.headers[3]}
+                  </th>
+                  <th className="px-4 py-3 text-center text-sm font-medium rounded-tr-3xl w-[80px]">
+                    <Eye className="w-4 h-4 mx-auto" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {announcements.length > 0 ? (
+                  announcements.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="border-b border-gray-200 hover:bg-gray-50 transition-colors"
+                    >
+                      <td className="px-4 py-4 text-sm text-gray-700">
+                        {formatDate(item.date)}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-700">
+                        {item.semester.display_name}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-700">
+                        {getDepartmentDisplay(item.department)}
+                      </td>
+                      <td className="px-4 py-4 text-sm">
+                        <Link
+                          href={`/${locale}/announcement/${item.id}`}
+                          className="text-gray-700 hover:text-[#A51D2C] hover:underline transition-colors"
+                        >
+                          {item.title}
+                        </Link>
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-500 text-center">
+                        <span className="flex items-center justify-center gap-1">
+                          <Eye className="w-3 h-3" />
+                          {item.views.toLocaleString()}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="px-4 py-8 text-center text-gray-500">
+                      {t.table.noResults}
                     </td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-gray-500">
-                    {t.table.noResults}
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
 
         {/* Pagination */}
-        {totalPages > 1 && (
+        {totalPages > 1 && !loading && (
           <div className="flex items-center justify-center gap-2 mt-8">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
