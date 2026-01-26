@@ -254,7 +254,7 @@ export default function Home() {
                         m.working === true
                     )
                     .map((member) => (
-                      <div key={member.id} className="w-full sm:w-[calc(50%-1rem)]">
+                      <div key={member.id} className="flex flex-wrap gap-4 sm:gap-8 justify-center">
                         <MemberCard
                           member={{
                             ...member,
@@ -266,11 +266,11 @@ export default function Home() {
                 </div>
 
                 {/* All Department Heads - 2 per row */}
-                <div className="flex flex-wrap justify-center gap-6 sm:gap-8 max-w-4xl mx-auto">
+                <div className="flex flex-col sm:flex-row justify-center gap-6 sm:gap-8 max-w-4xl mx-auto">
                   {memberData
                     .filter((m) => m.position === "head" && m.working === true)
                     .map((member) => (
-                      <div key={member.id} className="w-full sm:w-[calc(50%-1rem)]">
+                      <div key={member.id} className="flex flex-wrap gap-4 sm:gap-8 justify-center">
                         <MemberCard
                           member={{
                             ...member,

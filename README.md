@@ -15,6 +15,7 @@ python manage.py makemigrations members
 python manage.py makemigrations events
 python manage.py makemigrations announcements
 python manage.py makemigrations scholarships
+python manage.py makemigrations experiences
 python manage.py migrate
 ```
 This is only for first time running. For later migration after changing model schema in backend, only run

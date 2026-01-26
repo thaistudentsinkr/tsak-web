@@ -122,14 +122,59 @@ type PageProps = {
 };
 
 export default async function ExperienceDetailPage({ params }: PageProps) {
-  const { locale, id } = await params;
+  const { locale: rawLocale, id } = await params;
+  const locale: Locale = rawLocale === "en" ? "en" : "th";
   const t = messages[locale] || messages.th;
   
-  const experience = t.experiences.find(exp => exp.id === id);
-  
-  if (!experience) {
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+  const res = await fetch(`${API_BASE}/api/experiences/${id}/?lang=${locale}`);
+  if (!res.ok) {
     notFound();
   }
+  const apiExperience: ExperienceAPI = await res.json();
+  type Locale = "en" | "th";
+
+  type LocalizedField<T> = {
+    en?: T;
+    th?: T;
+  };
+
+  type ExperienceAPI = Omit<
+    Experience,
+    | "majorPros"
+    | "majorCons"
+    | "uniPros"
+    | "uniCons"
+    | "recommendedCourses"
+    | "achievements"
+    | "preparation"
+  > & {
+    major_pros?: LocalizedField<string[]>;
+    major_cons?: LocalizedField<string[]>;
+    uni_pros?: LocalizedField<string[]>;
+    uni_cons?: LocalizedField<string[]>;
+    recommended_courses?: LocalizedField<
+      { name: string; professor?: string; reason: string }[]
+    >;
+    achievements?: LocalizedField<
+      { title: string; description: string; type: "achievement" | "project" | "extracurricular" }[]
+    >;
+    preparation?: LocalizedField<string[]>;
+  };
+  const experience: Experience = {
+    ...apiExperience,
+
+    majorPros: apiExperience.major_pros?.[locale] ?? [],
+    majorCons: apiExperience.major_cons?.[locale] ?? [],
+    uniPros: apiExperience.uni_pros?.[locale] ?? [],
+    uniCons: apiExperience.uni_cons?.[locale] ?? [],
+
+    recommendedCourses: apiExperience.recommended_courses?.[locale] ?? [],
+    achievements: apiExperience.achievements?.[locale] ?? [],
+    preparation: apiExperience.preparation?.[locale] ?? [],
+  };
+
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -251,7 +296,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
                 {t.fields.majorPros}
               </h3>
               <ul className="space-y-2">
-                {experience.majorPros.map((pro, idx) => (
+                {(Array.isArray(experience.majorPros) ? experience.majorPros : []).map((pro, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
                     <span className="text-gray-700">{pro}</span>
@@ -267,7 +312,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
                 {t.fields.majorCons}
               </h3>
               <ul className="space-y-2">
-                {experience.majorCons.map((con, idx) => (
+                {(Array.isArray(experience.majorCons) ? experience.majorCons : []).map((con, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="w-2 h-2 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
                     <span className="text-gray-700">{con}</span>
@@ -293,7 +338,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
                 {t.fields.uniPros}
               </h3>
               <ul className="space-y-2">
-                {experience.uniPros.map((pro, idx) => (
+                {(Array.isArray(experience.uniPros) ? experience.uniPros : []).map((pro, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0"></span>
                     <span className="text-gray-700">{pro}</span>
@@ -309,7 +354,7 @@ export default async function ExperienceDetailPage({ params }: PageProps) {
                 {t.fields.uniCons}
               </h3>
               <ul className="space-y-2">
-                {experience.uniCons.map((con, idx) => (
+                {(Array.isArray(experience.uniCons) ? experience.uniCons : []).map((con, idx) => (
                   <li key={idx} className="flex items-start gap-2">
                     <span className="w-2 h-2 rounded-full bg-red-500 mt-2 flex-shrink-0"></span>
                     <span className="text-gray-700">{con}</span>
