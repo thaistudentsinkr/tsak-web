@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useMemo, use } from "react";
 import { Users, Filter, X, GraduationCap, Building2, Globe, ChevronRight } from "lucide-react";
+import { useEffect } from "react";
 
 import enMessages from "@/locales/community/experience/en.json";
 import thMessages from "@/locales/community/experience/th.json";
@@ -88,6 +89,9 @@ const degreeColors: Record<DegreeType, { bg: string; text: string }> = {
   exchange: { bg: "bg-green-100", text: "text-green-800" },
 };
 
+// API Configuration
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 type FieldOfStudy = "all" | "science" | "arts" | "business" | "medicine" | "social-science";
 
 type PageProps = {
@@ -97,7 +101,22 @@ type PageProps = {
 export default function ExperiencePage({ params }: PageProps) {
   const { locale } = use(params);
   const t = messages[locale] || messages.th;
+  const [experiences, setExperiences] = useState<Experience[]>([]);
 
+  useEffect(() => {
+    const fetchExperiences = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/experiences?lang=${locale}`);
+        if (!res.ok) throw new Error("Failed to fetch experiences");
+        const data = await res.json();
+        setExperiences(data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchExperiences();
+  }, [locale]);
   // Filter states
   const [selectedField, setSelectedField] = useState<FieldOfStudy>("all");
   const [selectedDegree, setSelectedDegree] = useState<DegreeType | "all">("all");
@@ -106,14 +125,17 @@ export default function ExperiencePage({ params }: PageProps) {
 
   // Filter experiences
   const filteredExperiences = useMemo(() => {
-    return t.experiences.filter((exp) => {
+    if (!Array.isArray(experiences)) return [];
+    return experiences.filter((exp) => {
       const matchesField = selectedField === "all" || exp.fieldOfStudy === selectedField;
       const matchesDegree = selectedDegree === "all" || exp.degree === selectedDegree;
       const matchesLang = selectedLanguage === "all" || exp.curriculumLanguage === selectedLanguage;
       
       return matchesField && matchesDegree && matchesLang;
     });
-  }, [t.experiences, selectedField, selectedDegree, selectedLanguage]);
+  }, [experiences, selectedField, selectedDegree, selectedLanguage]);
+
+
 
   const clearFilters = () => {
     setSelectedField("all");

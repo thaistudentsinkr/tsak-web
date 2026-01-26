@@ -3,5 +3,5 @@ from .views import ExperienceListView, ExperienceDetailView
 
 urlpatterns = [
     path("", ExperienceListView.as_view(), name="experience-list"),
-    path("<uuid:id>/", ExperienceDetailView.as_view(), name="experience-detail"),
+    path("<int:id>/", ExperienceDetailView.as_view(), name="experience-detail"),
 ]
