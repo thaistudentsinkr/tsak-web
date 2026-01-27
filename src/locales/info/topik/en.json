@@ -2,7 +2,7 @@
     "title": "TOPIK Exam Guide",
     "subtitle": "Test of Proficiency in Korean",
     "author": "TSAK",
-    "date": "2024-12-01",
+    "date": "2025-01-25",
     "introduction": "The Test of Proficiency in Korean (TOPIK) is a standardized test designed to measure the Korean language proficiency of non-native speakers. It is widely recognized by Korean universities, employers, and immigration authorities.",
     "officialWebsite": "Official Website",
     "visitTopik": "Visit TOPIK Official Site",
@@ -55,21 +55,21 @@
             "levels": "Level 1-2",
             "headers": ["Section", "Questions", "Time", "Score"],
             "rows": [
-              ["Listening (듣기)", "30 questions", "40 minutes", "100 points"],
-              ["Reading (읽기)", "30 questions", "50 minutes", "100 points"]
+              ["Listening (듣기)", "26 questions", "30 minutes", "200 points"],
+              ["Reading (읽기)", "26 questions", "40 minutes", "200 points"]
             ],
-            "total": "Total: 60 questions | 90 minutes | 200 points"
+            "total": "Total: 52 questions | 70 minutes | 400 points"
           },
           "topik2": {
             "title": "TOPIK II (Intermediate-Advanced)",
             "levels": "Level 3-6",
             "headers": ["Section", "Questions", "Time", "Score"],
             "rows": [
-              ["Listening (듣기)", "40 questions", "50 minutes", "100 points"],
-              ["Reading (읽기)", "40 questions", "60 minutes", "100 points"],
-              ["Writing (쓰기)", "2 questions", "50 minutes", "100 points"]
+              ["Listening (듣기)", "30 questions", "35 minutes", "200 points"],
+              ["Reading (읽기)", "30 questions", "40 minutes", "200 points"],
+              ["Writing (쓰기)", "3 questions", "50 minutes", "200 points"]
             ],
-            "total": "Total: 82 questions | 160 minutes | 300 points"
+            "total": "Total: 62 questions | 125 minutes | 600 points"
           }
         },
         "pbt": {
@@ -77,44 +77,24 @@
           "topik1": {
             "title": "TOPIK I (Beginner)",
             "levels": "Level 1-2",
-            "headers": ["Section", "Questions", "Time", "Score"],
+            "headers": ["Section", "Questions", "Score"],
             "rows": [
-              ["Listening (듣기)", "30 questions", "40 minutes", "100 points"],
-              ["Reading (읽기)", "40 questions", "60 minutes", "100 points"]
+              ["Listening (듣기)", "30 questions", "100 points"],
+              ["Reading (읽기)", "40 questions", "100 points"]
             ],
             "total": "Total: 70 questions | 100 minutes | 200 points"
           },
           "topik2": {
             "title": "TOPIK II (Intermediate-Advanced)",
             "levels": "Level 3-6",
-            "headers": ["Section", "Questions", "Time", "Score"],
+            "headers": ["Section", "Questions", "Score"],
             "rows": [
-              ["Listening (듣기)", "50 questions", "60 minutes", "100 points"],
-              ["Writing (쓰기)", "4 questions", "50 minutes", "100 points"],
-              ["Reading (읽기)", "50 questions", "70 minutes", "100 points"]
+              ["Listening (듣기)", "50 questions", "100 points"],
+              ["Writing (쓰기)", "4 questions","100 points"],
+              ["Reading (읽기)", "50 questions", "100 points"]
             ],
-            "total": "Total: 104 questions | 180 minutes | 300 points"
+            "total": "Total: 104 questions | 300 points"
           }
-        }
-      },
-      "scoring": {
-        "title": "Score & Level System",
-        "description": "TOPIK levels are determined by your total score. Here's how the scoring works:",
-        "topik1": {
-          "title": "TOPIK I Levels",
-          "levels": [
-            { "level": "Level 1", "score": "80-139 points", "description": "Basic everyday Korean, simple sentences" },
-            { "level": "Level 2", "score": "140-200 points", "description": "Daily conversations, basic public facility use" }
-          ]
-        },
-        "topik2": {
-          "title": "TOPIK II Levels",
-          "levels": [
-            { "level": "Level 3", "score": "120-149 points", "description": "Daily life without difficulty, paragraph writing" },
-            { "level": "Level 4", "score": "150-189 points", "description": "News comprehension, common idioms, work functions" },
-            { "level": "Level 5", "score": "190-229 points", "description": "Professional contexts, unfamiliar topics" },
-            { "level": "Level 6", "score": "230-300 points", "description": "Near-native fluency, professional/academic use" }
-          ]
         }
       },
       "pricing": {

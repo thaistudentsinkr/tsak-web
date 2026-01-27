@@ -357,61 +357,6 @@ export default async function TopikPage({
           </div>
         </section>
 
-        {/* Score & Level System */}
-        <section className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 mb-8">
-          <h2 className="text-2xl font-bold text-[#2C3985] mb-4">
-            {content.sections.scoring.title}
-          </h2>
-          <p className="text-gray-700 mb-6">
-            {content.sections.scoring.description}
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* TOPIK I Levels */}
-            <div className="bg-blue-50 rounded-xl p-5">
-              <h3 className="font-semibold text-[#2C3985] mb-4">
-                {content.sections.scoring.topik1.title}
-              </h3>
-              <div className="space-y-3">
-                {content.sections.scoring.topik1.levels.map((level, idx) => (
-                  <div key={idx} className="bg-white rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold text-[#2C3985]">
-                        {level.level}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {level.score}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">{level.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* TOPIK II Levels */}
-            <div className="bg-purple-50 rounded-xl p-5">
-              <h3 className="font-semibold text-[#2C3985] mb-4">
-                {content.sections.scoring.topik2.title}
-              </h3>
-              <div className="space-y-3">
-                {content.sections.scoring.topik2.levels.map((level, idx) => (
-                  <div key={idx} className="bg-white rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold text-[#2C3985]">
-                        {level.level}
-                      </span>
-                      <span className="text-sm text-gray-500">
-                        {level.score}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600">{level.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* Pricing */}
         <section className="bg-white rounded-2xl shadow-sm p-6 sm:p-8 mb-8">
