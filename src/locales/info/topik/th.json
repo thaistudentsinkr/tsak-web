@@ -2,7 +2,7 @@
     "title": "การสอบ TOPIK",
     "subtitle": "Test of Proficiency in Korean",
     "author": "TSAK",
-    "date": "2024-12-01",
+    "date": "2025-01-25",
     "introduction": "TOPIK (Test of Proficiency in Korean) คือการสอบวัดระดับความสามารถภาษาเกาหลีมาตรฐานสำหรับผู้ที่ไม่ได้ใช้ภาษาเกาหลีเป็นภาษาแม่ ได้รับการยอมรับจากมหาวิทยาลัย นายจ้าง และหน่วยงานตรวจคนเข้าเมืองของเกาหลี",
     "officialWebsite": "เว็บไซต์ทางการ",
     "visitTopik": "ไปยังเว็บไซต์ TOPIK",
@@ -47,74 +47,54 @@
         ]
       },
       "structure": {
-        "title": "เปรียบเทียบโครงสร้างข้อสอบ",
+        "title": "Exam Structure Comparison",
         "ibt": {
-          "title": "TOPIK IBT (สอบด้วยคอมพิวเตอร์)",
+          "title": "TOPIK IBT (Computer-based)",
           "topik1": {
-            "title": "TOPIK I (ระดับต้น)",
-            "levels": "ระดับ 1-2",
-            "headers": ["ส่วน", "จำนวนข้อ", "เวลา", "คะแนน"],
+            "title": "TOPIK I (Beginner)",
+            "levels": "Level 1-2",
+            "headers": ["Section", "Questions", "Time", "Score"],
             "rows": [
-              ["การฟัง (듣기)", "30 ข้อ", "40 นาที", "100 คะแนน"],
-              ["การอ่าน (읽기)", "30 ข้อ", "50 นาที", "100 คะแนน"]
+              ["Listening (듣기)", "26 questions", "30 minutes", "200 points"],
+              ["Reading (읽기)", "26 questions", "40 minutes", "200 points"]
             ],
-            "total": "รวม: 60 ข้อ | 90 นาที | 200 คะแนน"
+            "total": "Total: 52 questions | 70 minutes | 400 points"
           },
           "topik2": {
-            "title": "TOPIK II (ระดับกลาง-สูง)",
-            "levels": "ระดับ 3-6",
-            "headers": ["ส่วน", "จำนวนข้อ", "เวลา", "คะแนน"],
+            "title": "TOPIK II (Intermediate-Advanced)",
+            "levels": "Level 3-6",
+            "headers": ["Section", "Questions", "Time", "Score"],
             "rows": [
-              ["การฟัง (듣기)", "40 ข้อ", "50 นาที", "100 คะแนน"],
-              ["การอ่าน (읽기)", "40 ข้อ", "60 นาที", "100 คะแนน"],
-              ["การเขียน (쓰기)", "2 ข้อ", "50 นาที", "100 คะแนน"]
+              ["Listening (듣기)", "30 questions", "35 minutes", "200 points"],
+              ["Reading (읽기)", "30 questions", "40 minutes", "200 points"],
+              ["Writing (쓰기)", "3 questions", "50 minutes", "200 points"]
             ],
-            "total": "รวม: 82 ข้อ | 160 นาที | 300 คะแนน"
+            "total": "Total: 62 questions | 125 minutes | 600 points"
           }
         },
         "pbt": {
-          "title": "TOPIK PBT (สอบกระดาษ)",
+          "title": "TOPIK PBT (Paper-based)",
           "topik1": {
-            "title": "TOPIK I (ระดับต้น)",
-            "levels": "ระดับ 1-2",
-            "headers": ["ส่วน", "จำนวนข้อ", "เวลา", "คะแนน"],
+            "title": "TOPIK I (Beginner)",
+            "levels": "Level 1-2",
+            "headers": ["Section", "Questions", "Score"],
             "rows": [
-              ["การฟัง (듣기)", "30 ข้อ", "40 นาที", "100 คะแนน"],
-              ["การอ่าน (읽기)", "40 ข้อ", "60 นาที", "100 คะแนน"]
+              ["Listening (듣기)", "30 questions", "100 points"],
+              ["Reading (읽기)", "40 questions", "100 points"]
             ],
-            "total": "รวม: 70 ข้อ | 100 นาที | 200 คะแนน"
+            "total": "Total: 70 questions | 100 minutes | 200 points"
           },
           "topik2": {
-            "title": "TOPIK II (ระดับกลาง-สูง)",
-            "levels": "ระดับ 3-6",
-            "headers": ["ส่วน", "จำนวนข้อ", "เวลา", "คะแนน"],
+            "title": "TOPIK II (Intermediate-Advanced)",
+            "levels": "Level 3-6",
+            "headers": ["Section", "Questions", "Score"],
             "rows": [
-              ["การฟัง (듣기)", "50 ข้อ", "60 นาที", "100 คะแนน"],
-              ["การเขียน (쓰기)", "4 ข้อ", "50 นาที", "100 คะแนน"],
-              ["การอ่าน (읽기)", "50 ข้อ", "70 นาที", "100 คะแนน"]
+              ["Listening (듣기)", "50 questions", "100 points"],
+              ["Writing (쓰기)", "4 questions","100 points"],
+              ["Reading (읽기)", "50 questions", "100 points"]
             ],
-            "total": "รวม: 104 ข้อ | 180 นาที | 300 คะแนน"
+            "total": "Total: 104 questions | 300 points"
           }
-        }
-      },
-      "scoring": {
-        "title": "ระบบคะแนนและระดับ",
-        "description": "ระดับ TOPIK ถูกกำหนดโดยคะแนนรวมของคุณ นี่คือวิธีการให้คะแนน:",
-        "topik1": {
-          "title": "ระดับ TOPIK I",
-          "levels": [
-            { "level": "ระดับ 1", "score": "80-139 คะแนน", "description": "ภาษาเกาหลีพื้นฐานในชีวิตประจำวัน ประโยคง่ายๆ" },
-            { "level": "ระดับ 2", "score": "140-200 คะแนน", "description": "การสนทนาในชีวิตประจำวัน การใช้สิ่งอำนวยความสะดวกสาธารณะพื้นฐาน" }
-          ]
-        },
-        "topik2": {
-          "title": "ระดับ TOPIK II",
-          "levels": [
-            { "level": "ระดับ 3", "score": "120-149 คะแนน", "description": "ใช้ชีวิตประจำวันได้โดยไม่ลำบาก เขียนย่อหน้าได้" },
-            { "level": "ระดับ 4", "score": "150-189 คะแนน", "description": "เข้าใจข่าว สำนวนทั่วไป ทำงานได้" },
-            { "level": "ระดับ 5", "score": "190-229 คะแนน", "description": "บริบทมืออาชีพ หัวข้อที่ไม่คุ้นเคย" },
-            { "level": "ระดับ 6", "score": "230-300 คะแนน", "description": "ใกล้เคียงเจ้าของภาษา ใช้งานมืออาชีพ/วิชาการ" }
-          ]
         }
       },
       "pricing": {
