@@ -20,6 +20,7 @@ const DEPARTMENTS = [
 ] as const;
 
 type Department = (typeof DEPARTMENTS)[number];
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
 type Position = "president" | "vice_president" | "secretary" | "head" | "member" | "advisor";
 
@@ -77,7 +78,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchMembers() {
       try {
-        const res = await fetch("http://localhost:8000/api/members/");
+        const res = await fetch(`${API_BASE}/api/members/`);
         if (!res.ok) throw new Error("Failed to fetch members");
         const data = await res.json();
         setMemberData(data);

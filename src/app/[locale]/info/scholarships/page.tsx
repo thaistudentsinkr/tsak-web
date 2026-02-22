@@ -60,7 +60,7 @@ type PageProps = {
 };
 
 async function getScholarships() {
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+  const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
   try {
     const response = await fetch(`${BACKEND_URL}/api/scholarships/`, {
