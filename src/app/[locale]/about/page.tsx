@@ -5,9 +5,24 @@ type PageProps = {
   params: Promise<{ locale: string }>;
 };
 
+type AboutDict = {
+  associationName: string;
+  title: string;
+  titleTh: string;
+  history: string;
+  historyContent?: string;
+  whatWeDo: string;
+  whatWeDoContent?: string;
+  vision: string;
+  visionContent?: string;
+  logoMeaningContent?: string;
+};
+
 export default async function AboutPage({ params }: PageProps) {
   const { locale } = await params;
   const dict = getDictionary(locale);
+  const about = dict.about as AboutDict;
+
   const contact = [
     {
       text: "thaistudentsinkorea@gmail.com",
@@ -93,10 +108,10 @@ export default async function AboutPage({ params }: PageProps) {
               lineHeight: '15px'
             }}
           >
-            {dict.about.associationName.split('\n').map((line: string, index: number) => (
+            {about.associationName.split('\n').map((line: string, index: number) => (
               <span key={index}>
                 {line}
-                {index < dict.about.associationName.split('\n').length - 1 && <br />}
+                {index < about.associationName.split('\n').length - 1 && <br />}
               </span>
             ))}
           </div>
@@ -112,10 +127,10 @@ export default async function AboutPage({ params }: PageProps) {
       >
         <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4">
           <h1 className="text-[#A51D2C] text-3xl sm:text-4xl lg:text-6xl font-semibold text-center lg:text-left">
-            {dict.about.title}
+            {about.title}
           </h1>
           <h1 className="text-[#A51D2C] text-3xl sm:text-4xl lg:text-6xl font-semibold text-center lg:text-right">
-            {dict.about.titleTh}
+            {about.titleTh}
           </h1>
         </div>
       </div>
@@ -127,11 +142,11 @@ export default async function AboutPage({ params }: PageProps) {
           {/* History Section */}
           <section className="py-8 sm:py-12">
             <h2 className="text-[#2C3985] text-2xl sm:text-3xl lg:text-5xl font-semibold mb-6">
-              {dict.about.history}
+              {about.history}
             </h2>
-            {(dict.about as any).historyContent && (
+            {about.historyContent && (
               <p className="text-[#2C3985] text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                {(dict.about as any).historyContent}
+                {about.historyContent}
               </p>
             )}
           </section>
@@ -139,11 +154,11 @@ export default async function AboutPage({ params }: PageProps) {
           {/* What We Do Section */}
           <section className="py-8 sm:py-12">
             <h2 className="text-[#2C3985] text-2xl sm:text-3xl lg:text-5xl font-semibold mb-6">
-              {dict.about.whatWeDo}
+              {about.whatWeDo}
             </h2>
-            {(dict.about as any).whatWeDoContent && (
+            {about.whatWeDoContent && (
               <p className="text-[#2C3985] text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                {(dict.about as any).whatWeDoContent}
+                {about.whatWeDoContent}
               </p>
             )}
           </section>
@@ -151,11 +166,11 @@ export default async function AboutPage({ params }: PageProps) {
           {/* Vision Section */}
           <section className="py-8 sm:py-12">
             <h2 className="text-[#2C3985] text-2xl sm:text-3xl lg:text-5xl font-semibold mb-6">
-              {dict.about.vision}
+              {about.vision}
             </h2>
-            {(dict.about as any).visionContent && (
+            {about.visionContent && (
               <p className="text-[#2C3985] text-sm sm:text-base leading-relaxed whitespace-pre-line">
-                {(dict.about as any).visionContent}
+                {about.visionContent}
               </p>
             )}
           </section>
@@ -183,9 +198,9 @@ export default async function AboutPage({ params }: PageProps) {
 
               {/* Logo Description */}
               <div className="flex-1 max-w-xl">
-                {(dict.about as any).logoMeaningContent && (
+                {about.logoMeaningContent && (
                   <p className="text-[#2C3985] text-sm sm:text-base leading-relaxed whitespace-pre-line mb-4">
-                    {(dict.about as any).logoMeaningContent}
+                    {about.logoMeaningContent}
                   </p>
                 )}
                 <p className="text-[#2C3985] text-sm sm:text-base">

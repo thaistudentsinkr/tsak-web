@@ -9,6 +9,18 @@ type PageProps = {
   }>;
 };
 
+type Sponsor = {
+  id: string;
+  name: string;
+  name_en: string;
+  description: string;
+  description_en: string;
+  logo: string;
+  type: "embassy" | "partner" | "network" | "sponsor";
+  created_at: string;
+  updated_at: string;
+};
+
 type NetworkItem = {
   type: "network";
   id: string;
@@ -27,7 +39,7 @@ type SponsorItem = {
 
 type CTAItem = {
   type: "cta";
-  id: "cta";
+  id: string;
 };
 
 type GridItem = NetworkItem | SponsorItem | CTAItem;
@@ -56,12 +68,17 @@ function NetworkCTA({ href, title, subtitle, }: { href: string; title: string; s
   );
 }
 
-async function getSponsors() {
-  const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+async function getSponsors(): Promise<{
+  embassies: Sponsor[];
+  partners: Sponsor[];
+  sponsors: Sponsor[];
+  networks: Sponsor[];
+}> {
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
   try {
-    const response = await fetch(`${BACKEND_URL}/api/sponsors/`, {
-      cache: 'no-store', // or 'force-cache' for caching
+    const response = await fetch(`${API_BASE}/api/sponsors/`, {
+      cache: 'no-store',
     });
 
     if (!response.ok) {
@@ -70,24 +87,14 @@ async function getSponsors() {
 
     const data = await response.json();
 
-    // Transform logo URLs to include full backend URL
-    const transformSponsors = (sponsors: any[]) =>
-      sponsors.map(sponsor => ({
-        ...sponsor,
-        logo: sponsor.logo.startsWith('http')
-          ? sponsor.logo
-          : `${BACKEND_URL}${sponsor.logo}`
-      }));
-
     return {
-      embassies: transformSponsors(data.embassies || []),
-      partners: transformSponsors(data.partners || []),
-      sponsors: transformSponsors(data.sponsors || []),
-      networks: transformSponsors(data.networks || []),
+      embassies: data.embassies || [],
+      partners: data.partners || [],
+      sponsors: data.sponsors || [],
+      networks: data.networks || [],
     };
   } catch (error) {
     console.error('Error fetching sponsors:', error);
-    // Return empty data structure as fallback
     return {
       embassies: [],
       partners: [],
@@ -103,30 +110,34 @@ export default async function Home({ params }: PageProps) {
   const sponsorsData = await getSponsors();
   const isEnglish = locale === 'en';
 
-  // Helper function to get the appropriate name based on locale
-  const getName = (item: any) => {
+  const getName = (item: Sponsor) => {
     return isEnglish && item.name_en ? item.name_en : item.name;
   };
 
-  // Helper function to get the appropriate description based on locale
-  const getDescription = (item: any) => {
+  const getDescription = (item: Sponsor) => {
     return isEnglish && item.description_en ? item.description_en : item.description;
   };
 
   const sponsorGridItems: GridItem[] = [
-    ...sponsorsData.sponsors.map((s) => ({
-      ...s,
-      type: "sponsor" as const,
+    ...sponsorsData.sponsors.map((s): SponsorItem => ({
+      id: s.id,
+      name: s.name,
+      name_en: s.name_en,
+      logo: s.logo,
+      type: "sponsor",
     })),
-    { id: "cta-sponsor", type: "cta" as const },
+    { id: "cta-sponsor", type: "cta" },
   ];
 
   const networkGridItems: GridItem[] = [
-    ...sponsorsData.networks.map((n) => ({
-      ...n,
-      type: "network" as const,
+    ...sponsorsData.networks.map((n): NetworkItem => ({
+      id: n.id,
+      name: n.name,
+      name_en: n.name_en,
+      logo: n.logo,
+      type: "network",
     })),
-    { id: "cta-network", type: "cta" as const },
+    { id: "cta-network", type: "cta" },
   ];
 
   return (
@@ -193,7 +204,7 @@ export default async function Home({ params }: PageProps) {
                   ) : (
                     <NetworkCard
                       logo={item.logo}
-                      name={getName(item)}
+                      name={getName(item as Sponsor)}
                     />
                   )}
                 </div>
@@ -228,7 +239,7 @@ export default async function Home({ params }: PageProps) {
                   ) : (
                     <NetworkCard
                       logo={item.logo}
-                      name={getName(item)}
+                      name={getName(item as Sponsor)}
                     />
                   )}
                 </div>

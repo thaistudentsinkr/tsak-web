@@ -11,13 +11,13 @@ type PageProps = {
   params: Promise<{ locale: string }>;
 };
 
-function EligibilityModal({ 
-  isOpen, 
-  onClose, 
-  locale 
-}: { 
-  isOpen: boolean; 
-  onClose: () => void; 
+function EligibilityModal({
+  isOpen,
+  onClose,
+  locale
+}: {
+  isOpen: boolean;
+  onClose: () => void;
   locale: string;
 }) {
   useEffect(() => {
@@ -35,7 +35,7 @@ function EligibilityModal({
 
   const newMem = getDictionary(locale).memberRegister;
   const regEligi = newMem.eligibility;
-  const eligibilityItems =[
+  const eligibilityItems = [
     {
       icon: GraduationCap,
       title: regEligi.degreeProgram.title,
@@ -48,7 +48,7 @@ function EligibilityModal({
     },
     {
       icon: Repeat,
-      title:regEligi.shortTermExchange.title,
+      title: regEligi.shortTermExchange.title,
       description: regEligi.shortTermExchange.description,
     },
     {
@@ -59,15 +59,15 @@ function EligibilityModal({
   ];
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-[999] flex items-center justify-center p-4"
       onClick={onClose}
     >
       {/* Backdrop */}
       <div className="absolute inset-0 bg-white/50 backdrop-blur-sm" />
-      
+
       {/* Modal */}
-      <div 
+      <div
         className="relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
@@ -76,7 +76,7 @@ function EligibilityModal({
           <h2 className="text-xl font-bold">
             {newMem.header}
           </h2>
-          <button 
+          <button
             onClick={onClose}
             className="p-1 hover:bg-white/20 rounded-full transition-colors"
           >
@@ -89,9 +89,9 @@ function EligibilityModal({
           <p className="text-gray-600 text-sm mb-6">
             {newMem.description}
           </p>
-          
+
           {eligibilityItems.map((item, index) => (
-            <div 
+            <div
               key={index}
               className="flex gap-4 p-4 bg-gray-50 rounded-xl hover:bg-[#2C3985]/5 transition-colors"
             >
@@ -171,12 +171,12 @@ function useScrollAnimation() {
   return { ref, isVisible };
 }
 
-function AnimatedSection({ 
-  children, 
+function AnimatedSection({
+  children,
   className = "",
-  delay = 0 
-}: { 
-  children: React.ReactNode; 
+  delay = 0
+}: {
+  children: React.ReactNode;
   className?: string;
   delay?: number;
 }) {
@@ -212,10 +212,10 @@ export default function Home({ params }: PageProps) {
   return (
     <div className="font-sans min-h-screen flex flex-col bg-white">
       {/* Eligibility Modal */}
-      <EligibilityModal 
-        isOpen={isEligibilityOpen} 
-        onClose={() => setIsEligibilityOpen(false)} 
-        locale={locale} 
+      <EligibilityModal
+        isOpen={isEligibilityOpen}
+        onClose={() => setIsEligibilityOpen(false)}
+        locale={locale}
       />
       {/* Hero Section - Full Screen with Image and Intro */}
       <section className="relative h-screen min-h-[700px] flex flex-col">
@@ -241,7 +241,9 @@ export default function Home({ params }: PageProps) {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#2C3985] mb-8 leading-tight">
               <TypingAnimation
-                text={(dict as any)["home.introduction"] || "Welcome to Thai Students Association in Korea"}
+                text={typeof (dict as Record<string, unknown>)["home.introduction"] === "string"
+                  ? (dict as Record<string, unknown>)["home.introduction"] as string
+                  : "Welcome to Thai Students Association in Korea"}
                 speed={40}
               />
             </h1>
