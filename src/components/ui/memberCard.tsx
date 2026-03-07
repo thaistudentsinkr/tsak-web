@@ -64,7 +64,7 @@ export default function MemberCard({ member }: { member: Member }) {
             </div>
 
             <div className="flex flex-1 gap-3 p-2 items-start">
-                <div className="flex-shrink-0 w-1/3 bg-gray-300 rounded-md overflow-hidden">
+                <div className="flex-shrink-0 w-1/3 aspect-[3/4] bg-gray-300 rounded-md overflow-hidden">
                     {picture && (
                         <img
                             src={imageSrc}

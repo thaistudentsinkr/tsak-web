@@ -141,8 +141,8 @@ export default async function Home({ params }: PageProps) {
   ];
 
   return (
-    <div className="min-h-screen p-8 sm:p-30">
-      <main className="mx-auto max-w-5xl flex flex-col gap-16">
+    <div className="min-h-screen bg-white">
+      <main className="max-w-5xl mx-auto px-6 py-30 flex flex-col gap-16">
 
         <h1 className="text-3xl font-bold text-center">
           {dict.sponsors.title}

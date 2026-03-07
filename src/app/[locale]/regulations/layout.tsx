@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Regulations | TSAK",
-  description: "Thai Students Association in the Republic of Korea - Regulations",
+  description: "Thai Students Association in the Republic of Korea Regulations",
 };
 
 type LayoutProps = {

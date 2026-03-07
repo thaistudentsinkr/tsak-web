@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Events - TSAK",
+  title: "Events | TSAK",
   description: "Thai Student Association in the Republic of Korea Events",
 };
 
