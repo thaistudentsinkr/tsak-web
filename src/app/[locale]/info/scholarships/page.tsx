@@ -155,7 +155,7 @@ export default function ScholarshipsPage({ params }: PageProps) {
   const hasActiveFilters = selectedFunding !== "all" || selectedLevel !== "all" || selectedField !== "all" || selectedProvider !== "all";
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-20">
 
       {/* Title Section */}
       <div

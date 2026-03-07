@@ -126,7 +126,10 @@ export default function Home() {
       return m.working === true && m.department !== "honorary";
     } else if (selectedDept === "alumni") {
       return m.working === false;
+    } else if (selectedDept === "honorary") {
+      return m.department === "honorary";
     }
+
     return m.department === selectedDept && m.working === true;
   });
 

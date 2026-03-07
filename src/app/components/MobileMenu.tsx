@@ -29,7 +29,7 @@ const menuStructure: Record<
       label: "About TSAK",
       items: [
         { label: "About TSAK", href: "/about" },
-        { label: "Executive Members", href: "/members" },
+        { label: "TSAK committee", href: "/members" },
         { label: "Sponsorships", href: "/sponsors" },
         { label: "Regulations", href: "/about/regulations" },
         { label: "Contact Us", href: "/contact" },
@@ -39,7 +39,6 @@ const menuStructure: Record<
       label: "Information",
       items: [
         { label: "About Visa", href: "/info/visa" },
-        { label: "Basic Laws", href: "/info/koreanlaws" },
         { label: "TOPIK Exam", href: "/info/topik" },
         { label: "Scholarships", href: "/info/scholarships" },
       ],
