@@ -251,7 +251,7 @@ export default function Home({ params }: PageProps) {
             {/* Register Button */}
             <div className="flex justify-center">
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSeLfm1mNQszliNc_NgpCIP0rrwbZSygyX0gYo3SZWaOcl5fDw/viewform?usp=preview"
+                href="http://docs.google.com/forms/d/e/1FAIpQLSc7MSFv6RQo5qA6PNMpVJyN0-7btC2FZx2_W2vZRLYLPJZmVA/viewform"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 px-8 py-4 bg-[#2C3985] text-[#fffdc0] rounded-full font-semibold text-lg hover:bg-[#1e2a5e] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
