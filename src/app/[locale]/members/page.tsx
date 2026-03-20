@@ -160,7 +160,7 @@ export default function Home() {
   }
 
   return (
-    <div className="font-sans min-h-screen p-25 sm:p-8 lg:p-20">
+    <div className="font-sans min-h-screen px-4 py-20 sm:px-8 lg:px-20 overflow-x-hidden">
       <h2 className="text-2xl font-bold text-black mb-6 sm:mb-8 pt-5 text-center lg:translate-x-[150px]">
         {dict.departments[selectedDept]}
       </h2>
