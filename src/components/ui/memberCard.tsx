@@ -15,6 +15,12 @@ type Member = {
 export default function MemberCard({ member }: { member: Member }) {
     const { picture, firstname, lastname, university, major, position, positionLabel } = member;
 
+    const getTextSize = (text: string) => {
+        if (text.length > 50) return "text-[clamp(9px,0.7vw,12px)]";
+        if (text.length > 40) return "text-[clamp(9px,1.2vw,12px)]";
+        return "text-[clamp(11px,1.4vw,14px)]";
+    };
+
     const cardBg =
         position === "president"
             ? "#85C5FF"
@@ -38,7 +44,7 @@ export default function MemberCard({ member }: { member: Member }) {
 
     // If picture is a full URL from Django (starts with http), use it directly
     // Otherwise, treat it as a filename in /public folder
-    const imageSrc = picture 
+    const imageSrc = picture
         ? (picture.startsWith('http') ? picture : `/${picture}`)
         : undefined;
 
@@ -78,12 +84,12 @@ export default function MemberCard({ member }: { member: Member }) {
                     <div>
                         <div className="border-b pb-1 font-medium text-left">{firstname}</div>
                         <div className="border-b pb-1 font-medium text-right">{lastname}</div>
-                        <div className="border-b pb-1 text-center">{university}</div>
-                        <div className="border-b pb-1 text-center">{major}</div>
+                        <div className={`border-b pb-1 text-center line-clamp-2 ${getTextSize(university)}`}>{university}</div>
+                        <div className={`border-b pb-1 text-center line-clamp-2 ${getTextSize(major)}`}>{major}</div>
                     </div>
 
                     <div className="text-center mt-3 sm:mt-4 pb-4">
-                        <span 
+                        <span
                             className="bg-[#9d2b2b] text-[#f7f5dc] text-[10px] sm:text-xs font-medium py-1 px-2 sm:px-3 rounded-full inline-block max-w-full truncate"
                             title={positionLabel || position}
                         >
